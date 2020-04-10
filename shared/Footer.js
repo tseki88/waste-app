@@ -6,9 +6,9 @@ const Footer = () => {
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.section}>
-                <View style={styles.innerSection}>
-                    <AntDesign name="search1" size={22} />
-                    <Text style={styles.label}>Search</Text>
+                <View style={[styles.innerSection, styles.innerSectionFocused]}>
+                    <AntDesign name="search1" size={22} color={"#4f87ef"} />
+                    <Text style={[styles.label, {color: "#4f87ef", fontWeight: "bold"}]}>Search</Text>
                 </View>
             </TouchableOpacity>
             <TouchableOpacity style={styles.section}>
@@ -37,19 +37,23 @@ export default Footer
 
 const styles = StyleSheet.create({
     container: {
-        borderTopColor: "grey",
-        borderTopWidth: 0.2,
         width: '100%',
         flexDirection: 'row',
-        paddingVertical: 10,
-
+        height: 60,
     },
     section: {
         flex: 1,
         justifyContent: 'center',
     },
     innerSection: {
+        height: "100%",
+        borderTopColor: "lightgrey",
+        borderTopWidth: 3, 
+        paddingTop: 5,
         alignItems: 'center',
+    },
+    innerSectionFocused: {
+        borderTopColor: "#4f87ef",
     },
     label: {
         fontSize: 12,

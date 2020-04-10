@@ -23,7 +23,7 @@ const Header = ({title, nagivation}) => {
                     {nearest.map((item) => {
                         return (
                             <View key={item.key} style={styles.each}>
-                                <Text>{item.location}</Text>
+                                <Text style={styles.eachText}>{item.location}</Text>
                             </View>
                         )
                     })}
@@ -50,7 +50,10 @@ const styles = StyleSheet.create({
         paddingVertical: 4,
         paddingHorizontal: 10,
         borderRadius: 4,
-        borderColor: "skyblue",
-        borderWidth: 0.3,
+        borderColor: "#4f87ef",
+        borderWidth: 1,
+    },
+    eachText: {
+        color: "#4f87ef",
     }
 })

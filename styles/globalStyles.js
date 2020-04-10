@@ -16,11 +16,11 @@ const globalStyles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection:"column",
-        justifyContent: "space-between"
+        backgroundColor:"#fff"
     },
     wrapper: {
         flex: 1,
-        marginHorizontal: 18,
+        marginHorizontal: 20,
     }
 })
 

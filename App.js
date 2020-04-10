@@ -11,11 +11,12 @@ export default function App() {
 
   return (
     <KeyboardAvoidingView
-    behavior={Platform.OS == "ios" ? "padding" : "height"} style={{flex: 1}}
->
-  <HomeStack />
-
-</KeyboardAvoidingView>
+    behavior={Platform.OS == "ios" ? "padding" : undefined} 
+    style={{flex: 1}}
+    // keyboardVerticalOffset={-60}
+    >
+      <HomeStack />
+    </KeyboardAvoidingView>
   );
 }
 

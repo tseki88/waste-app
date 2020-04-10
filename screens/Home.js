@@ -7,7 +7,7 @@ import Section from '../shared/Section'
 import Card from '../shared/Card'
 import { ScrollView } from 'react-native-gesture-handler'
 
-const Home = () => {
+const Home = ({navigation}) => {
     const [topSearch, setTopSearch] = useState([
         {text: "coffee cup", key: '1'},
         {text: "red plastic cup", key: '2'},
@@ -16,6 +16,11 @@ const Home = () => {
         // {text: "styrofoam", key: '5'},
     ])
     
+    const pressHandler = () => {
+        navigation.navigate("ItemDetails")
+    }
+
+
     return (
         <View style={globalStyles.container}>
             <View style={globalStyles.wrapper}>
@@ -23,7 +28,7 @@ const Home = () => {
                     <FlatList
                         data={topSearch}
                         renderItem={({item}) => (
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={pressHandler}>
                                 <View style={styles.listItem}>
                                     <Text style={globalStyles.fontBase}>{item.text}</Text>
                                     <AntDesign name="right" size={22} color="#333" /> 
@@ -41,7 +46,8 @@ const Home = () => {
                             <Text style={styles.cardText}>Remember to rinse recycling matters before putting it in the <Text style={styles.highlight}>blue bin</Text></Text>
                         </Card>
                         <Card>
-                            <Text style={styles.cardText}>Remember to rinse recycling matters before putting it in the <Text style={styles.highlight}>blue bin</Text></Text>
+                            <Text style={styles.cardText}>Remember to rinse recycling matters before putting it in the</Text> 
+                            <View style={styles.highlight}><Text>blue bin</Text></View>
                         </Card>
                     </ScrollView>
                 </Section>
@@ -68,10 +74,10 @@ const styles = StyleSheet.create({
         width: "50%",
         paddingVertical: 10,
         paddingHorizontal: 14,
-        lineHeight: 20,
+        lineHeight: 22,
     },
     highlight: {
-        backgroundColor: "blue",
+        backgroundColor: "#004de8",
         color: "#fff",
     },
     sideScroll: {
