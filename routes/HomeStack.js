@@ -1,63 +1,56 @@
 import React from 'react';
-import { TouchableWithoutFeedback, Keyboard } from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {NavigationContainer} from '@react-navigation/native';
-import Home from '../screens/Home';
-import Locate from '../screens/Locate';
+import HomeScreen from '../screens/HomeScreen';
 import Header from '../shared/Header';
-import ItemDetails from '../screens/ItemDetails';
-// import SearchItem from '../screen/SearchItem';
+import ItemDetailScreen from '../screens/ItemDetailScreen';
 import LocationDetails from '../screens/LocationDetails';
 
-const Stack = createStackNavigator();
+const HomeStack = createStackNavigator();
 
-const HomeStack = () => {
+const HomeStackScreen = () => {
     return (
-        <TouchableWithoutFeedback onPress={() => {
-            Keyboard.dismiss()
-        }}>
-            <NavigationContainer>
-                <Stack.Navigator 
-                    initialRouteName='Home'
-                    screenOptions={{
+        <HomeStack.Navigator 
+            initialRouteName='Home'
+            screenOptions={{
+                headerStyle: {
+                    backgroundColor: '#fff',
+                    height: 60,
+                },
+                title: "Back",
+                headerTitleStyle: {
+                    fontSize: 16,
+                    fontWeight: "400",
+                    marginLeft: -25,
+
+                }
+            }}
+        >
+            <HomeStack.Screen 
+                name='Home' 
+                component={HomeScreen}
+                options={({navigation}) => {
+                    return {
+                        headerTitle: () => <Header navigation={navigation} title="What do you want to throw out?" />,
                         headerStyle: {
-                            backgroundColor: '#fff',
-                            height: 60,
+                            height: 180
                         }
-                    }}
-                >
-                    <Stack.Screen 
-                        name='Home' 
-                        component={Home}
-                        options={({navigation}) => {
-                            return {
-                                headerTitle: () => <Header navigation={navigation} title="What do you want to throw out?" />,
-                                headerStyle: {
-                                    height: 180
-                                }
-                            }
-                        }}
-                    />
-                    {/* <Stack.Screen
-                        name="Search"
-                        component={SearchItem}
-                    /> */}
-                    <Stack.Screen
-                        name="Locate"
-                        component={Locate}
-                    />
-                    <Stack.Screen 
-                        name="ItemDetails"
-                        component={ItemDetails}
-                    />
-                    <Stack.Screen
-                        name="LocationDetails"
-                        component={LocationDetails}
-                    />
-                </Stack.Navigator>
-            </NavigationContainer>
-        </TouchableWithoutFeedback>
+                    }
+                }}
+            />
+            {/* <HomeStack.Screen
+                name="Search"
+                component={SearchItem}
+            /> */}
+            <HomeStack.Screen 
+                name="ItemDetails"
+                component={ItemDetailScreen}
+            />
+            <HomeStack.Screen
+                name="LocationDetails"
+                component={LocationDetails}
+            />
+        </HomeStack.Navigator>
     )
 }
 
-export default HomeStack;
+export default HomeStackScreen;

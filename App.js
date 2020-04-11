@@ -1,28 +1,31 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native';
-import {AppLoading} from 'expo';
-import Locate from './screens/Locate';
-import Footer from './shared/Footer';
-// import Home from './screens/Home';
-import HomeStack from './routes/HomeStack';
+import {NavigationContainer} from '@react-navigation/native';
+import { KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
+import TabNavigator from './routes/TabNavigator';
+import PermissionModal from './screens/PermissionModal'
+import * as Permissions from 'expo-permissions'
 
 export default function App() {
 
+  async function checkPermission () {
+    const { status, permissions } = await Permissions.askAsync(Permissions.LOCATION);
+    
+  }
+
+
   return (
-    <KeyboardAvoidingView
-    behavior={Platform.OS == "ios" ? "padding" : undefined} 
-    style={{flex: 1}}
-    // keyboardVerticalOffset={-60}
-    >
-      <HomeStack />
-    </KeyboardAvoidingView>
+    <TouchableWithoutFeedback onPress={() => {
+      Keyboard.dismiss()
+    }}>
+      <NavigationContainer>
+        <KeyboardAvoidingView
+        behavior={Platform.OS == "ios" ? "padding" : undefined} 
+        style={{flex: 1}}
+        >
+          <TabNavigator />
+        </KeyboardAvoidingView>
+      </NavigationContainer>
+    </TouchableWithoutFeedback>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    height: "100%"
-  }
-})

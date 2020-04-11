@@ -1,19 +1,17 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, FlatList, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native'
+import { StyleSheet, Text, View, FlatList, TouchableOpacity} from 'react-native'
 import globalStyles from '../styles/globalStyles'
 import { AntDesign, Feather } from '@expo/vector-icons'
-import Footer from '../shared/Footer'
 import Section from '../shared/Section'
 import Card from '../shared/Card'
 import { ScrollView } from 'react-native-gesture-handler'
 
-const Home = ({navigation}) => {
+const HomeScreen = ({navigation}) => {
     const [topSearch, setTopSearch] = useState([
         {text: "coffee cup", key: '1'},
         {text: "red plastic cup", key: '2'},
         {text: "aluminum foil", key: '3'},
         {text: "AA battery", key: '4'},
-        // {text: "styrofoam", key: '5'},
     ])
     
     const pressHandler = () => {
@@ -52,12 +50,11 @@ const Home = ({navigation}) => {
                     </ScrollView>
                 </Section>
             </View>
-            <Footer />
         </View>
     )
 }
 
-export default Home
+export default HomeScreen
 
 const styles = StyleSheet.create({
     listItem: {

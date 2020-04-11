@@ -4,15 +4,20 @@ import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Clipboard } from 
 import Section from '../shared/Section'
 import globalStyles from '../styles/globalStyles'
 import Card from '../shared/Card'
+import { Linking } from 'expo'
 
 const LocationDetails = () => {
     
-    // Receive following data:
-    // Location, Distance From (Conditional), Address, Link to GoogleMaps, Hours of Operation, contactInfo, General Info
-
-    copyToClipBoard = () => {
-        // To Do, Soft Notification that the string has been copied to clipboard
+    const copyToClipBoard = () => {
         Clipboard.setString("Test Test")
+    }
+
+    const openDirection = () => {
+        Linking.openURL("https://www.google.com/maps/dir/?api=1&destination=georgina+waste+depot")
+    }
+    
+    const openLocation = () => {
+        Linking.openURL("geo:37.484847,-122.148386")
     }
     
     return (
@@ -30,7 +35,7 @@ const LocationDetails = () => {
                         <TouchableOpacity style={styles.button} onPress={copyToClipBoard}>
                                 <Text  style={styles.buttonText}>Copy Address</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.button}>
+                        <TouchableOpacity style={styles.button} onPress={openDirection}>
                                 <Text style={styles.buttonText}>Get Directions</Text>
                         </TouchableOpacity>
                     </View>
