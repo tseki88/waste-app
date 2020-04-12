@@ -1,14 +1,15 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { AntDesign, Feather } from '@expo/vector-icons'
+import AppText from './AppText'
 
-const Tag = () => {
+const Tag = ({type}) => {
     return (
-        <View style={styles.tag}>
-            <View style={styles.icon}>
+        <View style={[styles.tag, tagStyles[type]]}>
+            <View style={[styles.icon, iconStyles[type]]}>
                 <Feather name="package" size={20} color="white" />
             </View>
-                <Text style={styles.labelText}>Drop Off Center</Text>
+            <AppText style={[styles.labelText, textStyles[type]]}>{type}</AppText>
         </View>
     )
 }
@@ -32,13 +33,59 @@ const styles = StyleSheet.create({
         borderColor:"#fff",
         borderWidth: 2,
         padding: 5,
-        position: "absolute"
+        position: "absolute",
+        width: 36,
+        height: 36
     },
     labelText: {
-        marginLeft: 40,
-        marginRight: 14,
+        marginLeft: 48,
+        marginRight: 18,
         textTransform: "uppercase",
-        letterSpacing: 0.4
+        
     }
+})
 
+const tagStyles = StyleSheet.create({
+    garbage: {
+        backgroundColor: "grey",
+    },
+    "drop off": {
+        backgroundColor: "orange",
+    },
+    recycling: {
+        backgroundColor: "blue",
+    },
+    compost: {
+        backgroundColor: "green",
+    },
+})
+
+const textStyles = StyleSheet.create({
+    garbage: {
+        color: "white"
+    },
+    "drop off": {
+        color: "black"
+    },
+    recycling: {
+        color: "white"
+    },
+    compost: {
+        color: "white"
+    },
+})
+
+const iconStyles = StyleSheet.create({
+    garbage: {
+        backgroundColor: "grey",
+    },
+    "drop off": {
+        backgroundColor: "orange",
+    },
+    recycling: {
+        backgroundColor: "blue",
+    },
+    compost: {
+        backgroundColor: "green",
+    },
 })

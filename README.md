@@ -32,6 +32,8 @@
     - Possibly Short Recycling Tips (generates a set amount from a pool on random?)
 
 
+## Stretch Goal
+
 - Light Mode
     - Light
     - Dark

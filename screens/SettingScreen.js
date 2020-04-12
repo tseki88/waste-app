@@ -3,16 +3,17 @@ import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Clipboard } from 
 import Section from '../shared/Section'
 import globalStyles from '../styles/globalStyles'
 import Card from '../shared/Card'
+import AppText from '../shared/AppText'
 
 const SettingScreen = () => {
     
     return (
         <ScrollView>
             <View style={styles.listItem}>
-                <Text style={globalStyles.fontBase}>This Setting</Text>
+                <AppText style={globalStyles.fontBase}>This Setting</AppText>
             </View>
             <View style={styles.listItem}>
-                <Text style={globalStyles.fontBase}>This Setting</Text>
+                <AppText style={globalStyles.fontBase}>This Setting</AppText>
             </View>
         </ScrollView>
     )

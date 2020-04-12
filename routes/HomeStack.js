@@ -21,7 +21,6 @@ const HomeStackScreen = () => {
                     fontSize: 16,
                     fontWeight: "400",
                     marginLeft: -25,
-
                 }
             }}
         >
@@ -32,7 +31,7 @@ const HomeStackScreen = () => {
                     return {
                         headerTitle: () => <Header navigation={navigation} title="What do you want to throw out?" />,
                         headerStyle: {
-                            height: 180
+                            height: 220
                         }
                     }
                 }}
