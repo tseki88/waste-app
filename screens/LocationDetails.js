@@ -34,10 +34,10 @@ const LocationDetails = () => {
                     <AppText>Address Placeholder</AppText>
                     <View style={styles.buttonContainer}>
                         <TouchableOpacity style={styles.button} onPress={copyToClipBoard}>
-                                <AppText  style={styles.buttonText}>Copy Address</AppText>
+                                <AppText  style={globalStyles.fontBlue}>Copy Address</AppText>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.button} onPress={openDirection}>
-                                <AppText style={styles.buttonText}>Get Directions</AppText>
+                                <AppText style={globalStyles.fontBlue}>Get Directions</AppText>
                         </TouchableOpacity>
                     </View>
                 </Section>
@@ -48,7 +48,7 @@ const LocationDetails = () => {
                     <AppText>Phone PlaceHolder</AppText>
                     <View style={styles.buttonContainer}>
                         <TouchableOpacity style={styles.button} onPress={copyToClipBoard}>
-                            <AppText style={styles.buttonText}>Copy Number</AppText>
+                            <AppText style={globalStyles.fontBlue}>Copy Number</AppText>
                         </TouchableOpacity>
                     </View>
                 </Section>
@@ -82,7 +82,6 @@ const styles = StyleSheet.create({
         marginVertical: 20,
     },
     button: {
-        // width: "48%",
         alignItems: "center",
         paddingVertical: 9,
         paddingHorizontal: 16,
@@ -90,8 +89,5 @@ const styles = StyleSheet.create({
         borderColor: "#0945DE",
         borderRadius: 4,
         marginRight: 16,
-    },
-    buttonText: {
-        color: "#0945DE"
     }
 })

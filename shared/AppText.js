@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { Text } from 'react-native'
 import globalStyles from '../styles/globalStyles'
 
 const AppText = ({children, style}) => {
@@ -12,5 +12,3 @@ const AppText = ({children, style}) => {
 }
 
 export default AppText
-
-// const styles = StyleSheet.create({})

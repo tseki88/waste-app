@@ -28,18 +28,19 @@ export default function App() {
     return <AppLoading />
   } else {
     return (
-      <TouchableWithoutFeedback onPress={() => {
-        Keyboard.dismiss()
-      }}>
-        <NavigationContainer>
-          <KeyboardAvoidingView
-          behavior={Platform.OS == "ios" ? "padding" : undefined} 
-          style={{flex: 1}}
-          >
-            <TabNavigator />
-          </KeyboardAvoidingView>
-        </NavigationContainer>
-      </TouchableWithoutFeedback>
+        <TouchableWithoutFeedback onPress={() => {
+          Keyboard.dismiss()
+        }}>
+          <NavigationContainer>
+            <KeyboardAvoidingView
+            behavior={Platform.OS == "ios" ? "padding" : undefined} 
+            style={{flex: 1}}
+            enabled={false}
+            >
+              <TabNavigator />
+            </KeyboardAvoidingView>
+          </NavigationContainer>
+        </TouchableWithoutFeedback>
     );
   }
 }

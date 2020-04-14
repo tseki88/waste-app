@@ -1,6 +1,6 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { AntDesign, Feather } from '@expo/vector-icons'
+import { AntDesign } from '@expo/vector-icons'
 import HomeStackScreen from './HomeStack';
 import SettingStackScreen from './SettingStack';
 import { View, TouchableOpacity, Text } from 'react-native';

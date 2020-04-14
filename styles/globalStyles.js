@@ -2,9 +2,9 @@ import { StyleSheet} from 'react-native'
 
 const globalStyles = StyleSheet.create({
     headerOne: {
-        fontSize: 30,
+        fontSize: 24,
         fontFamily: "SongMyung",
-        lineHeight: 32,
+        lineHeight: 28,
         width: 265
     },
     headerTwo: {
@@ -28,7 +28,7 @@ const globalStyles = StyleSheet.create({
     },
     wrapper: {
         flex: 1,
-        marginHorizontal: 20,
+        paddingHorizontal: 14,
     },
 
     backgroundOne: {
@@ -62,9 +62,6 @@ const globalStyles = StyleSheet.create({
     fontBlue: {
         color: "#0945DE"
     },
-
-
-
 })
 
 export default globalStyles;

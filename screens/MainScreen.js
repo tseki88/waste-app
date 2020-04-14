@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import { StyleSheet, View, FlatList} from 'react-native'
+import { StyleSheet, View, FlatList, ScrollView } from 'react-native'
+import AppText from '../shared/AppText'
+import Card from '../shared/Card'
 import globalStyles from '../styles/globalStyles'
 import Section from '../shared/Section'
-import Card from '../shared/Card'
-import { ScrollView } from 'react-native-gesture-handler'
-import AppText from '../shared/AppText'
 import ListItem from '../shared/ListItem'
 
-const HomeScreen = ({navigation}) => {
+const MainScreen = ({navigation}) => {
+
     const [topSearch, setTopSearch] = useState([
         {
             key: '1',
@@ -55,45 +55,39 @@ const HomeScreen = ({navigation}) => {
 
     return (
         <View style={globalStyles.container}>
-            <ScrollView>
-                <View style={globalStyles.wrapper}>
-                    <Section title="Top Searches" flex={4}>
-                        <FlatList
-                            data={topSearch}
-                            renderItem={({item}) => (
-                                <ListItem item={item} pressHandler={pressHandler}/>
-                            )}
-                            />
-                    </Section>
-                    <Section title="Recycling Blog" flex={3}>
-                        <ScrollView horizontal={true} style={styles.sideScroll} showsHorizontalScrollIndicator={false}>
-                            <Card>
-                                <AppText style={[styles.cardText, globalStyles.fontBlue]}>Remember to rinse recycling matters before putting it in the <AppText style={styles.highlight}>blue bin</AppText></AppText>
-                            </Card>
-                            <Card>
-                                <AppText style={styles.cardText}>Remember to rinse recycling matters before putting it in the <AppText style={styles.highlight}>blue bin</AppText></AppText>
-                            </Card>
-                            <Card>
-                                <AppText style={styles.cardText}>Remember to rinse recycling matters before putting it in the</AppText> 
-                                <View style={styles.highlight}><AppText>blue bin</AppText></View>
-                            </Card>
-                        </ScrollView>
-                    </Section>
-                </View>
-        </ScrollView>
+            <View style={globalStyles.wrapper}>
+                <Section title="Top Searches" flex={4} list={true}>
+                    <FlatList
+                        data={topSearch}
+                        renderItem={({item}) => (
+                            <ListItem item={item} pressHandler={pressHandler}/>
+                        )}
+                        />
+                </Section>
+                <Section title="Recycling Blog" flex={3}>
+                    <ScrollView horizontal={true} style={styles.sideScroll} showsHorizontalScrollIndicator={false}>
+                        <Card>
+                            <AppText style={[styles.cardText, globalStyles.fontBlue]}>Remember to rinse recycling matters before putting it in the <AppText style={[globalStyles.backgroundTwo,globalStyles.fontWhite]}>blue bin</AppText></AppText>
+                        </Card>
+                        <Card>
+                            <AppText style={[styles.cardText, globalStyles.fontBlue]}>Remember to rinse recycling matters before putting it in the <AppText style={[globalStyles.backgroundTwo,globalStyles.fontWhite]}>blue bin</AppText></AppText>
+                        </Card>
+                        <Card>
+                            <AppText style={[styles.cardText, globalStyles.fontBlue]}>Remember to rinse recycling matters before putting it in the <AppText style={[globalStyles.backgroundTwo,globalStyles.fontWhite]}>blue bin</AppText></AppText> 
+                        </Card>
+                    </ScrollView>
+                </Section>
             </View>
+        </View>
     )
 }
 
-export default HomeScreen
+export default MainScreen
+
 
 const styles = StyleSheet.create({
     cardText: {
         width: "55%",
-    },
-    highlight: {
-        backgroundColor: "#004de8",
-        color: "#fff",
     },
     sideScroll: {
         overflow: "visible"

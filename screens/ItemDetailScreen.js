@@ -16,14 +16,16 @@ const ItemDetailScreen = ({route, navigation}) => {
     return (
         <ScrollView style={globalStyles.container}>
             <View style={globalStyles.wrapper}>
+                {/* Need to pass in this section into the Header */}
                 <Section title={name}>
-                    <View style={styles.image}>
                         {tags.map((e, i) => (
                             <Tag type={e} key={i} />
                             ))}
-                        <Image source={image} />
-                    </View>
                 </Section>
+                <View style={styles.image}>
+                    <Image source={image} />
+                    <Text>Img Placeholder</Text>
+                </View>
                 <Section title="How to discard item">
                     {description.map((e,i) => (
                         <AppText style={[styles.paragraph, globalStyles.fontBlackPrimary]} key={i} >{e}</AppText>

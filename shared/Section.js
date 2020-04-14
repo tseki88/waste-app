@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import globalStyles from '../styles/globalStyles'
 
-const Section = ({title, flex, children}) => {
+const Section = ({title, flex, children, list}) => {
 
     const capitalize = (str) => {
         return str.charAt(0).toUpperCase() + str.slice(1);
@@ -10,8 +10,13 @@ const Section = ({title, flex, children}) => {
         
 
     return (
-        <View style={[styles.section,{flex: flex ? flex : 1}]}>
-            <Text style={[globalStyles.headerTwo, globalStyles.fontBlackPrimary, styles.header]}>{capitalize(title)}</Text>
+        <View style={[title === null ? null : styles.section ,{flex: flex ? flex : 1}]}>
+            {title === null
+            ?
+            null
+            :
+            <Text style={[globalStyles.headerTwo, globalStyles.fontBlackPrimary, {marginBottom: list ? 0 : 10}]}>{capitalize(title)}</Text>
+            }
             {children}
         </View>
     )
@@ -21,9 +26,9 @@ export default Section
 
 const styles = StyleSheet.create({
     section: {
-        marginTop: 15,
+        borderColor: "lightgrey",
+        borderWidth:1,
+        marginTop: 10,
+        paddingBottom: 5
     },
-    header: {
-        marginBottom: 10,
-    }
 })
