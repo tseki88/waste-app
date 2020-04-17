@@ -26,8 +26,8 @@ export default Section
 
 const styles = StyleSheet.create({
     section: {
-        borderColor: "lightgrey",
-        borderWidth:1,
+        // borderColor: "lightgrey",
+        // borderWidth:1,
         marginTop: 10,
         paddingBottom: 5
     },

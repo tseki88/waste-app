@@ -16,7 +16,7 @@ const ItemDetailScreen = ({route, navigation}) => {
     return (
         <ScrollView style={globalStyles.container}>
             <View style={globalStyles.wrapper}>
-                {/* Need to pass in this section into the Header */}
+                {/* Confirm if need to pass in this section into the Header */}
                 <Section title={name}>
                         {tags.map((e, i) => (
                             <Tag type={e} key={i} />

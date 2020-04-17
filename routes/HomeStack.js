@@ -1,82 +1,25 @@
 import React, { useState, createContext } from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import HomeSubStack from '../routes/HomeSubStack';
-import Header from '../shared/Header';
 import ItemDetailScreen from '../screens/ItemDetailScreen';
 import LocationDetails from '../screens/LocationDetails';
+import SearchScreen from '../screens/SearchScreen';
+import MainScreen from '../screens/MainScreen';
 
 const HomeStack = createStackNavigator();
 
 const HomeStackScreen = () => {
 
-
-    // const data = [
-    //     "styrofoam",
-    //     "styrofoam board",
-    //     "styrofoam plate",
-    //     "styrofoam cup",
-    //     "string"
-    // ]
-
-    // const [query, setQuery] = useState("")
-    // const [queryDisplay, setQueryDisplay] = useState([])
-    
-    // const inputChangeHandler = (val) => {
-    //     setQuery(val);
-        
-    //     let filteredData = data.filter((each) => {
-    //         return each.toLowerCase().indexOf(val.toLowerCase()) == 0
-    //     })
-
-    //     setQueryDisplay(filteredData)
-    // }
-
-    function getHeaderHeight(route) {
-        // Access the tab navigator's state using `route.state`
-        const routeName = route.state
-          ? // Get the currently active route name in the tab navigator
-            route.state.routes[route.state.index].name
-          : // If state doesn't exist, we need to default to `screen` param if available, or the initial screen
-            // In our case, it's "Feed" as that's the first screen inside the navigator
-            route.params?.screen || 'Feed';
-    
-        switch (routeName) {
-            case "Home":
-                return 200;
-            case 'Main':
-                return 200;
-            case 'Search':
-                return 150;
-            default:
-                return 60;
-        }
-    }
-
-    function getHeaderTitle(route) {
-        // Access the tab navigator's state using `route.state`
-        const routeName = route.state
-          ? // Get the currently active route name in the tab navigator
-            route.state.routes[route.state.index].name
-          : // If state doesn't exist, we need to default to `screen` param if available, or the initial screen
-            // In our case, it's "Feed" as that's the first screen inside the navigator
-            route.params?.screen || 'Feed';
-    
-        switch (routeName) {
-            case 'Home':
-                return "What do you want to throw out?";
-            case 'Main':
-                return "What do you want to throw out?";
-            case 'Search':
-                return null;
-        }
-    }
-
-
+    const [nearest, setNearest] = useState([
+        {location:"Markham", key : "1"},
+        {location:"Mississauga", key : "2"},
+        {location:"Richmond Hill", key : "3"},
+        {location:"Vaughan", key : "4"},
+        {location:"North York", key : "5"},
+    ])
 
     return (
-        // <SearchContext.Provider queryDisplay={queryDisplay}>
         <HomeStack.Navigator 
-            initialRouteName='Home'
+            initialRouteName='Main'
             screenOptions={{
                 headerStyle: {
                     backgroundColor: '#fff',
@@ -91,15 +34,17 @@ const HomeStackScreen = () => {
             }}
         >
             <HomeStack.Screen 
-                name='Home' 
-                component={HomeSubStack}
-                options={({navigation, route}) => {
-                    return {
-                        headerTitle: () => <Header title={getHeaderTitle(route)} route={route} navigation={navigation} />,
-                        headerStyle: {
-                            height: getHeaderHeight(route)
-                        }
-                    }
+                name='Main' 
+                component={MainScreen}
+                options={{
+                    headerShown: false
+                }}
+            />
+            <HomeStack.Screen
+                name="Search"
+                component={SearchScreen}
+                options={{
+                    headerShown: false
                 }}
             />
             <HomeStack.Screen 
@@ -111,7 +56,6 @@ const HomeStackScreen = () => {
                 component={LocationDetails}
             />
         </HomeStack.Navigator>
-        // </SearchContext.Provider>
     )
 }
 

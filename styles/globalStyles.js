@@ -24,7 +24,8 @@ const globalStyles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection:"column",
-        backgroundColor: "#FFFFFF"
+        backgroundColor: "#FFFFFF",
+        position: "relative"
     },
     wrapper: {
         flex: 1,
