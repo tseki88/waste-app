@@ -1,21 +1,16 @@
-import React, { useState, createContext } from 'react';
+import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import ItemDetailScreen from '../screens/ItemDetailScreen';
 import LocationDetails from '../screens/LocationDetails';
 import SearchScreen from '../screens/SearchScreen';
 import MainScreen from '../screens/MainScreen';
+// import { createSharedElementStackNavigator } from "react-navigation-shared-element";
+
 
 const HomeStack = createStackNavigator();
+// const HomeStack = createSharedElementStackNavigator();
 
 const HomeStackScreen = () => {
-
-    const [nearest, setNearest] = useState([
-        {location:"Markham", key : "1"},
-        {location:"Mississauga", key : "2"},
-        {location:"Richmond Hill", key : "3"},
-        {location:"Vaughan", key : "4"},
-        {location:"North York", key : "5"},
-    ])
 
     return (
         <HomeStack.Navigator 

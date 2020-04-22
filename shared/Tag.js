@@ -1,6 +1,6 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { AntDesign, Feather } from '@expo/vector-icons'
+import { StyleSheet, View } from 'react-native'
+import { Feather } from '@expo/vector-icons'
 import AppText from './AppText'
 
 const Tag = ({type}) => {

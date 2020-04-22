@@ -6,26 +6,38 @@ import globalStyles from '../styles/globalStyles'
 import ListItem from '../shared/ListItem'
 import data from '../sampleData'
 import AppText from '../shared/AppText'
+import bindicator from '../bindicator.json'
+import { SharedElement, SharedElementTransition, nodeFromRef } from 'react-native-shared-element';  
 
 const SearchScreen = ({navigation, route}) => {
 
+    // const data = JSON.parse(bindicator)
+    // console.log(bindicator)
+
     // Temporary Data, will be based off global data later on
     const [nearest, setNearest] = useState([
-        {location:"Markham", key : "1"},
-        {location:"Mississauga", key : "2"},
-        {location:"Richmond Hill", key : "3"},
-        {location:"Vaughan", key : "4"},
-        {location:"North York", key : "5"},
+        {location:"Aurora", key : "1"},
+        {location:"East Gwillimbury", key : "2"},
+        {location:"Georgina", key : "3"},
+        {location:"King", key : "4"},
+        {location:"Markham", key : "5"},
+        {location:"Newmarket", key : "6"},
+        {location:"Richmond Hill", key : "7"},
+        {location:"Vaughan", key : "8"},
+        {location:"Whitchurch-Stouffville", key : "9"},
     ])
 
     const [query, setQuery] = useState("")
     const [queryDisplay, setQueryDisplay] = useState([])
+
+    // Turn this into global/persistent state, on localStorage
+    const [recentSearch, setRecentSearch] = useState([])
     
     const inputChangeHandler = (val) => {
         setQuery(val);
         
-        let filteredData = data.filter((each) => {
-            return each.name.toLowerCase().indexOf(val.toLowerCase()) === 0
+        let filteredData = bindicator.filter((each) => {
+            return each.name.toLowerCase().indexOf(val.toLowerCase()) >= 0
         })
         
         setQueryDisplay(filteredData)
@@ -35,29 +47,64 @@ const SearchScreen = ({navigation, route}) => {
         setQuery("")
     }
 
-    const pressHandler = ({name, tags, image, description}) => {
+    const pressHandler = (item) => {
+        const {name, tag, image, description} = item
         navigation.navigate("ItemDetails", {
             name: name,
-            tags: tags,
+            tag: tag,
             image: image,
             description: description
         })
+
+        let duplicate = false
+
+        recentSearch.forEach((e) => {
+            if (e.name === item.name) {
+                return duplicate = true
+            }
+        })
+
+        if (duplicate === false){
+            if (recentSearch.length > 2) {
+                setRecentSearch(prev => {
+                    let tempState = prev
+                    tempState.pop()
+                    tempState.unshift(item)
+                    console.log(tempState)
+                    return tempState
+                })
+            } else {
+                setRecentSearch(prev => {
+                    let tempState = prev
+                    tempState.unshift(item)
+                    return tempState
+                })
+            }
+        }
     }
 
+    let endAncestor;
+    let endNode;
+    
+
     return (
-        <View style={globalStyles.container}>
+        <View style={globalStyles.container} ref={ref => endAncestor = nodeFromRef(ref)}>
             <View style={globalStyles.wrapper}>
                 <View style={styles.header}>
                     <View style={styles.inputContainer}>
+  
                         <View style={styles.inputWrapper}>
+                    <SharedElement onNode={node => endNode = node} id="input">
                             <TextInput
                                 placeholder="Search for an item" 
                                 placeholderTextColor="grey"
+                                autoCapitalize='none'
                                 onChange={val => inputChangeHandler(val.nativeEvent.text)} 
                                 value={query} 
                                 autoFocus={true}
                                 style={[styles.input, globalStyles.fontBase]} 
                             />
+                        </SharedElement>
                             {
                                 query === "" 
                                 ?
@@ -98,7 +145,15 @@ const SearchScreen = ({navigation, route}) => {
                         />
                     </Section>
                     :
-                    <Section title={null} list={true}>
+                    <Section title="Recent Searches" list={true}>
+                        <FlatList
+                            data={recentSearch}
+                            renderItem={({item}) => {                            
+                                return (
+                                    <ListItem item={item} query={query} history={true} pressHandler={pressHandler}/>
+                                )
+                            }}
+                        />
                     </Section>
                 }
             </View>

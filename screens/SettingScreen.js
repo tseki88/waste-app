@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Clipboard } from 'react-native'
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Clipboard, Button, Linking } from 'react-native'
 import Section from '../shared/Section'
 import globalStyles from '../styles/globalStyles'
 import Card from '../shared/Card'
@@ -7,6 +7,10 @@ import AppText from '../shared/AppText'
 
 const SettingScreen = () => {
     
+    const openPermission = () => {
+        Linking.openSettings()
+    }
+
     return (
         <ScrollView>
             <View style={styles.listItem}>
@@ -14,6 +18,7 @@ const SettingScreen = () => {
             </View>
             <View style={styles.listItem}>
                 <AppText style={globalStyles.fontBase}>This Setting</AppText>
+                <Button title="Change Permission" onPress={openPermission} />
             </View>
         </ScrollView>
     )

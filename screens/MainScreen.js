@@ -1,47 +1,44 @@
 import React, { useState } from 'react'
-import { StyleSheet, View, FlatList, ScrollView, Dimensions, Text, TextInput, TouchableWithoutFeedback } from 'react-native'
-import { AntDesign } from '@expo/vector-icons'
+import { StyleSheet, View, FlatList, ScrollView, Dimensions, Text, TouchableWithoutFeedback, TextInput } from 'react-native'
 import AppText from '../shared/AppText'
 import Card from '../shared/Card'
 import globalStyles from '../styles/globalStyles'
 import Section from '../shared/Section'
 import ListItem from '../shared/ListItem'
+import { SharedElement, SharedElementTransition, nodeFromRef } from 'react-native-shared-element';  
 
 const MainScreen = ({navigation}) => {
 
     const [topSearch, setTopSearch] = useState([
         {
-            key: '1',
-            name: "styrofoam packaging",
-            tags: ["drop off", "garbage"],
-            image: null,
-            description: [
-                "Drop off at a Community Environmental Center (CEC) or Georgina Transfer Station for recycling. Otherwise, this item should be placed in your garbage.",
-                "Material must be free of debris, including cardboard and paper.",
-                "Styrofoam containers such as meat trays, cups, plates and packaging peanuts (including biodegradable peanuts) are not accepted and should be placed in your garbage"
-            ]
+            "name": "Single Use Coffee Pod",
+            "description": "Please place this item in the garbage.  Consider using a reusable coffee filter suitable for your device.",
+            "search": "\nSingle Use Coffee Pod,Keurig,Tassimo,Kcup,K-cup,Keurig Coffee Pod,Keurig Pod,Tassimo Coffee Pod,Tassimo Pod,Coffee Pod,Pod,Coffee Pods,Plastic Coffee Pods",
+            "tag": [
+                "Garbage"
+            ],
+            "category": "Food and beverage containers",
+            "subCategory": "Disposable containers/utensils"
         },
         {
-            key: '2',
-            name: "cardboard",
-            tags: ["drop off", "recycling", "compost"],
-            image: null,
-            description: [
-                "Cardboard Filler Text: -- for recycling. Otherwise, this item should be placed in your garbage.",
-                "Material must be free of debris, including cardboard and paper.",
-                "Take out containers such as pizza boxes are not accepted as recycling and should be placed in your compost"
-            ]
+            "name": "Styrofoam Cups/Dishes/Containers",
+            "description": "Please place this item in the garbage.",
+            "search": "\nStyrofoam Cups/Dishes/Containers,Cup,Plate,Takeout,Coffee,Foam,Meat Tray,Packaging Peanuts,Expanded Polystyrene,EPS Foam,Clamshell,Styrofoam Clamshell,Styrofoam Peanuts",
+            "tag": [
+                "Garbage"
+            ],
+            "category": "Food and beverage containers",
+            "subCategory": "Disposable containers/utensils"
         },
         {
-            key: '3',
-            name: "coffee cup",
-            tags: ["garbage"],
-            image: null,
-            description: [
-                "Coffee Cup Filler Text: -- for recycling. Otherwise, this item should be placed in your garbage.",
-                "Material must be free of debris, including cardboard and paper.",
-                "Take out containers such as pizza boxes are not accepted as recycling and should be placed in your compost"
-            ]
+            "name": "Take-Out Cup Lid",
+            "description": "Please place this item in the garbage.",
+            "search": "\nTake-Out Cup Lid,Plastic Lid,Lid,Paper Cup Lid,Coffee Cup Lid,Soft Drink Lid",
+            "tag": [
+                "Garbage"
+            ],
+            "category": "Food and beverage containers",
+            "subCategory": "Disposable containers/utensils"
         },
     ])
 
@@ -55,10 +52,10 @@ const MainScreen = ({navigation}) => {
 
     // get the name/id only for top items, then render based on imported master data
 
-    const pressHandler = ({name, tags, image, description}) => {
+    const pressHandler = ({name, tag, image, description}) => {
         navigation.navigate("ItemDetails", {
             name: name,
-            tags: tags,
+            tag: tag,
             image: image,
             description: description
         })
@@ -69,18 +66,32 @@ const MainScreen = ({navigation}) => {
     }
     // Pressing Search Button => navigate to search
 
+    let startAncestor;
+    let startNode;
+
     return (
-        <View style={globalStyles.container}>
+        <View style={globalStyles.container} ref={ref => startAncestor = nodeFromRef(ref)}>
             <View style={globalStyles.wrapper}>
                 <View style={styles.header}>
                     <Text style={globalStyles.headerOne}>What do you want to throw out?</Text>
-                    <TouchableWithoutFeedback onPress={navigateSearch} style={{height: 42}}>
-                        <View style={styles.inputContainer}>
-                            <View style={styles.inputWrapper}>
-                                <AppText style={styles.input}>Search for an item</AppText>
+                        <TouchableWithoutFeedback onPress={navigateSearch} style={{height: 42}}>
+                            <View style={styles.inputContainer}>
+                                <View style={styles.inputWrapper}>
+                    <SharedElement onNode={node => startNode = node} id="input">
+                    <TextInput
+                                placeholder="Search for an item" 
+                                placeholderTextColor="grey"
+                                // autoCapitalize='none'
+                                // onChange={val => inputChangeHandler(val.nativeEvent.text)} 
+                                // value={query} 
+                                // autoFocus={true}
+                                style={[styles.input, globalStyles.fontBase]} 
+                            />
+                                    {/* <AppText style={styles.input}>Search for an item</AppText> */}
+                    </SharedElement>
+                                </View>
                             </View>
-                        </View>
-                    </TouchableWithoutFeedback>
+                        </TouchableWithoutFeedback>
                     <ScrollView horizontal={true} style={styles.sideScroll} showsHorizontalScrollIndicator={false}>
                         {/* Maybe Radio? or just a setState a single location which gets a focus style */}
                         <AppText style={styles.location}>Location:</AppText>
@@ -97,7 +108,7 @@ const MainScreen = ({navigation}) => {
                     <FlatList
                         data={topSearch}
                         renderItem={({item}) => (
-                            <ListItem item={item} pressHandler={pressHandler}/>
+                            <ListItem key={item.name} item={item} pressHandler={pressHandler}/>
                         )}
                     />
                 </Section>

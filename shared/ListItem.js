@@ -1,25 +1,48 @@
 import React from 'react'
 import { StyleSheet, View, TouchableOpacity } from 'react-native'
-import { AntDesign } from '@expo/vector-icons'
+import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons'
 import AppText from './AppText'
 
 
-const ListItem = ({item, pressHandler, query = ""}) => {
+const ListItem = ({item, pressHandler, query = "", history = null}) => {
     
-    let letterCount = query.length
+    let boldMatch
+    let noMatchBefore
+    let noMatchAfter
 
-    let name = item.name
-    let boldMatch = name.slice(0,letterCount)
-    let noMatch = name.slice(letterCount,name.length)
+    if (query !== ""){
+        query = query.toLowerCase()
+        let letterCount = query.length
+        let name = item.name.toLowerCase()
+        let ind = name.indexOf(query)
+
+        noMatchBefore = name.slice(0, ind)
+        boldMatch = name.slice(ind,(ind + letterCount))
+        noMatchAfter = name.slice((ind + letterCount),name.length)
+    }
     
 
     return (
         <TouchableOpacity onPress={() => pressHandler(item)}>
             <View style={styles.listItem}>
+                {
+                    history === true
+                    ?
+                    <MaterialCommunityIcons name="history" size={22} color="#50575D" />
+                    :
+                    null
+                }
+
+                {query !== ""
+                ?
                 <AppText>
+                    {noMatchBefore}
                     <AppText style={styles.bold}>{boldMatch}</AppText>
-                    {noMatch}
+                    {noMatchAfter}
                 </AppText>
+                :
+                <AppText style={styles.label}>{item.name}</AppText>
+                }
                 <AntDesign name="right" size={22} color="#50575D" /> 
             </View>
         </TouchableOpacity>
@@ -39,5 +62,8 @@ const styles = StyleSheet.create({
     },
     bold: {
         fontWeight: "bold",
+    },
+    label: {
+        width: "85%",
     }
 })

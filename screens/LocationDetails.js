@@ -1,30 +1,28 @@
 import React from 'react'
 import MapView from 'react-native-maps'
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Clipboard } from 'react-native'
+import { StyleSheet, View, ScrollView, TouchableOpacity, Clipboard } from 'react-native'
 import Section from '../shared/Section'
 import globalStyles from '../styles/globalStyles'
 import Card from '../shared/Card'
 import { Linking } from 'expo'
 import AppText from '../shared/AppText'
-import { depotData } from '../sampleData'
-import { add } from 'react-native-reanimated'
+import * as WebBrowser from 'expo-web-browser'
 
-const LocationDetails = () => {
-    
-    const {name, address, hours, closed, phone, direction, lat, long} = depotData[0]
+const LocationDetails = ({route}) => {
+
+    const {name, municipality ,address, hours, closed, direction, lat, long, website} = route.params.item
     
     const copyToClipBoard = (value) => {
         Clipboard.setString(value)
     }
 
-    const openDirection = (link) => {
+    const openLink = (link) => {
         Linking.openURL(link)
     }
-    
-    // const openLocation = () => {
-    //     Linking.openURL("geo:37.484847,-122.148386")
-    // }
 
+    const openAppBrowser = (link) => {
+        WebBrowser.openBrowserAsync(link)
+    }
 
     return (
         <View style={{flex: 1, position: "relative"}}>
@@ -39,8 +37,8 @@ const LocationDetails = () => {
                             initialRegion={{
                                 latitude: parseFloat(lat),
                                 longitude: parseFloat(long),
-                                latitudeDelta: 0.0922,
-                                longitudeDelta: 0.0421,
+                                latitudeDelta: 0.03,
+                                longitudeDelta: 0.03,
                             }}
                         >
                             <MapView.Marker
@@ -57,29 +55,52 @@ const LocationDetails = () => {
                             <TouchableOpacity style={styles.button} onPress={() => copyToClipBoard(address)}>
                                     <AppText  style={globalStyles.fontBlue}>Copy Address</AppText>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.button} onPress={() => openDirection(direction)}>
+                            <TouchableOpacity style={styles.button} onPress={() => openLink(direction)}>
                                     <AppText style={globalStyles.fontBlue}>Get Directions</AppText>
                             </TouchableOpacity>
                         </View>
                     </Section>
                     <Section title="Hours of Operation">
-                        <AppText>Monday: {hours.mon}</AppText>
-                        <AppText>Tuesday: {hours.tues}</AppText>
-                        <AppText>Wednesday: {hours.wed}</AppText>
-                        <AppText>Thursday: {hours.thurs}</AppText>
-                        <AppText>Friday: {hours.fri}</AppText>
-                        <AppText>Saturday: {hours.sat}</AppText>
-                        <AppText>Sunday: {hours.sun}</AppText>
+                    {
+                        hours.length > 1
+                        ?
+                        hours.map((e) => {
+                            return (
+                                <View style={{marginBottom: 14}} key={e.key}>
+                                    <AppText style={{fontWeight: "bold", marginBottom: 10}}>{e.name}</AppText>
+                                    <View>
+                                        <AppText>Monday: {e.mon}</AppText>
+                                        <AppText>Tuesday: {e.tues}</AppText>
+                                        <AppText>Wednesday: {e.wed}</AppText>
+                                        <AppText>Thursday: {e.thurs}</AppText>
+                                        <AppText>Friday: {e.fri}</AppText>
+                                        <AppText>Saturday: {e.sat}</AppText>
+                                        <AppText>Sunday: {e.sun}</AppText>
+                                    </View>
+                                </View>
+                            )
+                        })
+                        :
+                        <View style={{marginBottom: 14}}>
+                            <AppText>Monday: {hours[0].mon}</AppText>
+                            <AppText>Tuesday: {hours[0].tues}</AppText>
+                            <AppText>Wednesday: {hours[0].wed}</AppText>
+                            <AppText>Thursday: {hours[0].thurs}</AppText>
+                            <AppText>Friday: {hours[0].fri}</AppText>
+                            <AppText>Saturday: {hours[0].sat}</AppText>
+                            <AppText>Sunday: {hours[0].sun}</AppText>
+                        </View>
+                    }
                         <AppText style={{fontWeight: "bold"}}>Closed</AppText>
                         <AppText>{closed}</AppText>
                     </Section>
-                    <Section title="Contact Info">
-                        <AppText>{phone}</AppText>
-                        <View style={styles.buttonContainer}>
-                            <TouchableOpacity style={styles.button} onPress={() => copyToClipBoard(phone)}>
-                                <AppText style={globalStyles.fontBlue}>Copy Number</AppText>
-                            </TouchableOpacity>
-                        </View>
+                    <Section title="Website">
+                        <AppText>
+                            <AppText style={styles.link} onPress={() => openAppBrowser(website)}>
+                                {/* 'https://www.york.ca/wps/portal/yorkhome/environment/yr/garbageandrecycling/wastedepots' */}
+                                Click here 
+                            </AppText> to visit {municipality}'s Drop-Off Depot Locations Website.
+                        </AppText>
                     </Section>
                     <Section title="Accepted Items">
                         <Card>
@@ -136,5 +157,9 @@ const styles = StyleSheet.create({
         backgroundColor: "lightgrey",
         lineHeight: 50,
         height: 50,
+    },
+    link: {
+        color: "blue",
+        textDecorationLine: "underline"
     }
 })

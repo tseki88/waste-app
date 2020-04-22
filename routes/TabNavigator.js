@@ -3,7 +3,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { AntDesign } from '@expo/vector-icons'
 import HomeStackScreen from './HomeStack';
 import SettingStackScreen from './SettingStack';
-import { View, TouchableOpacity, Text } from 'react-native';
 import DropOffStackScreen from './DropOffStack';
 import ScheduleStackScreen from './ScheduleStack';
 
@@ -13,7 +12,6 @@ const TabNavigator = () => {
     return (
         <Tab.Navigator
             initialRouteName="Search"
-            // tabBar={props => <MyTabBar {...props} />}
             screenOptions={({route}) => ({
                 tabBarIcon: ({ focused, color, size}) => {
                     let iconName;
