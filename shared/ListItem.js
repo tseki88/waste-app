@@ -1,49 +1,44 @@
 import React from 'react'
 import { StyleSheet, View, TouchableOpacity } from 'react-native'
-import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons'
+import { AntDesign, MaterialCommunityIcons, Feather } from '@expo/vector-icons'
 import AppText from './AppText'
 
 
-const ListItem = ({item, pressHandler, query = "", history = null}) => {
+const ListItem = ({item, pressHandler, history = null, depot = null}) => {
     
-    let boldMatch
-    let noMatchBefore
-    let noMatchAfter
-
-    if (query !== ""){
-        query = query.toLowerCase()
-        let letterCount = query.length
-        let name = item.name.toLowerCase()
-        let ind = name.indexOf(query)
-
-        noMatchBefore = name.slice(0, ind)
-        boldMatch = name.slice(ind,(ind + letterCount))
-        noMatchAfter = name.slice((ind + letterCount),name.length)
+    let renderIcon;
+    
+    if (history) {
+        renderIcon = <MaterialCommunityIcons name="history" size={22} color="#50575D" />
+    } else if (depot){
+        renderIcon = <Feather name="map-pin" size={16} color="#50575D" />
     }
-    
 
     return (
         <TouchableOpacity onPress={() => pressHandler(item)}>
             <View style={styles.listItem}>
-                {
-                    history === true
-                    ?
-                    <MaterialCommunityIcons name="history" size={22} color="#50575D" />
-                    :
-                    null
-                }
-
-                {query !== ""
-                ?
-                <AppText>
-                    {noMatchBefore}
-                    <AppText style={styles.bold}>{boldMatch}</AppText>
-                    {noMatchAfter}
-                </AppText>
-                :
-                <AppText style={styles.label}>{item.name}</AppText>
-                }
-                <AntDesign name="right" size={22} color="#50575D" /> 
+                {renderIcon}
+                <View style={{flex: 1}}>
+                    {
+                        depot
+                        ?
+                        <View style={{flex: 1, marginHorizontal: 15}}>
+                            <AppText style={styles.label}>{item.name}</AppText>
+                            <AppText style={{fontSize: 12, color: "#50575D"}}>{item.addressSimple}</AppText>
+                        </View>
+                        :
+                            history
+                            ?
+                            <View style={{flex: 1, marginHorizontal: 15, marginVertical: 2}}>
+                                <AppText style={styles.label}>{item.name}</AppText>
+                            </View>
+                            :
+                            <View style={{flex: 1, marginVertical: 2}}>
+                                <AppText style={styles.label}>{item.name}</AppText>
+                            </View>
+                    }
+                </View>
+                <AntDesign name="right" size={18} color="#50575D" /> 
             </View>
         </TouchableOpacity>
     )
@@ -58,12 +53,13 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingVertical: 17,
+        paddingVertical: 15,
+        width: "100%"
     },
     bold: {
         fontWeight: "bold",
     },
-    label: {
-        width: "85%",
-    }
+    // label: {
+    //     width: "100%",
+    // }
 })

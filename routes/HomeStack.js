@@ -4,11 +4,8 @@ import ItemDetailScreen from '../screens/ItemDetailScreen';
 import LocationDetails from '../screens/LocationDetails';
 import SearchScreen from '../screens/SearchScreen';
 import MainScreen from '../screens/MainScreen';
-// import { createSharedElementStackNavigator } from "react-navigation-shared-element";
-
 
 const HomeStack = createStackNavigator();
-// const HomeStack = createSharedElementStackNavigator();
 
 const HomeStackScreen = () => {
 

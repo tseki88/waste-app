@@ -34,7 +34,8 @@ const TabNavigator = () => {
             })}
             tabBarOptions={{
                 activeTintColor: "blue",
-                inactiveTintColor: "grey"
+                inactiveTintColor: "grey",
+                style: {paddingBottom: 4, height: 60}
             }}
         >
             <Tab.Screen name="Search" component={HomeStackScreen} />

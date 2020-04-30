@@ -86,6 +86,7 @@ export const depotData = [
         name: "East Gwillimbury Household Hazardous Waste and Recycling Depot",
         municipality: "York Region",
         address: "225 Garfield Wright Boulevard, East Gwillimbury, Ontario, L0G 1V0",
+        addressSimple: "225 Garfield Wright Boulevard",
         hours: [
             {
                 "mon": "8:30am - 4:30pm",
@@ -108,6 +109,7 @@ export const depotData = [
         name: "Elgin Mills Community Environmental Centre",
         municipality: "York Region",
         address: "1124 Elgin Mills Road East, Richmond Hill, Ontario, L4S 1M7",
+        addressSimple: "1124 Elgin Mills Road East",
         hours: [
             {
                 "mon": "Closed",
@@ -130,6 +132,7 @@ export const depotData = [
         name: "Markham Household Hazardous Waste Depot",
         municipality: "York Region",
         address: "403 Rodick Rd #383, Markham, Ontario, L6G 1B2",
+        addressSimple: "403 Rodick Rd #383",
         hours: [
             {
                 "mon": "8:30am - 4:30pm",
@@ -152,6 +155,7 @@ export const depotData = [
         name: "McCleary Court Community Environmental Centre",
         municipality: "York Region",
         address: "130 McCleary Court, Vaughan, Ontario, L4K 1W8",
+        addressSimple: "130 McCleary Court",
         hours: [
             {
                 "mon": "Closed",
@@ -209,6 +213,7 @@ export const depotData = [
         name: "Georgina Transfer Station, Household Hazardous Waste and Recycling Depot",
         municipality: "York Region",
         address: "23068 Warden Avenue, Georgina, Ontario, L4P 3E9",
+        addressSimple: "23068 Warden Avenue",
         hours: [
             {
                 key: '1',

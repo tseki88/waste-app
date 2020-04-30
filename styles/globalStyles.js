@@ -29,7 +29,8 @@ const globalStyles = StyleSheet.create({
     },
     wrapper: {
         flex: 1,
-        paddingHorizontal: 14,
+        backgroundColor: "#FFFFFF",
+        paddingHorizontal: 18,
     },
 
     backgroundOne: {

@@ -15,7 +15,7 @@ const Section = ({title, flex, children, list}) => {
             ?
             null
             :
-            <Text style={[globalStyles.headerTwo, globalStyles.fontBlackPrimary, {marginBottom: list ? 0 : 10}]}>{capitalize(title)}</Text>
+            <Text style={[globalStyles.headerTwo, globalStyles.fontBlackPrimary, {marginBottom: list ? 0 : 10, width: 320}]}>{capitalize(title)}</Text>
             }
             {children}
         </View>
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     section: {
         // borderColor: "lightgrey",
         // borderWidth:1,
-        marginTop: 10,
+        marginVertical: 10,
         paddingBottom: 5
     },
 })

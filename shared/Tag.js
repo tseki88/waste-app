@@ -1,13 +1,42 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
-import { Feather } from '@expo/vector-icons'
+import { Feather, SimpleLineIcons, FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons'
 import AppText from './AppText'
 
 const Tag = ({type}) => {
+
+    let renderTag
+
+    switch (type) {
+        case "Garbage":
+            renderTag = <SimpleLineIcons name="trash" size={20} color="white" />
+            break;
+        case "Community Drop off":
+            renderTag = <Feather name="package" size={20} color="black" />
+            break;
+        case "Blue Box":
+            renderTag = <FontAwesome name="recycle" size={20} color="white" />
+            break;
+        case "York Region Waste Facility":
+            renderTag = <MaterialCommunityIcons name="factory" size={20} color="white" />
+            break;
+        case "Reuse Donation Centre":
+            renderTag = <Feather name="users" size={20} color="black" />
+            break;
+        case "Green Bin":
+            renderTag = <MaterialCommunityIcons name="food-apple" size={20} color="white" />
+            break;
+        case "Yard Waste":
+            renderTag = <MaterialCommunityIcons name="leaf" size={20} color="black" />
+        default:
+            break;
+    }
+
+
     return (
         <View style={[styles.tag, tagStyles[type]]}>
-            <View style={[styles.icon, iconStyles[type]]}>
-                <Feather name="package" size={20} color="white" />
+            <View style={[styles.icon, tagStyles[type]]}>
+                {renderTag}
             </View>
             <AppText style={[styles.labelText, textStyles[type]]}>{type}</AppText>
         </View>
@@ -22,20 +51,20 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         marginVertical: 4,
-        backgroundColor: "grey",
         borderRadius: 25,
         position: "relative",
         height: 32
     },
     icon: {
-        backgroundColor: "grey",
         borderRadius: 50,
         borderColor:"#fff",
         borderWidth: 2,
         padding: 5,
         position: "absolute",
         width: 36,
-        height: 36
+        height: 36,
+        alignItems: "center",
+        justifyContent: "center"
     },
     labelText: {
         marginLeft: 48,
@@ -46,46 +75,49 @@ const styles = StyleSheet.create({
 })
 
 const tagStyles = StyleSheet.create({
-    garbage: {
-        backgroundColor: "grey",
+    "Garbage": {
+        backgroundColor: "#6E6E6E",
     },
-    "drop off": {
-        backgroundColor: "orange",
+    "Community Drop off": {
+        backgroundColor: "#FFD027",
     },
-    recycling: {
+    "Blue Box": {
         backgroundColor: "blue",
     },
-    compost: {
-        backgroundColor: "green",
+    "York Region Waste Facility": {
+        backgroundColor: "lightcoral",
     },
+    "Reuse Donation Centre": {
+        backgroundColor: "cornflowerblue"
+    },
+    "Green Bin": {
+        backgroundColor: "darkgreen"
+    },
+    "Yard Waste": {
+        backgroundColor: "peru"
+    }
 })
 
 const textStyles = StyleSheet.create({
-    garbage: {
+    "Garbage": {
         color: "white"
     },
-    "drop off": {
+    "Community Drop off": {
         color: "black"
     },
-    recycling: {
+    "Blue Box": {
         color: "white"
     },
-    compost: {
+    "York Region Waste Facility": {
         color: "white"
     },
-})
-
-const iconStyles = StyleSheet.create({
-    garbage: {
-        backgroundColor: "grey",
+    "Reuse Donation Centre": {
+        color: "black"
     },
-    "drop off": {
-        backgroundColor: "orange",
+    "Green Bin": {
+        color: "white"
     },
-    recycling: {
-        backgroundColor: "blue",
-    },
-    compost: {
-        backgroundColor: "green",
-    },
+    "Yard Waste": {
+        color: "black"
+    }
 })

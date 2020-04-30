@@ -47,7 +47,7 @@ const ItemDetailScreen = ({route, navigation}) => {
             renderItem={({item}) => {                            
                 return (
                     <View style={globalStyles.wrapper}>
-                        <ListItem item={item} pressHandler={() => pressHandler(item)}/>
+                        <ListItem item={item} depot={true} pressHandler={() => pressHandler(item)}/>
                     </View>
                 )
             }}

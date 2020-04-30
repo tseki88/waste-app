@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
-import { StyleSheet, View, FlatList, ScrollView, Dimensions, Text, TouchableWithoutFeedback, TextInput } from 'react-native'
+import { StyleSheet, View, FlatList, ScrollView, Dimensions, Text, TouchableWithoutFeedback } from 'react-native'
 import AppText from '../shared/AppText'
 import Card from '../shared/Card'
 import globalStyles from '../styles/globalStyles'
 import Section from '../shared/Section'
 import ListItem from '../shared/ListItem'
-import { SharedElement, SharedElementTransition, nodeFromRef } from 'react-native-shared-element';  
 
 const MainScreen = ({navigation}) => {
 
@@ -66,39 +65,25 @@ const MainScreen = ({navigation}) => {
     }
     // Pressing Search Button => navigate to search
 
-    let startAncestor;
-    let startNode;
-
     return (
-        <View style={globalStyles.container} ref={ref => startAncestor = nodeFromRef(ref)}>
+        <View style={globalStyles.container}>
             <View style={globalStyles.wrapper}>
                 <View style={styles.header}>
                     <Text style={globalStyles.headerOne}>What do you want to throw out?</Text>
-                        <TouchableWithoutFeedback onPress={navigateSearch} style={{height: 42}}>
-                            <View style={styles.inputContainer}>
-                                <View style={styles.inputWrapper}>
-                    <SharedElement onNode={node => startNode = node} id="input">
-                    <TextInput
-                                placeholder="Search for an item" 
-                                placeholderTextColor="grey"
-                                // autoCapitalize='none'
-                                // onChange={val => inputChangeHandler(val.nativeEvent.text)} 
-                                // value={query} 
-                                // autoFocus={true}
-                                style={[styles.input, globalStyles.fontBase]} 
-                            />
-                                    {/* <AppText style={styles.input}>Search for an item</AppText> */}
-                    </SharedElement>
-                                </View>
+                    <TouchableWithoutFeedback onPress={navigateSearch} style={{height: 42}}>
+                        <View style={styles.inputContainer}>
+                            <View style={styles.inputWrapper}>
+                                <AppText style={styles.input}>Search for an item</AppText>
                             </View>
-                        </TouchableWithoutFeedback>
+                        </View>
+                    </TouchableWithoutFeedback>
                     <ScrollView horizontal={true} style={styles.sideScroll} showsHorizontalScrollIndicator={false}>
                         {/* Maybe Radio? or just a setState a single location which gets a focus style */}
                         <AppText style={styles.location}>Location:</AppText>
-                        {nearest.map((item) => {
+                        {nearest.map((item, i) => {
                             return (
-                                <View key={item.key} style={styles.each}>
-                                    <AppText>{item.location}</AppText>
+                                <View key={i} style={styles.each}>
+                                    <AppText key={i}>{item.location}</AppText>
                                 </View>
                             )
                         })}
@@ -107,6 +92,7 @@ const MainScreen = ({navigation}) => {
                 <Section title="Top Searches" flex={4} list={true}>
                     <FlatList
                         data={topSearch}
+                        keyExtractor={item => item.name}
                         renderItem={({item}) => (
                             <ListItem key={item.name} item={item} pressHandler={pressHandler}/>
                         )}
@@ -136,13 +122,17 @@ export default MainScreen
 const styles = StyleSheet.create({
     header: {
         width: Dimensions.get('screen').width,
-        marginLeft: -14,
-        paddingHorizontal: 14,
+        marginLeft: -18,
+        paddingHorizontal: 18,
         elevation: 1,
-        paddingTop: 20,
+        paddingTop: 30,
         paddingBottom: 10,
         // borderBottomColor: "grey",
         // borderBottomWidth: 1,
+        // shadowOffset: { width: 10, height: 10 },
+        // shadowColor: 'grey',
+        // shadowOpacity: 1,
+        // backgroundColor: "#0000"
     },
     inputContainer: {
         flexDirection: "row",
@@ -156,7 +146,7 @@ const styles = StyleSheet.create({
         flex: 1,
         height: 42,
         borderRadius: 4,
-        borderWidth: 0.2,
+        borderWidth: 0.4,
         borderColor: 'grey',
         marginTop: 20,
         marginBottom: 10,

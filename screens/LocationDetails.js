@@ -1,17 +1,22 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { StyleSheet, View, ScrollView, TouchableOpacity, Clipboard, AsyncStorage } from 'react-native'
 import MapView from 'react-native-maps'
-import { StyleSheet, View, ScrollView, TouchableOpacity, Clipboard } from 'react-native'
-import Section from '../shared/Section'
-import globalStyles from '../styles/globalStyles'
-import Card from '../shared/Card'
-import { Linking } from 'expo'
-import AppText from '../shared/AppText'
 import * as WebBrowser from 'expo-web-browser'
+import { Linking } from 'expo'
+import { AntDesign } from '@expo/vector-icons'
 
-const LocationDetails = ({route}) => {
+import Section from '../shared/Section'
+import AppText from '../shared/AppText'
+import AccordionList from '../shared/AccordionList'
 
-    const {name, municipality ,address, hours, closed, direction, lat, long, website} = route.params.item
-    
+import globalStyles from '../styles/globalStyles'
+
+const LocationDetails = ({ route }) => {
+
+    const { name, municipality, address, hours, closed, direction, lat, long, website } = route.params.item
+    const [userLocation, setUserLocation] = useState({})
+    const [distance, setDistance] = useState(0)
+
     const copyToClipBoard = (value) => {
         Clipboard.setString(value)
     }
@@ -24,15 +29,55 @@ const LocationDetails = ({route}) => {
         WebBrowser.openBrowserAsync(link)
     }
 
+    const retrieveData = async () => {
+        console.log("retrieving")
+        try {
+            const value = await AsyncStorage.getItem('userLocation');
+            if (value !== null) {
+                setUserLocation(JSON.parse(value))
+                setDistance(computeDistance([userLocation.latitude, userLocation.longitude],[lat, long]).toFixed(1))
+            }
+        } catch (error) {
+            return
+        }
+    };
+
+    const computeDistance = ([prevLat, prevLong], [lat, long]) => {
+        const prevLatInRad = toRad(prevLat);
+        const prevLongInRad = toRad(prevLong);
+        const latInRad = toRad(lat);
+        const longInRad = toRad(long);
+
+        console.log(userLocation)
+        console.log(prevLatInRad, prevLongInRad, latInRad, longInRad)
+
+        return (
+            // In kilometers
+            6377.830272 *
+            Math.acos(
+                Math.sin(prevLatInRad) * Math.sin(latInRad) +
+                Math.cos(prevLatInRad) * Math.cos(latInRad) * Math.cos(longInRad - prevLongInRad),
+            )
+        );
+    }
+
+    const toRad = (angle) => {
+        return (angle * Math.PI) / 180;
+    }
+
+    useEffect(() => {
+        retrieveData()
+    }, [distance])
+
     return (
-        <View style={{flex: 1, position: "relative"}}>
+        <View style={{ flex: 1, position: "relative" }}>
             <ScrollView style={globalStyles.container}>
                 <View style={globalStyles.wrapper}>
                     <Section title={name}>
-                        <AppText>-- km away</AppText>
+                        <AppText>{!isNaN(distance) ? distance : "--" } km away</AppText>
                     </Section>
                     <View style={styles.mapContainer}>
-                        <MapView 
+                        <MapView
                             style={styles.mapStyle}
                             initialRegion={{
                                 latitude: parseFloat(lat),
@@ -50,63 +95,90 @@ const LocationDetails = ({route}) => {
                         </MapView>
                     </View>
                     <Section title="Address">
-                            <AppText>{address}</AppText>
+                        <AppText>{address}</AppText>
                         <View style={styles.buttonContainer}>
                             <TouchableOpacity style={styles.button} onPress={() => copyToClipBoard(address)}>
-                                    <AppText  style={globalStyles.fontBlue}>Copy Address</AppText>
+                                <AppText style={globalStyles.fontBlue}>Copy Address</AppText>
                             </TouchableOpacity>
                             <TouchableOpacity style={styles.button} onPress={() => openLink(direction)}>
-                                    <AppText style={globalStyles.fontBlue}>Get Directions</AppText>
+                                <AppText style={globalStyles.fontBlue}>Get Directions</AppText>
                             </TouchableOpacity>
                         </View>
                     </Section>
                     <Section title="Hours of Operation">
-                    {
-                        hours.length > 1
-                        ?
-                        hours.map((e) => {
-                            return (
-                                <View style={{marginBottom: 14}} key={e.key}>
-                                    <AppText style={{fontWeight: "bold", marginBottom: 10}}>{e.name}</AppText>
+                        {
+                            hours.length > 1
+                                ?
+                                hours.map((e) => {
+                                    return (
+                                        <View style={{ marginBottom: 14 }} key={e.key}>
+                                            <AppText style={{ fontWeight: "bold", marginBottom: 10 }}>{e.name}</AppText>
+                                            <View style={{ marginBottom: 14, flexDirection: "row", flexWrap: "nowrap" }}>
+                                                <View>
+                                                    <AppText>Monday </AppText>
+                                                    <AppText>Tuesday </AppText>
+                                                    <AppText>Wednesday </AppText>
+                                                    <AppText>Thursday </AppText>
+                                                    <AppText>Friday </AppText>
+                                                    <AppText>Saturday </AppText>
+                                                    <AppText>Sunday </AppText>
+                                                </View>
+                                                <View style={{marginLeft: 26}}>
+                                                    <AppText>{e.mon}</AppText>
+                                                    <AppText>{e.tues}</AppText>
+                                                    <AppText>{e.wed}</AppText>
+                                                    <AppText>{e.thurs}</AppText>
+                                                    <AppText>{e.fri}</AppText>
+                                                    <AppText>{e.sat}</AppText>
+                                                    <AppText>{e.sun}</AppText>
+                                                </View>
+                                            </View>
+                                        </View>
+                                    )
+                                })
+                                :
+                                <View style={{ marginBottom: 14, flexDirection: "row", flexWrap: "nowrap" }}>
                                     <View>
-                                        <AppText>Monday: {e.mon}</AppText>
-                                        <AppText>Tuesday: {e.tues}</AppText>
-                                        <AppText>Wednesday: {e.wed}</AppText>
-                                        <AppText>Thursday: {e.thurs}</AppText>
-                                        <AppText>Friday: {e.fri}</AppText>
-                                        <AppText>Saturday: {e.sat}</AppText>
-                                        <AppText>Sunday: {e.sun}</AppText>
+                                        <AppText>Monday </AppText>
+                                        <AppText>Tuesday </AppText>
+                                        <AppText>Wednesday </AppText>
+                                        <AppText>Thursday </AppText>
+                                        <AppText>Friday </AppText>
+                                        <AppText>Saturday </AppText>
+                                        <AppText>Sunday </AppText>
+                                    </View>
+                                    <View style={{marginLeft: 26}}>
+                                        <AppText>{hours[0].mon}</AppText>
+                                        <AppText>{hours[0].tues}</AppText>
+                                        <AppText>{hours[0].wed}</AppText>
+                                        <AppText>{hours[0].thurs}</AppText>
+                                        <AppText>{hours[0].fri}</AppText>
+                                        <AppText>{hours[0].sat}</AppText>
+                                        <AppText>{hours[0].sun}</AppText>
                                     </View>
                                 </View>
-                            )
-                        })
-                        :
-                        <View style={{marginBottom: 14}}>
-                            <AppText>Monday: {hours[0].mon}</AppText>
-                            <AppText>Tuesday: {hours[0].tues}</AppText>
-                            <AppText>Wednesday: {hours[0].wed}</AppText>
-                            <AppText>Thursday: {hours[0].thurs}</AppText>
-                            <AppText>Friday: {hours[0].fri}</AppText>
-                            <AppText>Saturday: {hours[0].sat}</AppText>
-                            <AppText>Sunday: {hours[0].sun}</AppText>
-                        </View>
-                    }
-                        <AppText style={{fontWeight: "bold"}}>Closed</AppText>
+                        }
+                        <AppText style={{ fontWeight: "bold" }}>Closed</AppText>
                         <AppText>{closed}</AppText>
                     </Section>
                     <Section title="Website">
                         <AppText>
                             <AppText style={styles.link} onPress={() => openAppBrowser(website)}>
                                 {/* 'https://www.york.ca/wps/portal/yorkhome/environment/yr/garbageandrecycling/wastedepots' */}
-                                Click here 
+                                Click here
                             </AppText> to visit {municipality}'s Drop-Off Depot Locations Website.
                         </AppText>
                     </Section>
                     <Section title="Accepted Items">
-                        <Card>
-                            <AppText>CheckIcon! You searched for XXXX. This item is accepted at this facility.</AppText>
-                        </Card>
-                        <AppText>List Placeholder</AppText>
+                        <View style={styles.card}>
+                            <AntDesign name="checkcircleo" size={20} color="#50575D" />
+                            <View style={{ marginHorizontal: 16 }}>
+                                <AppText>You searched for XXXX. This item is accepted at this facility.</AppText>
+                            </View>
+                        </View>
+                        <AccordionList />
+                        <AccordionList />
+                        <AccordionList />
                     </Section>
                 </View>
             </ScrollView>
@@ -125,6 +197,8 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         marginVertical: 10,
+        borderRadius: 10,
+        overflow: "hidden"
     },
     mapStyle: {
         width: "100%",
@@ -161,5 +235,16 @@ const styles = StyleSheet.create({
     link: {
         color: "blue",
         textDecorationLine: "underline"
+    },
+    card: {
+        borderRadius: 10,
+        borderWidth: 0.3,
+        borderColor: "#004EE7",
+        shadowColor: "#004EE7",
+        flexDirection: "row",
+        alignItems: "center",
+        // marginRight: 8,
+        // marginHorizontal: 6,
+        padding: 16
     }
 })

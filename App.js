@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import React, { useState, useEffect } from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import { KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native';
+import { KeyboardAvoidingView, TouchableWithoutFeedback, AsyncStorage } from 'react-native';
 import TabNavigator from './routes/TabNavigator';
 import PermissionModal from './screens/PermissionModal'
 import * as Permissions from 'expo-permissions'
@@ -21,17 +21,46 @@ export default function App() {
     if (status === 'granted') {
       await Location.getCurrentPositionAsync({})
         .then((data) => setUserLocation(data.coords))
+        .catch((error) => console.log(error))
       
+      console.log(userLocation)
+
       await Location.reverseGeocodeAsync({latitude: userLocation.latitude, longitude: userLocation.longitude})
         .then((data) => setUserCity(data[0].city))
+        .catch((error) => console.log(error))
+
+      storeData()
     } else {
-      throw new Error("permission denied")
+      // null
+      throw console.log("permission denied")
       // Load a notification or select from a list on a modal?
     } 
   }
 
+  const storeData = async () => {
+    try {
+        await AsyncStorage.setItem('userLocation', JSON.stringify(userLocation));
+        console.log("userlocation Set")
+    } catch (error) {
+        console.log("failed to save in storeData asyncStorage")
+    }
+  };
+
+  const retrieveData = async () => {
+    console.log("retrieving")
+    try {
+        const value = await AsyncStorage.getItem('userLocation');
+        if (value !== null) {
+            setUserLocation(JSON.parse(value))
+        }
+    } catch (error) {
+        return
+    }
+  };
+
   useEffect(() => {
     checkPermission()
+    // retrieveData()
   }, [])
 
   let [fontLoaded] = useFonts({

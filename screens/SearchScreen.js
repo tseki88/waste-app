@@ -1,46 +1,70 @@
-import React, { useState } from 'react'
-import { StyleSheet, Text, View, FlatList, Dimensions, TextInput, TouchableOpacity, ScrollView } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { StyleSheet, Text, View, FlatList, Dimensions, TextInput, TouchableOpacity, ScrollView, AsyncStorage } from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
 import Section from '../shared/Section'
 import globalStyles from '../styles/globalStyles'
 import ListItem from '../shared/ListItem'
-import data from '../sampleData'
 import AppText from '../shared/AppText'
 import bindicator from '../bindicator.json'
-import { SharedElement, SharedElementTransition, nodeFromRef } from 'react-native-shared-element';  
+import SearchList from '../shared/SearchList'
 
-const SearchScreen = ({navigation, route}) => {
-
-    // const data = JSON.parse(bindicator)
-    // console.log(bindicator)
+const SearchScreen = ({ navigation, route }) => {
 
     // Temporary Data, will be based off global data later on
     const [nearest, setNearest] = useState([
-        {location:"Aurora", key : "1"},
-        {location:"East Gwillimbury", key : "2"},
-        {location:"Georgina", key : "3"},
-        {location:"King", key : "4"},
-        {location:"Markham", key : "5"},
-        {location:"Newmarket", key : "6"},
-        {location:"Richmond Hill", key : "7"},
-        {location:"Vaughan", key : "8"},
-        {location:"Whitchurch-Stouffville", key : "9"},
+        { location: "Aurora", key: "1" },
+        { location: "East Gwillimbury", key: "2" },
+        { location: "Georgina", key: "3" },
+        { location: "King", key: "4" },
+        { location: "Markham", key: "5" },
+        { location: "Newmarket", key: "6" },
+        { location: "Richmond Hill", key: "7" },
+        { location: "Vaughan", key: "8" },
+        { location: "Whitchurch-Stouffville", key: "9" },
     ])
 
     const [query, setQuery] = useState("")
     const [queryDisplay, setQueryDisplay] = useState([])
+    const [inputOutline, setInputOutline] = useState({ borderColor: "grey" })
 
     // Turn this into global/persistent state, on localStorage
     const [recentSearch, setRecentSearch] = useState([])
     
+    
+    const storeData = async () => {
+        try {
+            await AsyncStorage.setItem('recentSearch', JSON.stringify(recentSearch));
+        } catch (error) {
+            console.log("failed to save in stoeData asyncStorage")
+        }
+        console.log("setting")
+    };
+    
+    const retrieveData = async () => {
+        console.log("retrieving")
+        try {
+            const value = await AsyncStorage.getItem('recentSearch');
+            if (value !== null) {
+                setRecentSearch(JSON.parse(value))
+            }
+        } catch (error) {
+            return
+        }
+    };
+
+    useEffect(() => {
+        retrieveData()
+    }, [])
+
     const inputChangeHandler = (val) => {
         setQuery(val);
-        
+
         let filteredData = bindicator.filter((each) => {
             return each.name.toLowerCase().indexOf(val.toLowerCase()) >= 0
         })
-        
+
         setQueryDisplay(filteredData)
+
     }
 
     const clearSearch = () => {
@@ -48,7 +72,7 @@ const SearchScreen = ({navigation, route}) => {
     }
 
     const pressHandler = (item) => {
-        const {name, tag, image, description} = item
+        const { name, tag, image, description } = item
         navigation.navigate("ItemDetails", {
             name: name,
             tag: tag,
@@ -64,13 +88,12 @@ const SearchScreen = ({navigation, route}) => {
             }
         })
 
-        if (duplicate === false){
+        if (duplicate === false) {
             if (recentSearch.length > 2) {
                 setRecentSearch(prev => {
                     let tempState = prev
                     tempState.pop()
                     tempState.unshift(item)
-                    console.log(tempState)
                     return tempState
                 })
             } else {
@@ -80,43 +103,43 @@ const SearchScreen = ({navigation, route}) => {
                     return tempState
                 })
             }
+
+            storeData()
         }
+
     }
 
-    let endAncestor;
-    let endNode;
-    
+
 
     return (
-        <View style={globalStyles.container} ref={ref => endAncestor = nodeFromRef(ref)}>
+        <View style={globalStyles.container}>
             <View style={globalStyles.wrapper}>
                 <View style={styles.header}>
                     <View style={styles.inputContainer}>
-  
-                        <View style={styles.inputWrapper}>
-                    <SharedElement onNode={node => endNode = node} id="input">
+                        <View style={[styles.inputWrapper, inputOutline]}>
                             <TextInput
-                                placeholder="Search for an item" 
+                                placeholder="Search for an item"
                                 placeholderTextColor="grey"
                                 autoCapitalize='none'
-                                onChange={val => inputChangeHandler(val.nativeEvent.text)} 
-                                value={query} 
+                                onChange={val => inputChangeHandler(val.nativeEvent.text)}
+                                value={query}
                                 autoFocus={true}
-                                style={[styles.input, globalStyles.fontBase]} 
+                                onFocus={() => setInputOutline({ borderColor: "#0945DE" })}
+                                onBlur={() => setInputOutline({ borderColor: "grey" })}
+                                style={[styles.input, globalStyles.fontBase]}
                             />
-                        </SharedElement>
                             {
-                                query === "" 
-                                ?
-                                null
-                                :
-                                <TouchableOpacity style={styles.clearInputButton} onPress={clearSearch} >
-                                    <AntDesign name="close" size={18} color="#0945DE" />
-                                </TouchableOpacity>
+                                query === ""
+                                    ?
+                                    null
+                                    :
+                                    <TouchableOpacity style={styles.clearInputButton} onPress={clearSearch} >
+                                        <AntDesign name="close" size={18} color="#0945DE" />
+                                    </TouchableOpacity>
                             }
                         </View>
                         <TouchableOpacity style={styles.cancelButton} onPress={() => navigation.popToTop()} >
-                            <AppText style={globalStyles.fontBlue}>Cancel</AppText>
+                            <AppText style={[globalStyles.fontBlue, { textAlign: "center" }]}>Cancel</AppText>
                         </TouchableOpacity>
                     </View>
                     <ScrollView horizontal={true} style={styles.sideScroll} showsHorizontalScrollIndicator={false}>
@@ -133,28 +156,38 @@ const SearchScreen = ({navigation, route}) => {
                 </View>
                 {
                     query !== ""
-                    ?
-                    <Section title={`Results (${queryDisplay.length})`} list={true}>
-                        <FlatList
-                            data={queryDisplay}
-                            renderItem={({item}) => {                            
-                                return (
-                                    <ListItem item={item} query={query} pressHandler={pressHandler}/>
-                                )
-                            }}
-                        />
-                    </Section>
-                    :
-                    <Section title="Recent Searches" list={true}>
-                        <FlatList
-                            data={recentSearch}
-                            renderItem={({item}) => {                            
-                                return (
-                                    <ListItem item={item} query={query} history={true} pressHandler={pressHandler}/>
-                                )
-                            }}
-                        />
-                    </Section>
+                        ?
+                        <Section title={`Results (${queryDisplay.length})`} list={true}>
+                            {
+                                queryDisplay.length === 0
+                                    ?
+                                    <View style={{ marginVertical: 8 }}>
+                                        <AppText>Sorry, we couldn’t find any results. Double check the spelling and try again.</AppText>
+                                    </View>
+                                    :
+                                    <FlatList
+                                        data={queryDisplay}
+                                        keyExtractor={item => item.name + item.category + item.subCategory}
+                                        renderItem={({ item }) => {
+                                            return (
+                                                <SearchList item={item} query={query} pressHandler={pressHandler} />
+                                            )
+                                        }}
+                                    />
+                            }
+                        </Section>
+                        :
+                        <Section title="Recent Searches" list={true}>
+                            <FlatList
+                                data={recentSearch}
+                                keyExtractor={item => item.name}
+                                renderItem={({ item }) => {
+                                    return (
+                                        <ListItem item={item} query={query} history={true} pressHandler={pressHandler} />
+                                    )
+                                }}
+                            />
+                        </Section>
                 }
             </View>
         </View>
@@ -166,15 +199,19 @@ export default SearchScreen
 const styles = StyleSheet.create({
     header: {
         width: Dimensions.get('screen').width,
-        marginLeft: -14,
-        paddingHorizontal: 14,
+        marginLeft: -18,
+        paddingHorizontal: 18,
         elevation: 1,
         paddingTop: 10,
         // paddingBottom: 10,
         // width:Dimensions.get('screen').width - 40,
         // elevation: 1,
         // paddingTop: 20,
-        // marginBottom: 10
+        // marginBottom: 10,
+        // shadowOffset: { width: 10, height: 10 },
+        // shadowColor: 'grey',
+        // shadowOpacity: 1,
+        // backgroundColor: "#0000"
     },
     inputContainer: {
         flexDirection: "row",
@@ -188,8 +225,8 @@ const styles = StyleSheet.create({
         flex: 1,
         height: 42,
         borderRadius: 4,
-        borderWidth: 0.2,
-        borderColor: 'grey',
+        borderWidth: 1,
+        // borderColor: 'grey',
         marginTop: 20,
         marginBottom: 10,
     },
@@ -202,7 +239,7 @@ const styles = StyleSheet.create({
     },
     clearInputButton: {
         justifyContent: "center",
-        alignItems:"center",
+        alignItems: "center",
         width: 36,
         height: 42,
         // borderColor:"grey", 
@@ -212,10 +249,14 @@ const styles = StyleSheet.create({
         height: 42,
         marginTop: 20,
         marginBottom: 10,
-        paddingRight: 0,
-        paddingLeft: 16,
+        // paddingRight: 0,
+        // paddingHorizontal: 16,
+        marginLeft: 16,
         paddingVertical: 9,
-        alignItems: "center",
+        // justifyContent:"center",
+        // alignItems: "center",
+        // marginRight: 14,
+        // borderWidth:1
     }
     ,
     sideScroll: {
