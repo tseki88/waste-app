@@ -4,21 +4,25 @@ import { AntDesign } from '@expo/vector-icons'
 import AppText from './AppText'
 
 
-const SearchList = ({item, pressHandler, query = ""}) => {
+const SearchList = ({item, pressHandler, query = "", matchCount, index}) => {
     
     let boldMatch
     let noMatchBefore
     let noMatchAfter
 
-    if (query !== ""){
-        query = query.toLowerCase()
-        let letterCount = query.length
-        let name = item.name.toLowerCase()
-        let ind = name.indexOf(query)
+    if (index < matchCount) {
+        if (query !== ""){
+            query = query.toLowerCase()
+            let letterCount = query.length
+            let name = item.name.toLowerCase()
+            let ind = name.indexOf(query)
 
-        noMatchBefore = name.slice(0, ind)
-        boldMatch = name.slice(ind,(ind + letterCount))
-        noMatchAfter = name.slice((ind + letterCount),name.length)
+            noMatchBefore = name.slice(0, ind)
+            boldMatch = name.slice(ind,(ind + letterCount))
+            noMatchAfter = name.slice((ind + letterCount),name.length)
+        }
+    } else {
+        noMatchBefore = item.name.toLowerCase()
     }
     
 

@@ -25,6 +25,8 @@ const SearchScreen = ({ navigation, route }) => {
 
     const [query, setQuery] = useState("")
     const [queryDisplay, setQueryDisplay] = useState([])
+    const [queryLength, setQueryLength] = useState(0)
+    const [matchCount, setMatchCount] = useState(0)
     const [inputOutline, setInputOutline] = useState({ borderColor: "grey" })
 
     // Turn this into global/persistent state, on localStorage
@@ -59,12 +61,45 @@ const SearchScreen = ({ navigation, route }) => {
     const inputChangeHandler = (val) => {
         setQuery(val);
 
+        let related = []
+
         let filteredData = bindicator.filter((each) => {
-            return each.name.toLowerCase().indexOf(val.toLowerCase()) >= 0
+            const stringMatch = each.name.toLowerCase().indexOf(val.toLowerCase()) >= 0 
+            const relatedMatch = each.search.toLowerCase().indexOf(val.toLowerCase()) >= 0
+
+            if (stringMatch) {
+                return stringMatch
+            } else if (relatedMatch) {
+                related.push(each)
+            }
         })
 
-        setQueryDisplay(filteredData)
+        setQueryLength(related.length + filteredData.length)
+        let sortedArray
+        let finalQueryDisplay
 
+        if (filteredData.length > 40) {
+            sortedArray = filteredData.splice(0, 40)
+            finalQueryDisplay = sortedArray
+        } else {
+            sortedArray = filteredData.reduce((acc, element) => {
+                if (element.name.toLowerCase().indexOf(val.toLowerCase()) === 0) {
+                    return [element, ...acc]; 
+                } else {
+                    return [...acc, element]
+                }
+            },[])
+            
+            finalQueryDisplay = [...sortedArray, ...related]
+        }
+
+        setMatchCount(sortedArray.length)
+
+        if (finalQueryDisplay.length > 40){
+            setQueryDisplay(finalQueryDisplay.slice(0,40))
+        } else {
+            setQueryDisplay(finalQueryDisplay)
+        }
     }
 
     const clearSearch = () => {
@@ -157,7 +192,7 @@ const SearchScreen = ({ navigation, route }) => {
                 {
                     query !== ""
                         ?
-                        <Section title={`Results (${queryDisplay.length})`} list={true}>
+                        <Section title={`Results (${queryLength})`} list={true}>
                             {
                                 queryDisplay.length === 0
                                     ?
@@ -168,9 +203,9 @@ const SearchScreen = ({ navigation, route }) => {
                                     <FlatList
                                         data={queryDisplay}
                                         keyExtractor={item => item.name + item.category + item.subCategory}
-                                        renderItem={({ item }) => {
+                                        renderItem={({ item, index }) => {
                                             return (
-                                                <SearchList item={item} query={query} pressHandler={pressHandler} />
+                                                <SearchList item={item} query={query} pressHandler={pressHandler} matchCount={matchCount} index={index} />
                                             )
                                         }}
                                     />

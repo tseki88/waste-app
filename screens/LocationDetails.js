@@ -10,12 +10,15 @@ import AppText from '../shared/AppText'
 import AccordionList from '../shared/AccordionList'
 
 import globalStyles from '../styles/globalStyles'
+import AccordionContainer from '../shared/AccordionContainer'
 
 const LocationDetails = ({ route }) => {
 
-    const { name, municipality, address, hours, closed, direction, lat, long, website } = route.params.item
+    const { name, municipality, address, hours, closed, direction, lat, long, website, acceptedItems } = route.params.item
     const [userLocation, setUserLocation] = useState({})
     const [distance, setDistance] = useState(0)
+
+    // console.log(acceptedItems)
 
     const copyToClipBoard = (value) => {
         Clipboard.setString(value)
@@ -68,6 +71,8 @@ const LocationDetails = ({ route }) => {
     useEffect(() => {
         retrieveData()
     }, [distance])
+
+    console.log("location component rerendered")
 
     return (
         <View style={{ flex: 1, position: "relative" }}>
@@ -176,9 +181,7 @@ const LocationDetails = ({ route }) => {
                                 <AppText>You searched for XXXX. This item is accepted at this facility.</AppText>
                             </View>
                         </View>
-                        <AccordionList />
-                        <AccordionList />
-                        <AccordionList />
+                        <AccordionContainer acceptedItems={acceptedItems} />
                     </Section>
                 </View>
             </ScrollView>

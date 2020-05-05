@@ -41,6 +41,21 @@ const MainScreen = ({navigation}) => {
         },
     ])
 
+    // const [topSearch, setTopSearch] = useState([
+    //     { 
+    //         name: "Paint",
+    //         count: 10,
+    //     },
+    //     { 
+    //         name: "Take-Out Cup Lid",
+    //         count: 8,
+    //     },
+    //     { 
+    //         name: "Single Use Coffee Pod",
+    //         count: 4,
+    //     },
+    // ])
+
     const [nearest, setNearest] = useState([
         {location:"Markham", key : "1"},
         {location:"Mississauga", key : "2"},
