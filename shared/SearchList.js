@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
         width: "100%"
     },
     bold: {
-        fontWeight: "bold",
+        fontFamily: "WorkSansBold",
     },
     label: {
         width: "80%",

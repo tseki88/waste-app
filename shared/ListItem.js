@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     bold: {
         fontWeight: "bold",
     },
-    // label: {
-    //     width: "100%",
-    // }
+    label: {
+        width: "90%",
+    }
 })

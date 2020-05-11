@@ -22,9 +22,9 @@ const TabNavigator = () => {
                     else if (route.name === "Setting") {
                         iconName = "setting"
                     }
-                    else if (route.name === "Schedule") {
-                        iconName = "calendar"
-                    }
+                    // else if (route.name === "Schedule") {
+                    //     iconName = "calendar"
+                    // }
                     else if (route.name === "DropOff") {
                         iconName = "inbox"
                     }
@@ -40,7 +40,7 @@ const TabNavigator = () => {
         >
             <Tab.Screen name="Search" component={HomeStackScreen} />
             <Tab.Screen name="DropOff" component={DropOffStackScreen} />
-            <Tab.Screen name="Schedule" component={ScheduleStackScreen} />
+            {/* <Tab.Screen name="Schedule" component={ScheduleStackScreen} /> */}
             <Tab.Screen name="Setting" component={SettingStackScreen} />
         </Tab.Navigator>
     )

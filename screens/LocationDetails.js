@@ -7,7 +7,6 @@ import { AntDesign } from '@expo/vector-icons'
 
 import Section from '../shared/Section'
 import AppText from '../shared/AppText'
-import AccordionList from '../shared/AccordionList'
 
 import globalStyles from '../styles/globalStyles'
 import AccordionContainer from '../shared/AccordionContainer'
@@ -15,6 +14,7 @@ import AccordionContainer from '../shared/AccordionContainer'
 const LocationDetails = ({ route }) => {
 
     const { name, municipality, address, hours, closed, direction, lat, long, website, acceptedItems } = route.params.item
+    // Also have a route.params. => coming from search screen, location enabled
     const [userLocation, setUserLocation] = useState({})
     const [distance, setDistance] = useState(0)
 

@@ -1,10 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, View } from 'react-native'
 import AccordionList from './AccordionList'
 
 const AccordionContainer = ({acceptedItems}) => {
     
     const [openAccordion, setOpenAccordion] = useState(null)
+
+    useEffect(() => {
+        if (acceptedItems.length === 1) {
+            setOpenAccordion(0)
+        }
+    }, [])
 
     const accordionHandler = (index) => {
         if (openAccordion === index) {
@@ -15,7 +21,7 @@ const AccordionContainer = ({acceptedItems}) => {
     }
     
     return (
-        <View>
+        <View style={{marginBottom: 10}}>
             {
                 acceptedItems.map((each, i) => (
                     <AccordionList
@@ -31,5 +37,3 @@ const AccordionContainer = ({acceptedItems}) => {
 }
 
 export default AccordionContainer
-
-const styles = StyleSheet.create({})

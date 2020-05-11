@@ -12,15 +12,8 @@ const SearchScreen = ({ navigation, route }) => {
 
     // Temporary Data, will be based off global data later on
     const [nearest, setNearest] = useState([
-        { location: "Aurora", key: "1" },
-        { location: "East Gwillimbury", key: "2" },
-        { location: "Georgina", key: "3" },
-        { location: "King", key: "4" },
-        { location: "Markham", key: "5" },
-        { location: "Newmarket", key: "6" },
-        { location: "Richmond Hill", key: "7" },
-        { location: "Vaughan", key: "8" },
-        { location: "Whitchurch-Stouffville", key: "9" },
+        { location: "City of Toronto", key: "1" },
+        { location: "York Region", key: "2" },
     ])
 
     const [query, setQuery] = useState("")
@@ -61,45 +54,26 @@ const SearchScreen = ({ navigation, route }) => {
     const inputChangeHandler = (val) => {
         setQuery(val);
 
-        let related = []
-
+        
         let filteredData = bindicator.filter((each) => {
             const stringMatch = each.name.toLowerCase().indexOf(val.toLowerCase()) >= 0 
-            const relatedMatch = each.search.toLowerCase().indexOf(val.toLowerCase()) >= 0
-
-            if (stringMatch) {
-                return stringMatch
-            } else if (relatedMatch) {
-                related.push(each)
-            }
+            return stringMatch
         })
+        
+        let related = []
 
-        setQueryLength(related.length + filteredData.length)
-        let sortedArray
-        let finalQueryDisplay
-
-        if (filteredData.length > 40) {
-            sortedArray = filteredData.splice(0, 40)
-            finalQueryDisplay = sortedArray
+        if (filteredData.length === 0) {
+            related = bindicator.filter((each) => {
+                const relatedMatch = each.search.toLowerCase().indexOf(val.toLowerCase()) >= 0
+                return relatedMatch
+            })
+            setQueryDisplay(related)
         } else {
-            sortedArray = filteredData.reduce((acc, element) => {
-                if (element.name.toLowerCase().indexOf(val.toLowerCase()) === 0) {
-                    return [element, ...acc]; 
-                } else {
-                    return [...acc, element]
-                }
-            },[])
-            
-            finalQueryDisplay = [...sortedArray, ...related]
+            setQueryDisplay(filteredData)
         }
 
-        setMatchCount(sortedArray.length)
-
-        if (finalQueryDisplay.length > 40){
-            setQueryDisplay(finalQueryDisplay.slice(0,40))
-        } else {
-            setQueryDisplay(finalQueryDisplay)
-        }
+        setQueryLength(filteredData.length + related.length)
+        setMatchCount(filteredData.length)
     }
 
     const clearSearch = () => {

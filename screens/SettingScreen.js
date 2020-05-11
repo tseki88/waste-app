@@ -4,6 +4,8 @@ import Section from '../shared/Section'
 import globalStyles from '../styles/globalStyles'
 import Card from '../shared/Card'
 import AppText from '../shared/AppText'
+import SettingsListSwitch from '../shared/SettingsListSwitch'
+import SettingsListTouchable from '../shared/SettingsListTouchable'
 
 const SettingScreen = () => {
     
@@ -12,13 +14,18 @@ const SettingScreen = () => {
     }
 
     return (
-        <ScrollView>
-            <View style={styles.listItem}>
-                <AppText style={globalStyles.fontBase}>This Setting</AppText>
-            </View>
-            <View style={styles.listItem}>
-                <AppText style={globalStyles.fontBase}>This Setting</AppText>
-                <Button title="Change Permission" onPress={openPermission} />
+        <ScrollView style={globalStyles.container}>
+            <View style={globalStyles.wrapper}>
+                <SettingsListSwitch
+                    title="Enable Location"
+                    description="littr uses location to show you nearby drop-off centers."
+                    openPermission={openPermission}
+                />
+                <SettingsListTouchable
+                    title="Contact Us"
+                    description="Have a suggestion or feature request? Shoot us an email!"
+                    // presshandler of email modal to be displayed
+                />
             </View>
         </ScrollView>
     )
@@ -30,10 +37,10 @@ const styles = StyleSheet.create({
     listItem: {
         borderBottomColor: "lightgrey",
         borderBottomWidth: 0.2,
-        paddingLeft: 16,
+        // paddingLeft: 16,
         flexDirection: "row",
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingVertical: 18,
+        paddingVertical: 17,
     },
 })

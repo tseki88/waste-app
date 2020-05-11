@@ -1,6 +1,6 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import ItemDetailScreen from '../screens/ItemDetailScreen';
+// import ItemDetailScreen from '../screens/ItemDetailScreen';
 import LocationDetails from '../screens/LocationDetails';
 import DropOffScreen from '../screens/DropOffScreen';
 
@@ -21,6 +21,10 @@ const DropOffStackScreen = () => {
             <DropOffStack.Screen 
                 name="DropOffScreen"
                 component={DropOffScreen}
+            />
+            <DropOffStack.Screen
+                name="LocationDetails"
+                component={LocationDetails}
             />
         </DropOffStack.Navigator>
     )

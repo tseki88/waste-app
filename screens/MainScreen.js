@@ -57,11 +57,8 @@ const MainScreen = ({navigation}) => {
     // ])
 
     const [nearest, setNearest] = useState([
-        {location:"Markham", key : "1"},
-        {location:"Mississauga", key : "2"},
-        {location:"Richmond Hill", key : "3"},
-        {location:"Vaughan", key : "4"},
-        {location:"North York", key : "5"},
+        { location: "City of Toronto", key: "1" },
+        { location: "York Region", key: "2" },
     ])
 
     // get the name/id only for top items, then render based on imported master data
