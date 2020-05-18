@@ -15,12 +15,23 @@ const DropOffStackScreen = () => {
                     backgroundColor: '#fff',
                     height: 60,
                 },
-                title: "DropOff"
+                title: "Back",
+                headerTitleStyle: {
+                    fontSize: 16,
+                    fontWeight: "400",
+                    marginLeft: -25,
+                }
             }}
         >
             <DropOffStack.Screen 
                 name="DropOffScreen"
                 component={DropOffScreen}
+                options={{
+                    title: "Drop Off Centers",
+                    headerTitleStyle: {
+                        marginLeft: 0
+                    }
+                }}
             />
             <DropOffStack.Screen
                 name="LocationDetails"

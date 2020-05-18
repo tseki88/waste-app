@@ -22,7 +22,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "This app uses the user location to determing the municipality, and find the closest drop-off facilities",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "This app uses the user location to determing the municipality, and find the closest drop-off facilities"
+      }
     },
     "android": {
       "permissions": [

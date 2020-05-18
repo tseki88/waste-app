@@ -26,10 +26,10 @@ const ItemDetailScreen = ({route, navigation}) => {
                             <Tag type={e} key={i} />
                             ))}
                 </Section>
-                <View style={styles.image}>
+                {/* <View style={styles.image}>
                     <Image source={image} />
                     <Text>Img Placeholder</Text>
-                </View>
+                </View> */}
                 <Section title="How to discard item">
                     {/* <AppText style={[styles.paragraph, globalStyles.fontBlackPrimary]} >{description}</AppText> */}
                     {splitDescription.map((e,i) => (

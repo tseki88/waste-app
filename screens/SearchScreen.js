@@ -122,7 +122,7 @@ const SearchScreen = ({ navigation, route }) => {
 
     return (
         <View style={globalStyles.container}>
-            <View style={globalStyles.wrapper}>
+            <View style={[globalStyles.wrapper, {paddingRight: 0}]}>
                 <View style={styles.header}>
                     <View style={styles.inputContainer}>
                         <View style={[styles.inputWrapper, inputOutline]}>
@@ -175,6 +175,7 @@ const SearchScreen = ({ navigation, route }) => {
                                     </View>
                                     :
                                     <FlatList
+                                        style={{paddingRight: 18}}
                                         data={queryDisplay}
                                         keyExtractor={item => item.name + item.category + item.subCategory}
                                         renderItem={({ item, index }) => {
@@ -188,6 +189,7 @@ const SearchScreen = ({ navigation, route }) => {
                         :
                         <Section title="Recent Searches" list={true}>
                             <FlatList
+                                style={{paddingRight: 18}}
                                 data={recentSearch}
                                 keyExtractor={item => item.name}
                                 renderItem={({ item }) => {

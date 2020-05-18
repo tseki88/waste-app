@@ -32,19 +32,6 @@ const LocationDetails = ({ route }) => {
         WebBrowser.openBrowserAsync(link)
     }
 
-    const retrieveData = async () => {
-        console.log("retrieving")
-        try {
-            const value = await AsyncStorage.getItem('userLocation');
-            if (value !== null) {
-                setUserLocation(JSON.parse(value))
-                setDistance(computeDistance([userLocation.latitude, userLocation.longitude],[lat, long]).toFixed(1))
-            }
-        } catch (error) {
-            return
-        }
-    };
-
     const computeDistance = ([prevLat, prevLong], [lat, long]) => {
         const prevLatInRad = toRad(prevLat);
         const prevLongInRad = toRad(prevLong);
@@ -68,9 +55,26 @@ const LocationDetails = ({ route }) => {
         return (angle * Math.PI) / 180;
     }
 
-    useEffect(() => {
+    // Initial Render, fetches the data
+    useEffect(() => {        
+        const retrieveData = async () => {
+            console.log("retrieving")
+            try {
+                const value = await AsyncStorage.getItem('userLocation');
+                if (value !== null) {
+                    setUserLocation(JSON.parse(value))
+                }
+            } catch (error) {
+                return
+            }
+        };
         retrieveData()
-    }, [distance])
+    }, [])
+
+    // Only executes when the userLocation is updated
+    useEffect(() => {
+        setDistance(computeDistance([userLocation.latitude, userLocation.longitude],[lat, long]).toFixed(1))
+    }, [userLocation])
 
     console.log("location component rerendered")
 

@@ -21,20 +21,38 @@ const DropOffScreen = ({navigation}) => {
     sortDepot.sort((a,b) => {
         return b.name > a.name ? -1 : 1
     })
+
+    const getHeader = () => {
+        return (
+            <View style={globalStyles.container}>
+                <ScrollView horizontal={true} style={[styles.sideScroll, globalStyles.wrapper]} showsHorizontalScrollIndicator={false}>
+                    {/* Maybe Radio? or just a setState a single location which gets a focus style */}
+                    <AppText style={styles.location}>Location:</AppText>
+                    {nearest.map((item, i) => {
+                        return (
+                            <View key={i} style={styles.each}>
+                                <AppText key={i}>{item.location}</AppText>
+                            </View>
+                        )
+                    })}
+                </ScrollView>
+            </View>
+        )
+    }
     
     return (
-        <View style={globalStyles.container}>
-            <ScrollView horizontal={true} style={[styles.sideScroll, globalStyles.wrapper]} showsHorizontalScrollIndicator={false}>
-                {/* Maybe Radio? or just a setState a single location which gets a focus style */}
-                <AppText style={styles.location}>Location:</AppText>
-                {nearest.map((item, i) => {
-                    return (
-                        <View key={i} style={styles.each}>
-                            <AppText key={i}>{item.location}</AppText>
-                        </View>
-                    )
-                })}
-            </ScrollView>
+        // <ScrollView style={globalStyles.container}>
+        //     <ScrollView horizontal={true} style={[styles.sideScroll, globalStyles.wrapper]} showsHorizontalScrollIndicator={false}>
+        //         {/* Maybe Radio? or just a setState a single location which gets a focus style */}
+        //         <AppText style={styles.location}>Location:</AppText>
+        //         {nearest.map((item, i) => {
+        //             return (
+        //                 <View key={i} style={styles.each}>
+        //                     <AppText key={i}>{item.location}</AppText>
+        //                 </View>
+        //             )
+        //         })}
+        //     </ScrollView>
             <FlatList
                 data={sortDepot}
                 renderItem={({item}) => {                            
@@ -44,8 +62,9 @@ const DropOffScreen = ({navigation}) => {
                         </View>
                     )
                 }}
+                ListHeaderComponent={getHeader}
             />
-        </View>
+        // {/* </ScrollView> */}
     )
 }
 
@@ -53,8 +72,8 @@ export default DropOffScreen
 
 const styles = StyleSheet.create({
     sideScroll: {
-        paddingBottom: 8,
-        marginVertical: 2,
+        // paddingBottom: 30,
+        marginVertical: 30,
         overflow: "visible"
     },
     location: {
@@ -68,8 +87,5 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         borderColor: "#E6EBEF",
         borderWidth: 1,
-    },
-    sideScroll: {
-        overflow: "visible"
     }
 })

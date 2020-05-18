@@ -17,8 +17,54 @@ export default function App() {
   const [userLocation, setUserLocation] = useState(null)
   const [userCity, setUserCity] = useState(null)
 
+
+  // SPLASHSCREEN
+  //  - Load Fonts
+  //  - Do the below permission check 
+  //    - if permission has been provided, jump to permission-2-Granted and do all calculations while splashscreen is loading.
+
+  // PERMISSIONS
+  // 1. Check if this is initial load of App
+  //    - Make a localStorage of initialLoad = true
+  //    - Show "Ask for Location Permission Screen". **Screen Component**
+  //      - if Denied, Select Municipality Screen will provide 1 of the 2 options
+  //      - save the selected municipality to a state && localStorage
+  //    - Once selection is resolved, change localStorage of initialLoad = false
+  
+  // if permission has been Provided (userLocation state will be used to determine for conditional rendering e.g. userLocation===null means distance is hidden)
+  // 2-Granted. Get userLocation lat + long (no need to save this to localStorage)
+  //    - determine municipality
+  //      - save this to a state
+  //    - Firebase call to get Data of selected municipality, and saved to a state
+  //    - Do calculation of all distances from each DropOffCenter and store into a state.
+
+  // if permission has been Denied:
+  // 2-Denied.
+  //    - retrieve municipality info from localStorage
+  //    - Firebase call to get Data of selected municipality, and saved to a state.
+
+  // Once the below has been all resolved, isAppReady = true / hideSplashScreen.
+  //  - FontsLoaded
+  //  - PermissionChecked, and selected municipality has been determined (distance calc if granted)
+  //  - Firebase call to get Data (items and locations) and data has been set.
+  //  - Get Top Searches
+
+  // LocalStorage:
+  //  - initialAppLoad = true
+  //  - userMunicipality = null
+
+  // StatesRequired:
+  //  - isSplashReady
+  //  - isAppReady
+  //  - userMunicipality (locationPermissionGranted ? calc from userLocation : fetch from localStorage)
+  //  - itemData
+  //  - depotData
+  //    - calculatedDistances (!locationPermissionGranted = null)
+  //  - topSearch results (for main screen only)
+
+
   async function checkPermission () {
-    const { status, permissions } = await Permissions.askAsync(Permissions.LOCATION);
+    const { status, permissions:{ location: { ios } } } = await Permissions.askAsync(Permissions.LOCATION);
 
     if (status === 'granted') {
       await Location.getCurrentPositionAsync({})
@@ -28,13 +74,13 @@ export default function App() {
       console.log(userLocation)
 
       await Location.reverseGeocodeAsync({latitude: userLocation.latitude, longitude: userLocation.longitude})
-        .then((data) => setUserCity(data[0].city))
+        .then((data) => {setUserCity(data[0].city); console})
         .catch((error) => console.log(error))
 
       storeData()
     } else {
       // null
-      throw console.log("permission denied")
+      throw new Error("permission denied")
       // Load a notification or select from a list on a modal?
     } 
   }
@@ -56,7 +102,7 @@ export default function App() {
             setUserLocation(JSON.parse(value))
         }
     } catch (error) {
-        return
+        return new Error("retrieving failed")
     }
   };
 
