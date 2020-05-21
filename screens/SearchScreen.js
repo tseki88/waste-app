@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { StyleSheet, Text, View, FlatList, Dimensions, TextInput, TouchableOpacity, ScrollView, AsyncStorage } from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
 import Section from '../shared/Section'
 import globalStyles from '../styles/globalStyles'
 import ListItem from '../shared/ListItem'
 import AppText from '../shared/AppText'
-import bindicator from '../bindicator.json'
+// import bindicator from '../bindicator.json'
 import SearchList from '../shared/SearchList'
+import { DataContext } from '../App'
 
 const SearchScreen = ({ navigation, route }) => {
 
@@ -23,8 +24,33 @@ const SearchScreen = ({ navigation, route }) => {
     const [inputOutline, setInputOutline] = useState({ borderColor: "grey" })
 
     // Turn this into global/persistent state, on localStorage
+
+    // Going to need to save different recentSearch based on Municipality set.
     const [recentSearch, setRecentSearch] = useState([])
     
+    const [municipalityData, setMunicipalityData] = useState(null)
+    
+    const data = useContext(DataContext)
+
+    console.log("screenRerender")
+
+    useEffect(() => {
+        const retrieveData = async () => {
+            console.log("retrieving")
+            try {
+                const value = await AsyncStorage.getItem('recentSearch');
+                if (value !== null) {
+                    setMunicipalityData(data)
+                    setRecentSearch(JSON.parse(value))
+                }
+            } catch (error) {
+                return
+            }
+        };
+
+        console.log("setting Data")
+        retrieveData()
+    }, [])
     
     const storeData = async () => {
         try {
@@ -34,28 +60,16 @@ const SearchScreen = ({ navigation, route }) => {
         }
         console.log("setting")
     };
-    
-    const retrieveData = async () => {
-        console.log("retrieving")
-        try {
-            const value = await AsyncStorage.getItem('recentSearch');
-            if (value !== null) {
-                setRecentSearch(JSON.parse(value))
-            }
-        } catch (error) {
-            return
-        }
-    };
 
-    useEffect(() => {
-        retrieveData()
-    }, [])
+    // useEffect(() => {
+
+    // }, [])
 
     const inputChangeHandler = (val) => {
         setQuery(val);
 
         
-        let filteredData = bindicator.filter((each) => {
+        let filteredData = municipalityData.items.filter((each) => {
             const stringMatch = each.name.toLowerCase().indexOf(val.toLowerCase()) >= 0 
             return stringMatch
         })
@@ -63,7 +77,7 @@ const SearchScreen = ({ navigation, route }) => {
         let related = []
 
         if (filteredData.length === 0) {
-            related = bindicator.filter((each) => {
+            related = municipalityData.items.filter((each) => {
                 const relatedMatch = each.search.toLowerCase().indexOf(val.toLowerCase()) >= 0
                 return relatedMatch
             })

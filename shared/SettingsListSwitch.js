@@ -1,12 +1,38 @@
-import React, { useState } from 'react'
-import { StyleSheet, Switch, View } from 'react-native'
-import { AntDesign } from '@expo/vector-icons'
+import React, { useState, useEffect } from 'react'
+import { StyleSheet, Switch, View, Linking } from 'react-native'
+import * as Permissions from 'expo-permissions'
 import AppText from './AppText'
 import globalStyles from '../styles/globalStyles'
 
-const SettingsListSwitch = ({title, description, openPermission}) => {
-    const [test, setTest] = useState(false)
+const SettingsListSwitch = ({title, description}) => {
     
+
+    // Issues with switch updating
+    const [locationPermission, setLocationPermission] = useState(null)
+    
+    useEffect(() => {
+        const checkPermissionStatus = async () => {
+            const { status, permissions: { location: { ios } } } = await Permissions.askAsync(Permissions.LOCATION);
+            console.log("checkingPermission")
+            if(status === "granted") {
+                // Closes this Screen
+                console.log("it is granted")
+                return setLocationPermission(true)
+            } else if(status !== 'granted') {
+                // Goes to city selection screen
+                console.log("it isn't granted")
+                return setLocationPermission(false)
+            } else {
+                throw new Error("permission denied")
+            }
+        };
+        checkPermissionStatus()
+    }, [locationPermission])
+
+    const openPermission = () => {
+        Linking.openSettings()
+    }
+
     return (
         <View style={styles.listItem}>
             <View style={{width: "80%"}}>
@@ -17,9 +43,9 @@ const SettingsListSwitch = ({title, description, openPermission}) => {
             </View>
             <View style={{paddingLeft:30}}>
                 <Switch 
-                    value={test}
+                    value={locationPermission}
                     onChange={openPermission} //opens the settings menu
-                    // onValueChange={fetches permission status and shows current state of the permission }
+                    // onValueChange={openPermission}
                     style={{ transform: [{ scaleX: 1.2 }, { scaleY: 1.2 }] }}
                     thumbColor="white"
                     trackColor={{false:"#6E6E6E", true:"#0945DE"}}    

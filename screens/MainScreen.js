@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
-import { StyleSheet, View, FlatList, ScrollView, Dimensions, Text, TouchableWithoutFeedback } from 'react-native'
+import React, { useState, useContext } from 'react'
+import { StyleSheet, View, FlatList, ScrollView, Dimensions, Text, TouchableWithoutFeedback, TouchableOpacity } from 'react-native'
 import AppText from '../shared/AppText'
 import Card from '../shared/Card'
 import globalStyles from '../styles/globalStyles'
 import Section from '../shared/Section'
 import ListItem from '../shared/ListItem'
+import { MunicipalityContext } from '../App'
 
 const MainScreen = ({navigation}) => {
 
@@ -61,13 +62,13 @@ const MainScreen = ({navigation}) => {
         { location: "York Region", key: "2" },
     ])
 
+    const setUserMunicipality = useContext(MunicipalityContext)
     // get the name/id only for top items, then render based on imported master data
 
-    const pressHandler = ({name, tag, image, description}) => {
+    const pressHandler = ({name, tag, description}) => {
         navigation.navigate("ItemDetails", {
             name: name,
             tag: tag,
-            image: image,
             description: description
         })
     }
@@ -94,9 +95,9 @@ const MainScreen = ({navigation}) => {
                         <AppText style={styles.location}>Location:</AppText>
                         {nearest.map((item, i) => {
                             return (
-                                <View key={i} style={styles.each}>
+                                <TouchableOpacity key={i} style={styles.each} onPress={() => setUserMunicipality(item.location)}>
                                     <AppText key={i}>{item.location}</AppText>
-                                </View>
+                                </TouchableOpacity>
                             )
                         })}
                     </ScrollView>

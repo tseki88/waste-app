@@ -32,49 +32,49 @@ const LocationDetails = ({ route }) => {
         WebBrowser.openBrowserAsync(link)
     }
 
-    const computeDistance = ([prevLat, prevLong], [lat, long]) => {
-        const prevLatInRad = toRad(prevLat);
-        const prevLongInRad = toRad(prevLong);
-        const latInRad = toRad(lat);
-        const longInRad = toRad(long);
+    // const computeDistance = ([prevLat, prevLong], [lat, long]) => {
+    //     const prevLatInRad = toRad(prevLat);
+    //     const prevLongInRad = toRad(prevLong);
+    //     const latInRad = toRad(lat);
+    //     const longInRad = toRad(long);
 
-        console.log(userLocation)
-        console.log(prevLatInRad, prevLongInRad, latInRad, longInRad)
+    //     console.log(userLocation)
+    //     console.log(prevLatInRad, prevLongInRad, latInRad, longInRad)
 
-        return (
-            // In kilometers
-            6377.830272 *
-            Math.acos(
-                Math.sin(prevLatInRad) * Math.sin(latInRad) +
-                Math.cos(prevLatInRad) * Math.cos(latInRad) * Math.cos(longInRad - prevLongInRad),
-            )
-        );
-    }
+    //     return (
+    //         // In kilometers
+    //         6377.830272 *
+    //         Math.acos(
+    //             Math.sin(prevLatInRad) * Math.sin(latInRad) +
+    //             Math.cos(prevLatInRad) * Math.cos(latInRad) * Math.cos(longInRad - prevLongInRad),
+    //         )
+    //     );
+    // }
 
-    const toRad = (angle) => {
-        return (angle * Math.PI) / 180;
-    }
+    // const toRad = (angle) => {
+    //     return (angle * Math.PI) / 180;
+    // }
 
     // Initial Render, fetches the data
-    useEffect(() => {        
-        const retrieveData = async () => {
-            console.log("retrieving")
-            try {
-                const value = await AsyncStorage.getItem('userLocation');
-                if (value !== null) {
-                    setUserLocation(JSON.parse(value))
-                }
-            } catch (error) {
-                return
-            }
-        };
-        retrieveData()
-    }, [])
+    // useEffect(() => {        
+    //     const retrieveData = async () => {
+    //         console.log("retrieving")
+    //         try {
+    //             const value = await AsyncStorage.getItem('userLocation');
+    //             if (value !== null) {
+    //                 setUserLocation(JSON.parse(value))
+    //             }
+    //         } catch (error) {
+    //             return
+    //         }
+    //     };
+    //     retrieveData()
+    // }, [])
 
     // Only executes when the userLocation is updated
-    useEffect(() => {
-        setDistance(computeDistance([userLocation.latitude, userLocation.longitude],[lat, long]).toFixed(1))
-    }, [userLocation])
+    // useEffect(() => {
+    //     setDistance(computeDistance([userLocation.latitude, userLocation.longitude],[lat, long]).toFixed(1))
+    // }, [userLocation])
 
     console.log("location component rerendered")
 
@@ -120,7 +120,7 @@ const LocationDetails = ({ route }) => {
                                 ?
                                 hours.map((e) => {
                                     return (
-                                        <View style={{ marginBottom: 14 }} key={e.key}>
+                                        <View style={{ marginBottom: 14 }} key={e.name}>
                                             <AppText style={{ fontWeight: "bold", marginBottom: 10 }}>{e.name}</AppText>
                                             <View style={{ marginBottom: 14, flexDirection: "row", flexWrap: "nowrap" }}>
                                                 <View>
@@ -179,12 +179,12 @@ const LocationDetails = ({ route }) => {
                         </AppText>
                     </Section>
                     <Section title="Accepted Items">
-                        <View style={styles.card}>
+                        {/* <View style={styles.card}>
                             <AntDesign name="checkcircleo" size={20} color="#50575D" />
                             <View style={{ marginHorizontal: 16 }}>
                                 <AppText>You searched for XXXX. This item is accepted at this facility.</AppText>
                             </View>
-                        </View>
+                        </View> */}
                         <AccordionContainer acceptedItems={acceptedItems} />
                     </Section>
                 </View>

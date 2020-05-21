@@ -26,6 +26,7 @@ const DropOffStackScreen = () => {
             <DropOffStack.Screen 
                 name="DropOffScreen"
                 component={DropOffScreen}
+                // possibly disabling header in here to remove the centered header for iOS?
                 options={{
                     title: "Drop Off Centers",
                     headerTitleStyle: {

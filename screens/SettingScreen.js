@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Clipboard, Button, Linking } from 'react-native'
 import Section from '../shared/Section'
 import globalStyles from '../styles/globalStyles'
+import * as Permissions from 'expo-permissions'
 import Card from '../shared/Card'
 import AppText from '../shared/AppText'
 import SettingsListSwitch from '../shared/SettingsListSwitch'
@@ -9,9 +10,29 @@ import SettingsListTouchable from '../shared/SettingsListTouchable'
 
 const SettingScreen = () => {
     
-    const openPermission = () => {
-        Linking.openSettings()
-    }
+    // const [locationPermission, setLocationPermission] = useState(null)
+
+    // useEffect(() => {
+    //     const checkPermissionStatus = async () => {
+    //         const { status, permissions: { location: { ios } } } = await Permissions.getAsync(Permissions.LOCATION);
+    //         console.log("checkingPermission")
+    //         if(status === "granted") {
+    //             // Closes this Screen
+    //             return setLocationPermission(true)
+    //         } else if(status !== 'granted') {
+    //             // Goes to city selection screen
+    //             // console.log("permission denied")
+    //             return setLocationPermission(false)
+    //         } else {
+    //             throw new Error("permission denied")
+    //         }
+    //     };
+    //     checkPermissionStatus()
+    // },[])
+
+    // const openPermission = () => {
+    //     Linking.openSettings()
+    // }
 
     return (
         <ScrollView style={globalStyles.container}>
@@ -19,7 +40,9 @@ const SettingScreen = () => {
                 <SettingsListSwitch
                     title="Enable Location"
                     description="littr uses location to show you nearby drop-off centers."
-                    openPermission={openPermission}
+                    // openPermission={openPermission}
+                    // locationPermission={locationPermission}
+                    // setLocationPermission={setLocationPermission}
                 />
                 <SettingsListTouchable
                     title="Contact Us"

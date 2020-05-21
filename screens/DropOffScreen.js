@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Clipboard, FlatList } from 'react-native'
 // import Section from '../shared/Section'
 import globalStyles from '../styles/globalStyles'
 import { depotData } from '../sampleData'
 import AppText from '../shared/AppText'
 import ListItem from '../shared/ListItem'
+import { MunicipalityContext, DataContext } from '../App'
 
 const DropOffScreen = ({navigation}) => {
 
@@ -13,11 +14,20 @@ const DropOffScreen = ({navigation}) => {
         { location: "York Region", key: "2" },
     ])
 
+    const [municipalityData, setMunicipalityData] = useState([])
+    const data = useContext(DataContext)
+
+    useEffect(() => {
+        setMunicipalityData(data.depots)
+    })
+
+    const setUserMunicipality = useContext(MunicipalityContext)
+
     const pressHandler = (item) => {
         navigation.navigate("LocationDetails", item={item})
     }
 
-    const sortDepot = depotData;
+    const sortDepot = municipalityData;
     sortDepot.sort((a,b) => {
         return b.name > a.name ? -1 : 1
     })
@@ -30,9 +40,9 @@ const DropOffScreen = ({navigation}) => {
                     <AppText style={styles.location}>Location:</AppText>
                     {nearest.map((item, i) => {
                         return (
-                            <View key={i} style={styles.each}>
+                            <TouchableOpacity key={i} style={styles.each} onPress={() => setUserMunicipality(item.location)}>
                                 <AppText key={i}>{item.location}</AppText>
-                            </View>
+                            </TouchableOpacity>
                         )
                     })}
                 </ScrollView>
