@@ -1,6 +1,5 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-// import ItemDetailScreen from '../screens/ItemDetailScreen';
 import LocationDetails from '../screens/LocationDetails';
 import DropOffScreen from '../screens/DropOffScreen';
 import LocationSelector from '../shared/LocationSelector';
@@ -29,7 +28,6 @@ const DropOffStackScreen = () => {
             <DropOffStack.Screen 
                 name="DropOffScreen"
                 component={DropOffScreen}
-                // possibly disabling header in here to remove the centered header for iOS?
                 options={{
                     headerTitle: () => (
                         <View style={{borderWidth:0}}>
