@@ -1,19 +1,15 @@
 import 'react-native-gesture-handler';
 import React, { useState, useEffect } from 'react';
-// import {NavigationContainer} from '@react-navigation/native';
-import { KeyboardAvoidingView, TouchableWithoutFeedback, AsyncStorage, View, Image, ActivityIndicator } from 'react-native';
-// import TabNavigator from './routes/TabNavigator';
+import { AsyncStorage, View, ActivityIndicator } from 'react-native';
 import * as Permissions from 'expo-permissions'
 import * as Location from 'expo-location'
 import { useFonts } from '@use-expo/font'
 import { AppLoading, SplashScreen } from 'expo';
 import InitialAppLoadScreen from './screens/InitialAppLoadScreen';
 import LandingScreen from './screens/LandingScreen';
-import AppText from './shared/AppText';
 import tempData from './firebaseTemplate.json'
+import { UpdateMunicipalityContext, DataContext, UserMunicipalityContext, depotDistanceContext } from './context/globalContext';
 
-export const MunicipalityContext = React.createContext()
-export const DataContext = React.createContext()
 
 export default function App() {
 
@@ -91,8 +87,11 @@ export default function App() {
       const getAsyncMunicipality = async () => {
         console.log("retrieving asyncStorage - userMunicipality")
         try {
-          const value = await AsyncStorage.getItem('userMunicipality');
+          let value = await AsyncStorage.getItem('userMunicipality');
           console.log(value)
+          if (value === null) {
+            value = "York Region"
+          }
           return setUserMunicipality(value)          
         } catch (error) {
           return new Error("retrieve failed")
@@ -109,6 +108,7 @@ export default function App() {
   }, [userMunicipality])
   
   
+  // Change this so that it only calculates it on initial app load, and save it. (no need to recalculate all the distances every time you switch municipality)
   useEffect(() => {
     const computeDistance = ([prevLat, prevLong], [lat, long]) => {
       const prevLatInRad = toRad(prevLat);
@@ -122,13 +122,13 @@ export default function App() {
         Math.acos(
           Math.sin(prevLatInRad) * Math.sin(latInRad) +
           Math.cos(prevLatInRad) * Math.cos(latInRad) * Math.cos(longInRad - prevLongInRad),
-          )
-          );
-        }
+        )
+      );
+    }
         
-        const toRad = (angle) => {
-          return (angle * Math.PI) / 180;
-        }
+    const toRad = (angle) => {
+      return (angle * Math.PI) / 180;
+    }
         
     const checkLocationPermission = async () => {
       const { status, permissions: { location: { ios } } } = await Permissions.getAsync(Permissions.LOCATION);
@@ -232,11 +232,15 @@ export default function App() {
     );
   } else {
     return (
-      <MunicipalityContext.Provider value={setUserMunicipality}>
-        <DataContext.Provider value={municipalityData}>
-          <LandingScreen />
-        </DataContext.Provider>
-      </MunicipalityContext.Provider>
+      <UpdateMunicipalityContext.Provider value={setUserMunicipality}>
+        <UserMunicipalityContext.Provider value={userMunicipality}>
+          <DataContext.Provider value={municipalityData}>
+            <depotDistanceContext.Provider value={depotDistance}>
+              <LandingScreen />
+            </depotDistanceContext.Provider>
+          </DataContext.Provider>
+        </UserMunicipalityContext.Provider>
+      </UpdateMunicipalityContext.Provider>
     );
   }
 }

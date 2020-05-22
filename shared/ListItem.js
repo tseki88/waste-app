@@ -1,8 +1,7 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { StyleSheet, View, TouchableOpacity } from 'react-native'
 import { AntDesign, MaterialCommunityIcons, Feather } from '@expo/vector-icons'
 import AppText from './AppText'
-
 
 const ListItem = ({item, pressHandler, history = null, depot = null}) => {
     
@@ -24,7 +23,16 @@ const ListItem = ({item, pressHandler, history = null, depot = null}) => {
                         ?
                         <View style={{flex: 1, marginHorizontal: 15}}>
                             <AppText style={styles.label}>{item.name}</AppText>
-                            <AppText style={{fontSize: 12, color: "#50575D"}}>{item.addressSimple}</AppText>
+                            <AppText style={{fontSize: 12, color: "#50575D"}}>
+                                {
+                                    item.distance !== undefined
+                                    ?
+                                    `${item.distance} km | `
+                                    :
+                                    null 
+                                }
+                                {item.addressSimple}
+                            </AppText>
                         </View>
                         :
                             history

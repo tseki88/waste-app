@@ -1779,14 +1779,6 @@
                     "search": ""
                 },
                 {
-                    "name": "Chemical",
-                    "description": "This item is Household Hazardous Waste (HHW) and MUST NOT be placed in your Garbage Bin, Blue Bin, Green Bin or put down the drain/toilet/sewer.\nPlease take this item to one of the City's Drop-Off Depots or  Community Environment Days.\nFor HHW between 10 to 50 litres/kilograms, residents can also request a free Toxic Taxi pick-up online or by calling 311.",
-                    "tag": [
-                        "Household Hazardous Waste"
-                    ],
-                    "search": ""
-                },
-                {
                     "name": "Carpet Cleaner",
                     "description": "This item is Household Hazardous Waste (HHW) and MUST NOT be placed in your Garbage Bin, Blue Bin, Green Bin or put down the drain/toilet/sewer.\nPlease take this item to one of the City's Drop-Off Depots or  Community Environment Days.\nFor HHW between 10 to 50 litres/kilograms, residents can also request a free Toxic Taxi pick-up online or by calling 311.",
                     "tag": [
@@ -1796,14 +1788,6 @@
                 },
                 {
                     "name": "Car Care Product",
-                    "description": "This item is Household Hazardous Waste (HHW) and MUST NOT be placed in your Garbage Bin, Blue Bin, Green Bin or put down the drain/toilet/sewer.\nPlease take this item to one of the City's Drop-Off Depots or  Community Environment Days.\nFor HHW between 10 to 50 litres/kilograms, residents can also request a free Toxic Taxi pick-up online or by calling 311.",
-                    "tag": [
-                        "Household Hazardous Waste"
-                    ],
-                    "search": ""
-                },
-                {
-                    "name": "Pool Chemical",
                     "description": "This item is Household Hazardous Waste (HHW) and MUST NOT be placed in your Garbage Bin, Blue Bin, Green Bin or put down the drain/toilet/sewer.\nPlease take this item to one of the City's Drop-Off Depots or  Community Environment Days.\nFor HHW between 10 to 50 litres/kilograms, residents can also request a free Toxic Taxi pick-up online or by calling 311.",
                     "tag": [
                         "Household Hazardous Waste"
@@ -2100,14 +2084,6 @@
                 },
                 {
                     "name": "Caulking",
-                    "description": "This item is Household Hazardous Waste (HHW) and MUST NOT be placed in your Garbage Bin, Blue Bin or Green Bin.\nPlease take this item to one of the City's Drop-Off Depots or  Community Environment Days.\nFor HHW between 10 to 50 litres/kilograms, residents can also request a free Toxic Taxi pick-up online or by calling 311.",
-                    "tag": [
-                        "Household Hazardous Waste"
-                    ],
-                    "search": ""
-                },
-                {
-                    "name": "Sealant",
                     "description": "This item is Household Hazardous Waste (HHW) and MUST NOT be placed in your Garbage Bin, Blue Bin or Green Bin.\nPlease take this item to one of the City's Drop-Off Depots or  Community Environment Days.\nFor HHW between 10 to 50 litres/kilograms, residents can also request a free Toxic Taxi pick-up online or by calling 311.",
                     "tag": [
                         "Household Hazardous Waste"
@@ -14700,14 +14676,6 @@
                 },
                 {
                     "name": "Ice Cream",
-                    "description": "Place this item in your Green Bin.\nLine either your indoor container or outdoor Green Bin with a plastic bag or kraft paper bag. Do not line both.",
-                    "tag": [
-                        "Green Bin"
-                    ],
-                    "search": ""
-                },
-                {
-                    "name": "Cheese",
                     "description": "Place this item in your Green Bin.\nLine either your indoor container or outdoor Green Bin with a plastic bag or kraft paper bag. Do not line both.",
                     "tag": [
                         "Green Bin"

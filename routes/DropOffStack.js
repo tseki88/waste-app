@@ -3,6 +3,9 @@ import {createStackNavigator} from '@react-navigation/stack';
 // import ItemDetailScreen from '../screens/ItemDetailScreen';
 import LocationDetails from '../screens/LocationDetails';
 import DropOffScreen from '../screens/DropOffScreen';
+import LocationSelector from '../shared/LocationSelector';
+import { View, Text } from 'react-native';
+import globalStyles from '../styles/globalStyles';
 
 const DropOffStack = createStackNavigator();
 
@@ -28,9 +31,15 @@ const DropOffStackScreen = () => {
                 component={DropOffScreen}
                 // possibly disabling header in here to remove the centered header for iOS?
                 options={{
-                    title: "Drop Off Centers",
-                    headerTitleStyle: {
-                        marginLeft: 0
+                    headerTitle: () => (
+                        <View style={{borderWidth:0}}>
+                            <Text style={[globalStyles.headerTwo, {marginTop: 30}]}>Drop Off Centers</Text>
+                            <LocationSelector />
+                        </View>
+                        
+                        ),
+                    headerStyle: {
+                        height: 120
                     }
                 }}
             />
