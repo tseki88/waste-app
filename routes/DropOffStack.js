@@ -17,12 +17,7 @@ const DropOffStackScreen = () => {
                     backgroundColor: '#fff',
                     height: 60,
                 },
-                title: "Back",
-                headerTitleStyle: {
-                    fontSize: 16,
-                    fontWeight: "400",
-                    marginLeft: -25,
-                }
+                headerTitle: ""
             }}
         >
             <DropOffStack.Screen 
@@ -44,6 +39,14 @@ const DropOffStackScreen = () => {
             <DropOffStack.Screen
                 name="LocationDetails"
                 component={LocationDetails}
+                options={{
+                    headerBackTitleVisible: true,
+                    headerBackTitle: "Back",
+                    headerBackTitleStyle: {
+                        fontSize: 16,
+                        marginLeft: 4
+                    }
+                }}
             />
         </DropOffStack.Navigator>
     )

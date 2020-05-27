@@ -1,35 +1,42 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { AntDesign } from '@expo/vector-icons'
+import { AntDesign, Feather } from '@expo/vector-icons'
 import HomeStackScreen from './HomeStack';
 import SettingStackScreen from './SettingStack';
 import DropOffStackScreen from './DropOffStack';
-import ScheduleStackScreen from './ScheduleStack';
+// import ScheduleStackScreen from './ScheduleStack';
+import { View } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
+
+    const renderNav = (focused, iconType) => (
+        <View style={{flex: 1, alignItems: 'center', borderTopColor: focused ? "blue" : '#E6EBEF', paddingTop: 4, borderTopWidth: 2, width: "100%", justifyContent:"center"}}>
+            {iconType()}
+        </View>
+    )
+
+
     return (
         <Tab.Navigator
             initialRouteName="Search"
             screenOptions={({route}) => ({
                 tabBarIcon: ({ focused, color, size}) => {
-                    let iconName;
+                    let iconType
 
                     if (route.name === "Search") {
-                        iconName = "search1"
+                        iconType = () => <AntDesign name="search1" size={size} color={color} />
+                        return renderNav(focused, iconType)
                     }
                     else if (route.name === "Setting") {
-                        iconName = "setting"
+                        iconType = () => <AntDesign name="setting" size={size} color={color} />
+                        return renderNav(focused, iconType)
                     }
-                    // else if (route.name === "Schedule") {
-                    //     iconName = "calendar"
-                    // }
                     else if (route.name === "DropOff") {
-                        iconName = "inbox"
+                        iconType = () => <Feather name="package" size={size} color={color} />
+                        return renderNav(focused, iconType)
                     }
-
-                    return <AntDesign name={iconName} size={size} color={color} />
                 },
             })}
             tabBarOptions={{
@@ -39,7 +46,7 @@ const TabNavigator = () => {
             }}
         >
             <Tab.Screen name="Search" component={HomeStackScreen} />
-            <Tab.Screen name="DropOff" component={DropOffStackScreen} />
+            <Tab.Screen name="DropOff" options={{tabBarLabel: "Drop Off"}} component={DropOffStackScreen} />
             {/* <Tab.Screen name="Schedule" component={ScheduleStackScreen} /> */}
             <Tab.Screen name="Setting" component={SettingStackScreen} />
         </Tab.Navigator>

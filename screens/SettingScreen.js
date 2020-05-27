@@ -7,9 +7,21 @@ import Card from '../shared/Card'
 import AppText from '../shared/AppText'
 import SettingsListSwitch from '../shared/SettingsListSwitch'
 import SettingsListTouchable from '../shared/SettingsListTouchable'
+import ModalContactForm from './ModalContactForm'
+import * as MailComposer from 'expo-mail-composer'
 
 const SettingScreen = () => {
     
+    const [modalVisible, setModalVisible] = useState(false)
+
+    const openMail = () => {
+        MailComposer.composeAsync({
+            recipients:["test@test.ca"],
+            subject: "Hello Littr App Team",
+        }).then((resolve) => {
+            console.log("sent?"+ resolve)
+        }).catch((error) => console.log(error))
+    }
     // const [locationPermission, setLocationPermission] = useState(null)
 
     // useEffect(() => {
@@ -36,6 +48,7 @@ const SettingScreen = () => {
 
     return (
         <ScrollView style={globalStyles.container}>
+            <ModalContactForm modalVisible={modalVisible} setModalVisible={setModalVisible} />
             <View style={globalStyles.wrapper}>
                 <SettingsListSwitch
                     title="Enable Location"
@@ -47,6 +60,8 @@ const SettingScreen = () => {
                 <SettingsListTouchable
                     title="Contact Us"
                     description="Have a suggestion or feature request? Shoot us an email!"
+                    // onPressHandler={() => setModalVisible(true)}
+                    onPressHandler={openMail}
                     // presshandler of email modal to be displayed
                 />
             </View>

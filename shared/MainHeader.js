@@ -43,13 +43,14 @@ const styles = StyleSheet.create({
         flex: 1,
         height: 42,
         borderRadius: 4,
-        borderWidth: 1,
         marginTop: 20,
+        borderWidth: 1,
         ...Platform.select({
             ios: {
-                shadowColor: '#0000',
-                shadowOffset: { width: 0, height: 3 },
-                shadowOpacity: 0.2,
+                borderColor: '#E6EBEF',
+                // shadowColor: 'grey',
+                // shadowOffset: { width: 0, height: 3 },
+                // shadowOpacity: 0.2,
             },
             android: {
                 backgroundColor: "#fff",

@@ -21,11 +21,12 @@ const HomeStackScreen = () => {
                     backgroundColor: '#fff',
                     height: 60,
                 },
-                title: "Back",
-                headerTitleStyle: {
+                headerTitle: "",
+                headerBackTitle: "Back",
+                headerBackTitleVisible: true,
+                headerBackTitleStyle: {
                     fontSize: 16,
-                    fontWeight: "400",
-                    marginLeft: -25,
+                    marginLeft: 4,
                 }
             }}
         >

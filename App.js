@@ -17,18 +17,15 @@ export default function App() {
   //  - isSplashReady
   //  - isAppReady
   //  - userMunicipality (locationPermissionGranted ? calc from userLocation : fetch from localStorage)
-  //  - itemData
-  //  - depotData
-  //    - calculatedDistances (!locationPermissionGranted = null)
+//    - calculatedDistances (!locationPermissionGranted = null)
   //  - topSearch results (for main screen only)
+  //    - will be fetched from firebase for most recent "top searches"
 
   // const [isSplashReady, setIsSplashReady] = useState(false)
   
   const [isAppReady, setIsAppReady] = useState(false)
   const [initialAppLoad, setInitialAppLoad] = useState(true)
   const [userMunicipality, setUserMunicipality] = useState(null)
-  // const [itemData, setItemData] = useState(null)
-  // const [depotData, setDepotData] = useState(null)
   // const [topSearch, setTopSearch] = useState([])
   const [municipalityData, setMunicipalityData] = useState({})
   const [depotDistance, setDepotDistance] = useState(null)
@@ -57,6 +54,7 @@ export default function App() {
   //    - Once selection is resolved, change localStorage of initialLoad = false
   
   useEffect(() => {
+    
     const initialAppLoadCheck = async () => {
       console.log("retrieving asyncStorage - initialAppLoadCheck")
       try {
@@ -185,7 +183,6 @@ export default function App() {
   
   
   
-
 
   // const cacheResourcesAsync = async () => {
   //   const images = [require('./assets/splash.png')];

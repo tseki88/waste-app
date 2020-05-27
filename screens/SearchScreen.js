@@ -242,14 +242,12 @@ const styles = StyleSheet.create({
         height: 42,
         borderRadius: 4,
         borderWidth: 1,
-        // borderColor: 'grey',
         marginTop: 20,
         marginBottom: 10,
         ...Platform.select({
             ios: {
-                shadowColor: '#0000',
-                shadowOffset: { width: 0, height: 3 },
-                shadowOpacity: 0.2,
+                borderColor: '#E6EBEF',
+                // THIS ISN'T SHOWING RIGHT NOW WHYYYYY
             },
             android: {
                 backgroundColor: "#fff",

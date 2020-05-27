@@ -4,10 +4,10 @@ import { AntDesign } from '@expo/vector-icons'
 import AppText from './AppText'
 import globalStyles from '../styles/globalStyles'
 
-const SettingsListTouchable = ({title, description}) => {
+const SettingsListTouchable = ({title, description, onPressHandler=null}) => {
 
     return (
-        <TouchableOpacity style={styles.listItem} onPress={null}>
+        <TouchableOpacity style={styles.listItem} onPress={onPressHandler}>
             <View style={{width: "80%"}}>
                 <AppText style={{marginBottom: 5}}>{title}</AppText>
                 <View>
