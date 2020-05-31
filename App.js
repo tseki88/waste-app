@@ -28,7 +28,7 @@ export default function App() {
   const [userMunicipality, setUserMunicipality] = useState(null)
   // const [topSearch, setTopSearch] = useState([])
   const [municipalityData, setMunicipalityData] = useState({})
-  const [depotDistance, setDepotDistance] = useState(null)
+  const [depotDistance, setDepotDistance] = useState({})
 
   // LocalStorage:
   //  - initialAppLoad = true
@@ -81,7 +81,7 @@ export default function App() {
   
 
   useEffect(() => {
-    if (userMunicipality === null) {
+    if (userMunicipality === null && initialAppLoad === false) {
       const getAsyncMunicipality = async () => {
         console.log("retrieving asyncStorage - userMunicipality")
         try {
@@ -95,16 +95,19 @@ export default function App() {
           return new Error("retrieve failed")
         }
       }
-      getAsyncMunicipality()
-      
-    }
 
+      getAsyncMunicipality()
+    }
+  }, [initialAppLoad])
+  
+  
+  useEffect(() => {
     if (initialAppLoad === false) {
       // This is where the firebase call will happen
       setMunicipalityData(tempData.municipality[userMunicipality])
     }
   }, [userMunicipality])
-  
+
   
   // Change this so that it only calculates it on initial app load, and save it. (no need to recalculate all the distances every time you switch municipality)
   useEffect(() => {
@@ -135,20 +138,25 @@ export default function App() {
         await Location.getCurrentPositionAsync({})
         .then((data) => {
           const userLat = data.coords.latitude;
-            const userLong = data.coords.longitude;
+          const userLong = data.coords.longitude;
 
-            const distanceArray = municipalityData.depots.map((depot) => {
-              const depotLat = depot.lat;
-              const depotLong = depot.long;
-              const depotObject = {
-                key: depot.key,
-                depotDistance: computeDistance([userLat, userLong],[depotLat, depotLong]).toFixed(1)
-              } 
-              return depotObject
-            })
-            console.log(distanceArray)
-            return setDepotDistance(distanceArray)
-          }).catch((error) => console.log(error))
+          const distanceArray = municipalityData.depots.map((depot) => {
+            const depotLat = depot.lat;
+            const depotLong = depot.long;
+            const depotObject = {
+              key: depot.key,
+              depotDistance: computeDistance([userLat, userLong],[depotLat, depotLong]).toFixed(1)
+            } 
+            return depotObject
+          })
+
+          
+          return setDepotDistance(prev => {
+            const temp = {...prev}
+            temp[userMunicipality] = distanceArray
+            return temp
+          })
+        }).catch((error) => console.log(error))
           
           
           // get user geolocation & calculate distances, save to state
@@ -162,7 +170,7 @@ export default function App() {
         } else {
           throw new Error("permission denied")
         }
-
+        console.log(depotDistance)
         return setIsAppReady(true)
     }
     if (municipalityData.depots !== undefined){
@@ -205,7 +213,7 @@ export default function App() {
     return <AppLoading />
   }
   else if(initialAppLoad) {
-    return <InitialAppLoadScreen setInitialAppLoad={setInitialAppLoad} />
+    return <InitialAppLoadScreen setInitialAppLoad={setInitialAppLoad} setUserMunicipality={setUserMunicipality} />
   // }
   // else if (!isSplashReady) {
   //   return null

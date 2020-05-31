@@ -5,14 +5,11 @@ import * as WebBrowser from 'expo-web-browser'
 import { Linking } from 'expo'
 import { AntDesign } from '@expo/vector-icons'
 
-
 import Section from '../shared/Section'
 import AppText from '../shared/AppText'
 
 import globalStyles from '../styles/globalStyles'
 import AccordionContainer from '../shared/AccordionContainer'
-
-// import { ToastAndroid } from 'react-native';
 
 
 const LocationDetails = ({ route }) => {
@@ -26,13 +23,13 @@ const LocationDetails = ({ route }) => {
 
     const copyToClipBoard = (value) => {
         Clipboard.setString(value)
+        ToastAndroid.showWithGravity("Address has been copied to clipboard", ToastAndroid.LONG, ToastAndroid.BOTTOM)
     }
     
     const openLink = (link) => {
         Linking.openURL(link)
-        ToastAndroid.show("Testing", ToastAndroid.SHORT)
     }
-
+    
     const openAppBrowser = (link) => {
         WebBrowser.openBrowserAsync(link)
     }
@@ -87,7 +84,6 @@ const LocationDetails = ({ route }) => {
         <View style={{ flex: 1, position: "relative" }}>
             <ScrollView style={globalStyles.container}>
                 <View style={globalStyles.wrapper}>
-                    <ToastNotification />
                     <Section title={name}>
                         <AppText>{!isNaN(distance) ? distance : "--" } km away</AppText>
                     </Section>

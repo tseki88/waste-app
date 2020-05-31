@@ -5,32 +5,18 @@ import AppText from '../shared/AppText'
 import * as Permissions from 'expo-permissions'
 import * as Location from 'expo-location'
 
-const InitialAppLoadScreen = ({setInitialAppLoad}) => {
+const InitialAppLoadScreen = ({setInitialAppLoad, setUserMunicipality}) => {
 
     // Prompt Permission on this Component. If the user denies permission, change state for conditional rendering.
 
-    const [permissionGranted, setPermissionGranted] = useState(null)
-
-    const promptLocationPermission = async () => {
-        const { status, permissions: { location: { ios } } } = await Permissions.askAsync(Permissions.LOCATION);
-        
-        if(status === "granted") {
-            // Closes this Screen
-            changeInitialAppLoad()
-            return setInitialAppLoad(false)
-        } else if(status !== 'granted') {
-            // Goes to city selection screen
-            console.log("permission denied")
-            return setPermissionGranted(false)
-        } else {
-            throw new Error("permission denied")
-        }
-    }
+    const [municipalitySelected, setMunicipalitySelected] = useState(null)
 
     const changeInitialAppLoad = async () => {
         try {
             await AsyncStorage.setItem('initialAppLoad', "false");
             console.log("asyncStorage initialAppLoad set to false")
+            setUserMunicipality(municipalitySelected)
+            return setInitialAppLoad(false)
         } catch (error) {
             console.log("failed to save in storeData asyncStorage")
         }
@@ -40,13 +26,31 @@ const InitialAppLoadScreen = ({setInitialAppLoad}) => {
         try {
             await AsyncStorage.setItem('userMunicipality', municipality);
             console.log(`userMunicipality set to ${municipality}`)
-            changeInitialAppLoad()
-            return setInitialAppLoad(false)
+            return setMunicipalitySelected(municipality)
         } catch (error) {
             console.log("failed to set userMunicipality")
         }
     }
 
+    const promptLocationPermission = async () => {
+        const { status, permissions: { location: { ios } } } = await Permissions.askAsync(Permissions.LOCATION);
+        
+        if(status === "granted") {
+            console.log("permission granted")
+        } else if(status !== 'granted') {
+            console.log("permission denied")
+        } else {
+            throw new Error("permission check failed")
+        }
+        changeInitialAppLoad()
+    }
+
+    const pressHandler = (municipality) => {
+        municipalitySelect(municipality)
+        setTimeout(() => {
+            promptLocationPermission()
+        }, 2000);
+    }
 
     // Render Options
     const locateMeText = () => {
@@ -54,14 +58,6 @@ const InitialAppLoadScreen = ({setInitialAppLoad}) => {
             <View style={styles.textContainer}>
                 <Text style={[globalStyles.headerOne, globalStyles.fontWhite, styles.header]}>Locate Me</Text>
                 <AppText style={[globalStyles.fontWhite, styles.text]}>We would like to access your location in order to provide accurate waste disposal information based on your location.</AppText>
-                <View style={styles.buttonContainer}>
-                    <TouchableOpacity
-                        style={styles.button}
-                        onPress={promptLocationPermission}
-                    >
-                        <AppText style={globalStyles.fontBlue}>Next</AppText>
-                    </TouchableOpacity>
-                </View>
             </View>
         )
     }
@@ -72,10 +68,10 @@ const InitialAppLoadScreen = ({setInitialAppLoad}) => {
                 <Text style={[globalStyles.headerOne, globalStyles.fontWhite, styles.header]}>Where is Your Waste Going?</Text>
                 <AppText style={[globalStyles.fontWhite, styles.text]}>Select a region so that you get the most relevant waste disposal instructions. You can change this at any time.</AppText>
                 <View style={styles.buttonContainer}>
-                    <TouchableOpacity style={styles.button} onPress={() => municipalitySelect("City of Toronto")}>
+                    <TouchableOpacity style={styles.button} onPress={() => pressHandler("City of Toronto")}>
                         <AppText style={globalStyles.fontBlue}>City of Toronto</AppText>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={() => municipalitySelect("York Region")}>
+                    <TouchableOpacity style={styles.button} onPress={() => pressHandler("York Region")}>
                         <AppText style={globalStyles.fontBlue}>York Region</AppText>
                     </TouchableOpacity>
                 </View>
@@ -87,11 +83,11 @@ const InitialAppLoadScreen = ({setInitialAppLoad}) => {
     return (
         <View style={[globalStyles.container, globalStyles.backgroundTwo, { justifyContent: "space-between" }]}>
             {
-                permissionGranted === null
+                municipalitySelected === null
                     ?
-                    locateMeText()
-                    :
                     selectCityText()
+                    :
+                    locateMeText()
             }
 
             <View style={styles.imageContainer}>
