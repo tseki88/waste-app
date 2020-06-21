@@ -18845,11 +18845,11 @@
                         {
                             "key": "1",
                             "name": "General Hours",
-                            "mon": "Opens at 6am - Open All Day & Night",
-                            "tues": "Open All Day & Night",
-                            "wed": "Open All Day & Night",
-                            "thurs": "Open All Day & Night",
-                            "fri": "Open All Day - Closes at 9pm",
+                            "mon": "6am - 12am",
+                            "tues": "Open 24 Hours",
+                            "wed": "Open 24 Hours",
+                            "thurs": "Open 24 Hours",
+                            "fri": "12am - 9pm",
                             "sat": "7am - 12:30pm",
                             "sun": "7am - 12:30pm (June - October 13)"
                         },
@@ -19012,12 +19012,12 @@
                         {
                             "key": "1",
                             "name": "General Hours",
-                            "mon": "6am - Tues",
-                            "tues": "24 Hours",
-                            "wed": "24 Hours",
-                            "thurs": "24 Hours",
-                            "fri": "24 Hours",
-                            "sat": "Fri - 12:30pm",
+                            "mon": "6am - 12am",
+                            "tues": "Open 24 Hours",
+                            "wed": "Open 24 Hours",
+                            "thurs": "Open 24 Hours",
+                            "fri": "Open 24 Hours",
+                            "sat": "12am - 12:30pm",
                             "sun": "Closed"
                         },
                         {
@@ -23314,7 +23314,7 @@
                     "acceptedItems": [
                         {
                             "category": "Appliances",
-                            "subcategory": [
+                            "subCategory": [
                                 "Appliances with coolant",
                                 "Large appliances",
                                 "Small appliances"
@@ -23322,7 +23322,7 @@
                         },
                         {
                             "category": "Electronics and electrical waste",
-                            "subcategory": [
+                            "subCategory": [
                                 "Cell phone",
                                 "Computers and tablets",
                                 "Media and accessories",
@@ -23331,7 +23331,7 @@
                         },
                         {
                             "category": "Household hazardous waste",
-                            "subcategory": [
+                            "subCategory": [
                                 "Car/Engine related products",
                                 "Cleaning products",
                                 "Compressed gas",
@@ -23346,34 +23346,34 @@
                         },
                         {
                             "category": "Kitchen waste",
-                            "subcategory": [
+                            "subCategory": [
                                 "Cooking oil"
                             ]
                         },
                         {
                             "category": "Medical/Homecare supplies",
-                            "subcategory": [
+                            "subCategory": [
                                 "Medication",
                                 "Sharps"
                             ]
                         },
                         {
                             "category": "Office supplies",
-                            "subcategory": [
+                            "subCategory": [
                                 "Equipment",
                                 "Office chemicals"
                             ]
                         },
                         {
                             "category": "Packaging",
-                            "subcategory": [
+                            "subCategory": [
                                 "Boxboard",
                                 "Cardboard"
                             ]
                         },
                         {
                             "category": "Personal care products",
-                            "subcategory": [
+                            "subCategory": [
                                 "Electronics and electrical waste",
                                 "Hair colour",
                                 "Nail products",
@@ -23382,7 +23382,7 @@
                         },
                         {
                             "category": "Sharp metals",
-                            "subcategory": [
+                            "subCategory": [
                                 "Other metal items"
                             ]
                         }
@@ -23412,7 +23412,7 @@
                     "acceptedItems": [
                         {
                             "category": "Appliances",
-                            "subcategory": [
+                            "subCategory": [
                                 "Appliances with coolant",
                                 "Large appliances",
                                 "Small appliances"
@@ -23420,13 +23420,13 @@
                         },
                         {
                             "category": "Baby supplies",
-                            "subcategory": [
+                            "subCategory": [
                                 "Baby furniture"
                             ]
                         },
                         {
                             "category": "Building materials",
-                            "subcategory": [
+                            "subCategory": [
                                 "Building supplies",
                                 "Clean wood",
                                 "Concrete",
@@ -23437,14 +23437,14 @@
                         },
                         {
                             "category": "Clothing and textiles",
-                            "subcategory": [
+                            "subCategory": [
                                 "Clothing",
                                 "Textiles"
                             ]
                         },
                         {
                             "category": "Electronics and electrical waste",
-                            "subcategory": [
+                            "subCategory": [
                                 "Cell phone",
                                 "Computers and tablets",
                                 "Media and accessories",
@@ -23453,14 +23453,14 @@
                         },
                         {
                             "category": "Garbage",
-                            "subcategory": [
+                            "subCategory": [
                                 "Bagged",
                                 "Bulky item disposal"
                             ]
                         },
                         {
                             "category": "Household hazardous waste",
-                            "subcategory": [
+                            "subCategory": [
                                 "Car/Engine related products",
                                 "Cleaning products",
                                 "Compressed gas",
@@ -23475,27 +23475,27 @@
                         },
                         {
                             "category": "Housewares",
-                            "subcategory": [
+                            "subCategory": [
                                 "Decorations",
                                 "Pool accessories"
                             ]
                         },
                         {
                             "category": "Kitchen waste",
-                            "subcategory": [
+                            "subCategory": [
                                 "Cooking oil"
                             ]
                         },
                         {
                             "category": "Medical/Homecare supplies",
-                            "subcategory": [
+                            "subCategory": [
                                 "Medication",
                                 "Sharps"
                             ]
                         },
                         {
                             "category": "Office supplies",
-                            "subcategory": [
+                            "subCategory": [
                                 "Equipment",
                                 "Paper",
                                 "Shredded paper "
@@ -23503,7 +23503,7 @@
                         },
                         {
                             "category": "Packaging",
-                            "subcategory": [
+                            "subCategory": [
                                 "Boxboard",
                                 "Cardboard",
                                 "Polystrene (styrofoam)"
@@ -23511,7 +23511,7 @@
                         },
                         {
                             "category": "Personal care products",
-                            "subcategory": [
+                            "subCategory": [
                                 "Hair colour",
                                 "Nail products",
                                 "Office supplies",
@@ -23520,20 +23520,20 @@
                         },
                         {
                             "category": "Printed materials",
-                            "subcategory": [
+                            "subCategory": [
                                 "Books",
                                 "Magazines/Newspapers"
                             ]
                         },
                         {
                             "category": "Sharp metals",
-                            "subcategory": [
+                            "subCategory": [
                                 "Other metal items"
                             ]
                         },
                         {
                             "category": "Tires",
-                            "subcategory": [
+                            "subCategory": [
                                 "Car and truck tires",
                                 "Tractor tires"
                             ]
@@ -23564,13 +23564,13 @@
                     "acceptedItems": [
                         {
                             "category": "Craft supplies",
-                            "subcategory": [
+                            "subCategory": [
                                 "Glues and chemicals"
                             ]
                         },
                         {
                             "category": "Electronics and electrical waste",
-                            "subcategory": [
+                            "subCategory": [
                                 "Cell phone",
                                 "Computers and tablets",
                                 "Media and accessories",
@@ -23579,7 +23579,7 @@
                         },
                         {
                             "category": "Household hazardous waste",
-                            "subcategory": [
+                            "subCategory": [
                                 "Car/Engine related products",
                                 "Cleaning products",
                                 "Compressed gas",
@@ -23594,20 +23594,20 @@
                         },
                         {
                             "category": "Kitchen waste",
-                            "subcategory": [
+                            "subCategory": [
                                 "Cooking oil"
                             ]
                         },
                         {
                             "category": "Medical/Homecare supplies",
-                            "subcategory": [
+                            "subCategory": [
                                 "Medication",
                                 "Sharps"
                             ]
                         },
                         {
                             "category": "Personal care products",
-                            "subcategory": [
+                            "subCategory": [
                                 "Electronics and electrical waste",
                                 "Hair colour",
                                 "Nail products",
@@ -23640,7 +23640,7 @@
                     "acceptedItems": [
                         {
                             "category": "Appliances",
-                            "subcategory": [
+                            "subCategory": [
                                 "Appliances with coolant",
                                 "Large appliances",
                                 "Small appliances"
@@ -23648,13 +23648,13 @@
                         },
                         {
                             "category": "Baby supplies",
-                            "subcategory": [
+                            "subCategory": [
                                 "Baby furniture"
                             ]
                         },
                         {
                             "category": "Building materials",
-                            "subcategory": [
+                            "subCategory": [
                                 "Building supplies",
                                 "Clean wood",
                                 "Concrete",
@@ -23664,14 +23664,14 @@
                         },
                         {
                             "category": "Clothing and textiles",
-                            "subcategory": [
+                            "subCategory": [
                                 "Clothing",
                                 "Textiles"
                             ]
                         },
                         {
                             "category": "Electronics and electrical waste",
-                            "subcategory": [
+                            "subCategory": [
                                 "Cell phone",
                                 "Computers and tablets",
                                 "Media and accessories",
@@ -23680,14 +23680,14 @@
                         },
                         {
                             "category": "Garbage",
-                            "subcategory": [
+                            "subCategory": [
                                 "Bagged",
                                 "Bulky item disposal"
                             ]
                         },
                         {
                             "category": "Household hazardous waste",
-                            "subcategory": [
+                            "subCategory": [
                                 "Car/Engine related products",
                                 "Cleaning products",
                                 "Compressed gas",
@@ -23702,7 +23702,7 @@
                         },
                         {
                             "category": "Housewares",
-                            "subcategory": [
+                            "subCategory": [
                                 "Decorations",
                                 "Mattresses",
                                 "Pool accessories"
@@ -23710,26 +23710,26 @@
                         },
                         {
                             "category": "Kitchen waste",
-                            "subcategory": [
+                            "subCategory": [
                                 "Cooking oil"
                             ]
                         },
                         {
                             "category": "Medical/Homecare supplies",
-                            "subcategory": [
+                            "subCategory": [
                                 "Medication",
                                 "Sharps"
                             ]
                         },
                         {
                             "category": "Office supplies",
-                            "subcategory": [
+                            "subCategory": [
                                 "Shredded paper"
                             ]
                         },
                         {
                             "category": "Packaging",
-                            "subcategory": [
+                            "subCategory": [
                                 "Boxboard",
                                 "Cardboard",
                                 "Polystrene (styrofoam)"
@@ -23737,26 +23737,26 @@
                         },
                         {
                             "category": "Printed materials",
-                            "subcategory": [
+                            "subCategory": [
                                 "Books",
                                 "Magazines/Newspapers"
                             ]
                         },
                         {
                             "category": "Sharp metals",
-                            "subcategory": [
+                            "subCategory": [
                                 "Other metal items"
                             ]
                         },
                         {
                             "category": "Sporting goods",
-                            "subcategory": [
+                            "subCategory": [
                                 "Bicycle"
                             ]
                         },
                         {
                             "category": "Tires",
-                            "subcategory": [
+                            "subCategory": [
                                 "Car and truck tires",
                                 "Tractor tires"
                             ]
@@ -23800,7 +23800,7 @@
                     "acceptedItems": [
                         {
                             "category": "Yard Waste",
-                            "subcategory": [
+                            "subCategory": [
                                 "Branches",
                                 "Christmas Tree",
                                 "Flowers and plants",
@@ -23852,7 +23852,7 @@
                     "acceptedItems": [
                         {
                             "category": "Appliances",
-                            "subcategory": [
+                            "subCategory": [
                                 "Appliances with coolant",
                                 "Large appliances",
                                 "Small appliances"
@@ -23860,13 +23860,13 @@
                         },
                         {
                             "category": "Baby supplies",
-                            "subcategory": [
+                            "subCategory": [
                                 "Baby furniture"
                             ]
                         },
                         {
                             "category": "Building materials",
-                            "subcategory": [
+                            "subCategory": [
                                 "Building supplies",
                                 "Concrete",
                                 "Stone products/Asphalt"
@@ -23874,27 +23874,27 @@
                         },
                         {
                             "category": "Car/Engine related products",
-                            "subcategory": [
+                            "subCategory": [
                                 "Sharp metals"
                             ]
                         },
                         {
                             "category": "Cell phone",
-                            "subcategory": [
+                            "subCategory": [
                                 "Building materials",
                                 "Sharp metals"
                             ]
                         },
                         {
                             "category": "Clothing and textiles",
-                            "subcategory": [
+                            "subCategory": [
                                 "Clothing",
                                 "Textiles"
                             ]
                         },
                         {
                             "category": "Electronics and electrical waste",
-                            "subcategory": [
+                            "subCategory": [
                                 "Cell phone",
                                 "Computers and tablets",
                                 "Media and accessories",
@@ -23903,7 +23903,7 @@
                         },
                         {
                             "category": "Garbage",
-                            "subcategory": [
+                            "subCategory": [
                                 "Bagged",
                                 "Bulky item disposal",
                                 "Oversized items"
@@ -23911,7 +23911,7 @@
                         },
                         {
                             "category": "Household hazardous waste",
-                            "subcategory": [
+                            "subCategory": [
                                 "Car/Engine related products",
                                 "Cleaning products",
                                 "Compressed gas",
@@ -23926,41 +23926,41 @@
                         },
                         {
                             "category": "Housewares",
-                            "subcategory": [
+                            "subCategory": [
                                 "Decorations",
                                 "Pool accessories"
                             ]
                         },
                         {
                             "category": "Kitchen waste",
-                            "subcategory": [
+                            "subCategory": [
                                 "Cooking oil"
                             ]
                         },
                         {
                             "category": "Medical/Homecare supplies",
-                            "subcategory": [
+                            "subCategory": [
                                 "Medication",
                                 "Sharps"
                             ]
                         },
                         {
                             "category": "Office supplies",
-                            "subcategory": [
+                            "subCategory": [
                                 "Equipment",
                                 "Office chemicals"
                             ]
                         },
                         {
                             "category": "Packaging",
-                            "subcategory": [
+                            "subCategory": [
                                 "Boxboard",
                                 "Cardboard"
                             ]
                         },
                         {
                             "category": "Personal care products",
-                            "subcategory": [
+                            "subCategory": [
                                 "Electronics and electrical waste",
                                 "Hair colour",
                                 "Nail products",
@@ -23969,26 +23969,26 @@
                         },
                         {
                             "category": "Polystrene (styrofoam)",
-                            "subcategory": [
+                            "subCategory": [
                                 "Sharp metals"
                             ]
                         },
                         {
                             "category": "Printed materials",
-                            "subcategory": [
+                            "subCategory": [
                                 "Books",
                                 "Magazines/Newspapers"
                             ]
                         },
                         {
                             "category": "Seasonal",
-                            "subcategory": [
+                            "subCategory": [
                                 "Outdoor decorations (organic)"
                             ]
                         },
                         {
                             "category": "Sharp metals",
-                            "subcategory": [
+                            "subCategory": [
                                 "Electronics and electrical waste",
                                 "Household hazardous waste",
                                 "Motorized vehicles and parts",
@@ -23998,14 +23998,14 @@
                         },
                         {
                             "category": "Tires",
-                            "subcategory": [
+                            "subCategory": [
                                 "Car and truck tires",
                                 "Tractor tires"
                             ]
                         },
                         {
                             "category": "Yard Waste",
-                            "subcategory": [
+                            "subCategory": [
                                 "Leaves and branches",
                                 "Roots and stumps",
                                 "Seasonal decorations",

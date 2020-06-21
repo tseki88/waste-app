@@ -4,12 +4,14 @@ import { AsyncStorage, View, ActivityIndicator } from 'react-native';
 import * as Permissions from 'expo-permissions'
 import * as Location from 'expo-location'
 import { useFonts } from '@use-expo/font'
-import { AppLoading, SplashScreen } from 'expo';
+import { AppLoading} from 'expo';
+
 import InitialAppLoadScreen from './screens/InitialAppLoadScreen';
 import LandingScreen from './screens/LandingScreen';
-import tempData from './firebaseTemplate.json'
-import { UpdateMunicipalityContext, DataContext, UserMunicipalityContext, depotDistanceContext } from './context/globalContext';
+// import tempData from './firebaseTemplate.json'
+import { UpdateMunicipalityContext, DataContext, UserMunicipalityContext } from './context/globalContext';
 
+import firebaseDB from './firebase'
 
 export default function App() {
 
@@ -26,10 +28,10 @@ export default function App() {
   const [isAppReady, setIsAppReady] = useState(false)
   const [initialAppLoad, setInitialAppLoad] = useState(true)
   const [userMunicipality, setUserMunicipality] = useState(null)
-  // const [topSearch, setTopSearch] = useState([])
-  const [municipalityData, setMunicipalityData] = useState({})
-  const [depotDistance, setDepotDistance] = useState({})
+  const [topSearch, setTopSearch] = useState([])
+  const [municipalityData, setMunicipalityData] = useState(null)
 
+  let tempData
   // LocalStorage:
   //  - initialAppLoad = true
   //  - userMunicipality = null
@@ -68,6 +70,57 @@ export default function App() {
     };
     initialAppLoadCheck()
   },[])
+  
+  
+  useEffect(() => {
+
+    // Call for firebase -> version
+    const dataVersion = firebsaeDB.ref("version")
+
+    const versionCheck = async () => {
+      console.log("checking data version")
+      try {
+        const localVersion = await AsyncStorage.getItem("version");
+
+        if (value === undefined || parseFloat(localVersion.once("value")) < parseFloat(dataVersion)) {
+          // if version is not up to date OR doesn't exist yet, then call firebase for dataset (including topSearch)
+          //    save data to asyncstorage (except topsearch)
+          //    save data as tempData
+          await AsyncStorage.setItem("version", dataVersion)
+
+          firebaseDB.ref("municipality").once("value")
+            .then((response) => {
+              await AsyncStorage.setItem("municipalityData", JSON.stringify(response))
+              tempData = response
+            })
+        } else {
+          // else get dataset from asyncstorage
+          //    set to data-state
+          const localJson = await AsyncStorage.getItem("municipalityData")
+          tempData = JSON.parse(localJson)
+        }
+
+        // pull topSearch numbers
+        firebaseDB.ref("topSearch").once("value")
+        .then((response) => {
+          for (let each in response) {
+            each.sort((a,b) => {
+              return b.count > a.count ? -1 : 1
+            })
+          }
+          
+          setTopSearch(response)
+        })
+
+      }
+      catch(error) {
+        return new Error("retrieve failed")
+      }
+    }
+
+    
+  }, [])
+
 
   // if permission has been Provided (userLocation state will be used to determine for conditional rendering e.g. userLocation===null means distance is hidden)
   // 2-Granted. Get userLocation lat + long (no need to save this to localStorage)
@@ -102,81 +155,62 @@ export default function App() {
   
   
   useEffect(() => {
-    if (initialAppLoad === false) {
-      // This is where the firebase call will happen
-      setMunicipalityData(tempData.municipality[userMunicipality])
-    }
-  }, [userMunicipality])
-
-  
-  // Change this so that it only calculates it on initial app load, and save it. (no need to recalculate all the distances every time you switch municipality)
-  useEffect(() => {
-    const computeDistance = ([prevLat, prevLong], [lat, long]) => {
-      const prevLatInRad = toRad(prevLat);
-      const prevLongInRad = toRad(prevLong);
-      const latInRad = toRad(lat);
-      const longInRad = toRad(long);
-      
-      return (
-        // In kilometers
-        6377.830272 *
-        Math.acos(
-          Math.sin(prevLatInRad) * Math.sin(latInRad) +
-          Math.cos(prevLatInRad) * Math.cos(latInRad) * Math.cos(longInRad - prevLongInRad),
-        )
-      );
-    }
+    if (municipalityData === null) {
+      const computeDistance = ([prevLat, prevLong], [lat, long]) => {
+        const prevLatInRad = toRad(prevLat);
+        const prevLongInRad = toRad(prevLong);
+        const latInRad = toRad(lat);
+        const longInRad = toRad(long);
         
-    const toRad = (angle) => {
-      return (angle * Math.PI) / 180;
-    }
+        return (
+          // In kilometers
+          6377.830272 *
+          Math.acos(
+            Math.sin(prevLatInRad) * Math.sin(latInRad) +
+            Math.cos(prevLatInRad) * Math.cos(latInRad) * Math.cos(longInRad - prevLongInRad),
+          )
+        );
+      }
+          
+      const toRad = (angle) => {
+        return (angle * Math.PI) / 180;
+      }
+          
+      const checkLocationPermission = async () => {
+        const { status, permissions: { location: { ios } } } = await Permissions.getAsync(Permissions.LOCATION);
+        const temporaryData = tempData
         
-    const checkLocationPermission = async () => {
-      const { status, permissions: { location: { ios } } } = await Permissions.getAsync(Permissions.LOCATION);
+        if(status === "granted") {
+          await Location.getCurrentPositionAsync({})
+          .then((data) => {
+            const userLat = data.coords.latitude;
+            const userLong = data.coords.longitude;
+
+            for (let each in temporaryData.municipality) {
+              temporaryData.municipality[each].depots.forEach((depot) => {
+                const depotLat = depot.lat;
+                const depotLong = depot.long;
+                depot["distance"] = computeDistance([userLat, userLong],[depotLat, depotLong]).toFixed(1)
+              })
+            }
+
+            setMunicipalityData(temporaryData)
+          })
+          .catch((error) => console.log(error))
+            
+          } else if(status !== 'granted') {
+            console.log("permission is denied, no distance to calculate")
+            setMunicipalityData(temporaryData)
+          } else {
+            throw new Error("permission denied")
+          }
+
+          return setIsAppReady(true)
+      }
       
-      if(status === "granted") {
-        await Location.getCurrentPositionAsync({})
-        .then((data) => {
-          const userLat = data.coords.latitude;
-          const userLong = data.coords.longitude;
-
-          const distanceArray = municipalityData.depots.map((depot) => {
-            const depotLat = depot.lat;
-            const depotLong = depot.long;
-            const depotObject = {
-              key: depot.key,
-              depotDistance: computeDistance([userLat, userLong],[depotLat, depotLong]).toFixed(1)
-            } 
-            return depotObject
-          })
-
-          
-          return setDepotDistance(prev => {
-            const temp = {...prev}
-            temp[userMunicipality] = distanceArray
-            return temp
-          })
-        }).catch((error) => console.log(error))
-          
-          
-          // get user geolocation & calculate distances, save to state
-          // Map through depot's geolocation and return an array of objects{depotId: number, distance: string?}
-          // setDepotDistance({})
-          // return setDepotDistance({})
-        } else if(status !== 'granted') {
-          // Goes to city selection screen
-          console.log("permission is denied, no distance to calculate")
-          // return setIsAppReady(true)
-        } else {
-          throw new Error("permission denied")
-        }
-        console.log(depotDistance)
-        return setIsAppReady(true)
-    }
-    if (municipalityData.depots !== undefined){
       checkLocationPermission()
     }
-  }, [municipalityData])
+  }, [userMunicipality])
 
   // if permission has been Denied:
   // 2-Denied.
@@ -189,60 +223,26 @@ export default function App() {
   //  - Firebase call to get Data (items and locations) and data has been set.
   //  - Get Top Searches
   
-  
-  
-
-  // const cacheResourcesAsync = async () => {
-  //   const images = [require('./assets/splash.png')];
-  //   const cacheImages = images.map(image => Asset.fromModule(image).downloadAsync());
-  //   return Promise.all(cacheImages);
-  // }
-
-  // useEffect(() => {
-  //   // SplashScreen.preventAutoHide();
-  //   // checkPermission()
-  //   cacheResourcesAsync() // ask for resources
-  //   .then(() => setIsSplashReady(true)) // mark resources as loaded
-  //   .catch(error => console.error(`Unexpected error thrown when loading:
-  //   ${error.stack}`));
-  //   // retrieveData()
-  // }, [])
-  
 
   if (!fontLoaded) {
     return <AppLoading />
   }
   else if(initialAppLoad) {
     return <InitialAppLoadScreen setInitialAppLoad={setInitialAppLoad} setUserMunicipality={setUserMunicipality} />
-  // }
-  // else if (!isSplashReady) {
-  //   return null
-  } else if (!isAppReady) {
+  } 
+  else if (!isAppReady) {
     return (
       <View style={{ flex: 1, backgroundColor: "#0945DE", display: "flex", alignItems:"center", justifyContent:"center" }}>
         <ActivityIndicator size="large" color="white" />
-          {/* <AppText style={{color: "white", marginTop: 30}}>Loading...</AppText> */}
-          {/* <Image
-            style={{ flex: 1, resizeMode:"contain", width: undefined, height: undefined }}
-            source={require('./assets/splash.png')}
-            onLoadEnd={() => {
-              // wait for image's content to fully load [`Image#onLoadEnd`] (https://facebook.github.io/react-native/docs/image#onloadend)
-              console.log('Image#onLoadEnd: hiding SplashScreen');
-              SplashScreen.hide(); // Image is fully presented, instruct SplashScreen to hide
-              setIsAppReady(true)
-            }}
-            fadeDuration={300} // we need to adjust Android devices (https://facebook.github.io/react-native/docs/image#fadeduration) fadeDuration prop to `0` as it's default value is `300`
-          /> */}
       </View>
     );
-  } else {
+  } 
+  else {
     return (
       <UpdateMunicipalityContext.Provider value={setUserMunicipality}>
         <UserMunicipalityContext.Provider value={userMunicipality}>
           <DataContext.Provider value={municipalityData}>
-            <depotDistanceContext.Provider value={depotDistance}>
-              <LandingScreen />
-            </depotDistanceContext.Provider>
+            <LandingScreen />
           </DataContext.Provider>
         </UserMunicipalityContext.Provider>
       </UpdateMunicipalityContext.Provider>

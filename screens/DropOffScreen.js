@@ -2,16 +2,17 @@ import React, { useState, useContext, useEffect } from 'react'
 import { View, FlatList } from 'react-native'
 import globalStyles from '../styles/globalStyles'
 import ListItem from '../shared/ListItem'
-import { DataContext } from '../context/globalContext'
+import { DataContext, UserMunicipalityContext } from '../context/globalContext'
 
 const DropOffScreen = ({navigation}) => {
 
     const data = useContext(DataContext)
+    const userMunicipality = useContext(UserMunicipalityContext)
     const [municipalityData, setMunicipalityData] = useState([])
 
     useEffect(() => {
-        setMunicipalityData(data.depots)
-    },[data])
+        setMunicipalityData(data.municipality[userMunicipality].depots)
+    },[userMunicipality])
 
     console.log("depot refresh")
 

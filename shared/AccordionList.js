@@ -10,7 +10,7 @@ const AccordionList = ({acceptedItem, open=false, accordionHandler}) => {
 
     const height = open ? "auto" : 0;
 
-    const {category, subcategory} = acceptedItem
+    const {category, subCategory} = acceptedItem
     // console.log(category)
 
     return (
@@ -30,7 +30,7 @@ const AccordionList = ({acceptedItem, open=false, accordionHandler}) => {
                 </TouchableOpacity>
                 <View style={[styles.nestedList, {height: height}, {marginBottom: open ? 17 : 0}]}>
                     { 
-                    subcategory.map((each, i) => (
+                    subCategory.map((each, i) => (
                         <View key={i} style={{flexDirection: "row"}}>
                             <AppText style={{marginRight: 8 }}>{'\u2022'}</AppText>
                             <AppText>{each}</AppText>

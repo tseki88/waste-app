@@ -1,15 +1,57 @@
-import React from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import { StyleSheet, Text, View, Image, FlatList } from 'react-native'
 import Section from '../shared/Section'
 import globalStyles from '../styles/globalStyles'
 import Tag from '../shared/Tag'
 import AppText from '../shared/AppText'
-import { depotData } from '../sampleData'
+// import { depotData } from '../sampleData'
+import { DataContext, UserMunicipalityContext } from '../context/globalContext'
+// need to go through current set of data and calculate the closest 3
 import ListItem from '../shared/ListItem'
 
 const ItemDetailScreen = ({route, navigation}) => {
 
-    const {name, tag, image = null, description} = route.params;
+    const {name, tag, image = null, description, category, subCategory} = route.params;
+
+    const data = useContext(DataContext)
+    const userMunicipality = useContext(UserMunicipalityContext)
+    const [depotData, setDepotData] = useState([])
+
+    useEffect(() => {
+        if (userMunicipality === "York Region") {
+
+            const exists = data.municipality[userMunicipality].depots.filter((each) => {
+                return each.acceptedItems.some((items) => {
+                    return items.subCategory.includes(subCategory) === true
+                })
+            })
+            
+            if (exists.distance !== undefined) {
+                exists.sort((a, b) => {
+                    return a.distance > b.distance ? -1 : 1
+                })
+            }
+            
+            setDepotData(exists.slice(0,2))
+
+        } else if (userMunicipality === "City of Toronto") {
+
+            const exists = data.municipality[userMunicipality].depots.filter((each) => {
+                return each.acceptedItems.some((items) => {
+                    return items.includes(tag) === true
+                })
+            })
+            
+            if (exists.distance !== undefined) {
+                exists.sort((a, b) => {
+                    return a.distance > b.distance ? -1 : 1
+                })
+            }
+            
+            setDepotData(exists.slice(0,2))
+        }
+
+    }, [])
 
     let splitDescription = description.split(". ")
 
@@ -36,7 +78,13 @@ const ItemDetailScreen = ({route, navigation}) => {
                         <AppText style={[styles.paragraph, globalStyles.fontBlackPrimary]} key={i} >{e}.</AppText>
                     ))}
                 </Section>
-                <AppText style={globalStyles.headerTwo}>Drop off centers nearby</AppText>
+                {
+                    depotData.length !== 0
+                    ?
+                    <AppText style={globalStyles.headerTwo}>Drop off centers nearby</AppText>
+                    :
+                    null
+                }
             </View>
         )
     }

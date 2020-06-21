@@ -6,7 +6,7 @@ import globalStyles from '../styles/globalStyles'
 import ListItem from '../shared/ListItem'
 import AppText from '../shared/AppText'
 import SearchList from '../shared/SearchList'
-import { DataContext } from '../context/globalContext'
+import { DataContext, UserMunicipalityContext } from '../context/globalContext'
 import LocationSelector from '../shared/LocationSelector'
 
 const SearchScreen = ({ navigation, route }) => {
@@ -25,13 +25,14 @@ const SearchScreen = ({ navigation, route }) => {
     const [municipalityData, setMunicipalityData] = useState(null)
     
     const data = useContext(DataContext)
+    const userMunicipality = useContext(UserMunicipalityContext)
 
     console.log("screenRerender")
 
     useEffect(() => {
-        setMunicipalityData(data)
+        setMunicipalityData(data.municipality[userMunicipality])
         setQuery("")
-    }, [data])
+    }, [userMunicipality])
 
     useEffect(() => {
         const retrieveData = async () => {
@@ -94,12 +95,14 @@ const SearchScreen = ({ navigation, route }) => {
     }
 
     const pressHandler = (item) => {
-        const { name, tag, image, description } = item
+        const { name, tag, image, description, category, subCategory } = item
         navigation.navigate("ItemDetails", {
             name: name,
             tag: tag,
             image: image,
-            description: description
+            description: description,
+            category: category,
+            subCategory: subCategory
         })
 
         let duplicate = false
@@ -115,13 +118,13 @@ const SearchScreen = ({ navigation, route }) => {
                 setRecentSearch(prev => {
                     let tempState = prev
                     tempState.pop()
-                    tempState.unshift(item)
+                    tempState.unshift({...item, muniRef: userMunicipality})
                     return tempState
                 })
             } else {
                 setRecentSearch(prev => {
                     let tempState = prev
-                    tempState.unshift(item)
+                    tempState.unshift({...item, muniRef: userMunicipality})
                     return tempState
                 })
             }
