@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
-import { Feather, SimpleLineIcons, FontAwesome, MaterialCommunityIcons } from '@expo/vector-icons'
+import { Feather, SimpleLineIcons, FontAwesome5, MaterialCommunityIcons, Ionicons } from '@expo/vector-icons'
 import AppText from './AppText'
 
 const Tag = ({type}) => {
@@ -14,11 +14,17 @@ const Tag = ({type}) => {
         case "Community Drop off":
             renderTag = <Feather name="package" size={20} color="black" />
             break;
+        case "Drop Off Depot":
+            renderTag = <Feather name="package" size={20} color="black" />
+            break;
         case "Blue Box":
-            renderTag = <FontAwesome name="recycle" size={20} color="white" />
+            renderTag = <FontAwesome5 name="recycle" size={20} color="white" />
+            break;
+        case "Blue Bin":
+            renderTag = <FontAwesome5 name="recycle" size={20} color="white" />
             break;
         case "York Region Waste Facility":
-            renderTag = <MaterialCommunityIcons name="factory" size={20} color="white" />
+            renderTag = <FontAwesome5 name="building" size={20} color="black" />
             break;
         case "Reuse Donation Centre":
             renderTag = <Feather name="users" size={20} color="black" />
@@ -28,6 +34,19 @@ const Tag = ({type}) => {
             break;
         case "Yard Waste":
             renderTag = <MaterialCommunityIcons name="leaf" size={20} color="black" />
+            break;
+        case "Household Hazardous Waste":
+            renderTag = <Ionicons name="ios-flame" size={20} color="black" />
+            break;
+        case "Electronics":
+            renderTag = <MaterialCommunityIcons name="battery-10" size={20} color="black" />
+            break;
+        case "Metal":
+            renderTag = <SimpleLineIcons name="wrench" size={20} color="black" />
+            break;
+        case "Oversized Item":
+            renderTag = <MaterialCommunityIcons name="sofa" size={20} color="white" />
+            break;
         default:
             break;
     }
@@ -84,8 +103,14 @@ const tagStyles = StyleSheet.create({
     "Blue Box": {
         backgroundColor: "blue",
     },
+    "Blue Bin": {
+        backgroundColor: "blue"
+    },
     "York Region Waste Facility": {
-        backgroundColor: "lightcoral",
+        backgroundColor: "#E6EBEF",
+    },
+    "Drop Off Depot": {
+        backgroundColor: "#E6EBEF",
     },
     "Reuse Donation Centre": {
         backgroundColor: "cornflowerblue"
@@ -95,6 +120,18 @@ const tagStyles = StyleSheet.create({
     },
     "Yard Waste": {
         backgroundColor: "peru"
+    },
+    "Household Hazardous Waste": {
+        backgroundColor: "#E65100"
+    },
+    "Electronics": {
+        backgroundColor: "#F3F6FB"
+    },
+    "Metal": {
+        backgroundColor: "#E6EBEF"
+    },
+    "Oversized Item": {
+        backgroundColor: "#6E6E6E"
     }
 })
 
@@ -108,8 +145,14 @@ const textStyles = StyleSheet.create({
     "Blue Box": {
         color: "white"
     },
-    "York Region Waste Facility": {
+    "Blue Bin": {
         color: "white"
+    },
+    "York Region Waste Facility": {
+        color: "black"
+    },
+    "Drop Off Depot": {
+        color: "black"
     },
     "Reuse Donation Centre": {
         color: "black"
@@ -119,5 +162,17 @@ const textStyles = StyleSheet.create({
     },
     "Yard Waste": {
         color: "black"
+    },
+    "Household Hazardous Waste": {
+        color: "black"
+    },
+    "Electronics": {
+        color: "black"
+    },
+    "Metal": {
+        color: "black"
+    },
+    "Oversized Item": {
+        color: "white"
     }
 })

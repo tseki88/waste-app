@@ -38,7 +38,7 @@ const ItemDetailScreen = ({route, navigation}) => {
 
             const exists = data.municipality[userMunicipality].depots.filter((each) => {
                 return each.acceptedItems.some((items) => {
-                    return items.includes(tag) === true
+                    return items.subCategory.includes(tag) === true || items.category.includes(tag) === true
                 })
             })
             
@@ -81,7 +81,7 @@ const ItemDetailScreen = ({route, navigation}) => {
                 {
                     depotData.length !== 0
                     ?
-                    <AppText style={globalStyles.headerTwo}>Drop off centers nearby</AppText>
+                    <AppText style={globalStyles.headerOne}>Drop off centers nearby</AppText>
                     :
                     null
                 }

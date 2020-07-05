@@ -5,13 +5,13 @@ import * as Permissions from 'expo-permissions'
 import * as Location from 'expo-location'
 import { useFonts } from '@use-expo/font'
 import { AppLoading} from 'expo';
+import firebase from './firebase'
 
 import InitialAppLoadScreen from './screens/InitialAppLoadScreen';
 import LandingScreen from './screens/LandingScreen';
-// import tempData from './firebaseTemplate.json'
-import { UpdateMunicipalityContext, DataContext, UserMunicipalityContext } from './context/globalContext';
+import tempData from './firebaseTemplate.json'
+import { UpdateMunicipalityContext, DataContext, UserMunicipalityContext, TopSearchContext } from './context/globalContext';
 
-import firebaseDB from './firebase'
 
 export default function App() {
 
@@ -28,10 +28,10 @@ export default function App() {
   const [isAppReady, setIsAppReady] = useState(false)
   const [initialAppLoad, setInitialAppLoad] = useState(true)
   const [userMunicipality, setUserMunicipality] = useState(null)
-  const [topSearch, setTopSearch] = useState([])
+  const [topSearch, setTopSearch] = useState()
   const [municipalityData, setMunicipalityData] = useState(null)
 
-  let tempData
+  // let tempData
   // LocalStorage:
   //  - initialAppLoad = true
   //  - userMunicipality = null
@@ -74,64 +74,23 @@ export default function App() {
   
   useEffect(() => {
 
-    // Call for firebase -> version
-    const dataVersion = firebsaeDB.ref("version")
+    const db = firebase.database()
 
-    const versionCheck = async () => {
-      console.log("checking data version")
-      try {
-        const localVersion = await AsyncStorage.getItem("version");
-
-        if (value === undefined || parseFloat(localVersion.once("value")) < parseFloat(dataVersion)) {
-          // if version is not up to date OR doesn't exist yet, then call firebase for dataset (including topSearch)
-          //    save data to asyncstorage (except topsearch)
-          //    save data as tempData
-          await AsyncStorage.setItem("version", dataVersion)
-
-          firebaseDB.ref("municipality").once("value")
-            .then((response) => {
-              await AsyncStorage.setItem("municipalityData", JSON.stringify(response))
-              tempData = response
-            })
-        } else {
-          // else get dataset from asyncstorage
-          //    set to data-state
-          const localJson = await AsyncStorage.getItem("municipalityData")
-          tempData = JSON.parse(localJson)
-        }
-
-        // pull topSearch numbers
-        firebaseDB.ref("topSearch").once("value")
-        .then((response) => {
-          for (let each in response) {
-            each.sort((a,b) => {
-              return b.count > a.count ? -1 : 1
-            })
-          }
-          
-          setTopSearch(response)
-        })
-
-      }
-      catch(error) {
-        return new Error("retrieve failed")
-      }
+    // the top search functionality should be stored as array index values, and then fetch off of the data set.
+    // sort by count and then return top3 only, set as topSearch state.
+    
+    if (userMunicipality !== null) {
+      console.log("useeffect for firebase starts")
+      db.ref(`${userMunicipality}`).orderByChild("count").limitToLast(3).on("value", function(response) {
+        // console.log(response.val())
+        return setTopSearch(response.val())
+      }, function(error) {
+        console.log(error)
+      })
     }
 
-    
-  }, [])
+  }, [userMunicipality])
 
-
-  // if permission has been Provided (userLocation state will be used to determine for conditional rendering e.g. userLocation===null means distance is hidden)
-  // 2-Granted. Get userLocation lat + long (no need to save this to localStorage)
-  //    - determine municipality
-  //      - save this to a state
-  //    - Firebase call to get Data of selected municipality, and saved to a state
-  //    - Do calculation of all distances from each DropOffCenter and store into a state.
-
-
-  // data fetch for item/depot data comes first, then
-  
 
   useEffect(() => {
     if (userMunicipality === null && initialAppLoad === false) {
@@ -210,7 +169,7 @@ export default function App() {
       
       checkLocationPermission()
     }
-  }, [userMunicipality])
+  }, [userMunicipality, tempData])
 
   // if permission has been Denied:
   // 2-Denied.
@@ -242,7 +201,9 @@ export default function App() {
       <UpdateMunicipalityContext.Provider value={setUserMunicipality}>
         <UserMunicipalityContext.Provider value={userMunicipality}>
           <DataContext.Provider value={municipalityData}>
-            <LandingScreen />
+            <TopSearchContext.Provider value={topSearch}>
+              <LandingScreen />
+            </TopSearchContext.Provider>
           </DataContext.Provider>
         </UserMunicipalityContext.Provider>
       </UpdateMunicipalityContext.Provider>

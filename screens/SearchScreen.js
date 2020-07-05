@@ -8,6 +8,7 @@ import AppText from '../shared/AppText'
 import SearchList from '../shared/SearchList'
 import { DataContext, UserMunicipalityContext } from '../context/globalContext'
 import LocationSelector from '../shared/LocationSelector'
+import firebase from '../firebase'
 
 const SearchScreen = ({ navigation, route }) => {
 
@@ -95,7 +96,7 @@ const SearchScreen = ({ navigation, route }) => {
     }
 
     const pressHandler = (item) => {
-        const { name, tag, image, description, category, subCategory } = item
+        const { name, tag, image, description, category, subCategory, index } = item
         navigation.navigate("ItemDetails", {
             name: name,
             tag: tag,
@@ -104,6 +105,26 @@ const SearchScreen = ({ navigation, route }) => {
             category: category,
             subCategory: subCategory
         })
+
+        const itemCount = firebase.database().ref(`${userMunicipality}/` + index)
+
+        const incrementTopSearch = () => {
+            console.log(index)
+            itemCount.once("value", function(response) {
+                
+                if (response.val() === null){
+                    console.log("count is now 1")
+                    itemCount.set({"count": 1})
+                } else {
+                    console.log("count has been increased by 1")
+                    let currentCount = response.val().count + 1
+                    itemCount.set({"count": currentCount})
+                }
+                
+            }, function(error){console.log(error)})
+        }
+
+        incrementTopSearch()
 
         let duplicate = false
 

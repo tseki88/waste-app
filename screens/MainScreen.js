@@ -1,45 +1,40 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { StyleSheet, View, FlatList, ScrollView, Dimensions, Text, TouchableWithoutFeedback, TouchableOpacity } from 'react-native'
 import AppText from '../shared/AppText'
 import Card from '../shared/Card'
 import globalStyles from '../styles/globalStyles'
 import Section from '../shared/Section'
 import ListItem from '../shared/ListItem'
+import { TopSearchContext, DataContext, UserMunicipalityContext } from '../context/globalContext'
 
 const MainScreen = ({navigation}) => {
 
-    const [topSearch, setTopSearch] = useState([
-        {
-            "name": "Single Use Coffee Pod",
-            "description": "Please place this item in the garbage.  Consider using a reusable coffee filter suitable for your device.",
-            "search": "\nSingle Use Coffee Pod,Keurig,Tassimo,Kcup,K-cup,Keurig Coffee Pod,Keurig Pod,Tassimo Coffee Pod,Tassimo Pod,Coffee Pod,Pod,Coffee Pods,Plastic Coffee Pods",
-            "tag": [
-                "Garbage"
-            ],
-            "category": "Food and beverage containers",
-            "subCategory": "Disposable containers/utensils"
-        },
-        {
-            "name": "Styrofoam Cups/Dishes/Containers",
-            "description": "Please place this item in the garbage.",
-            "search": "\nStyrofoam Cups/Dishes/Containers,Cup,Plate,Takeout,Coffee,Foam,Meat Tray,Packaging Peanuts,Expanded Polystyrene,EPS Foam,Clamshell,Styrofoam Clamshell,Styrofoam Peanuts",
-            "tag": [
-                "Garbage"
-            ],
-            "category": "Food and beverage containers",
-            "subCategory": "Disposable containers/utensils"
-        },
-        {
-            "name": "Take-Out Cup Lid",
-            "description": "Please place this item in the garbage.",
-            "search": "\nTake-Out Cup Lid,Plastic Lid,Lid,Paper Cup Lid,Coffee Cup Lid,Soft Drink Lid",
-            "tag": [
-                "Garbage"
-            ],
-            "category": "Food and beverage containers",
-            "subCategory": "Disposable containers/utensils"
-        },
-    ])
+    const topSearchIndex = useContext(TopSearchContext)
+    const itemData = useContext(DataContext)
+    const userMunicipality = useContext(UserMunicipalityContext)
+
+
+    const [topSearch, setTopSearch] = useState([])
+
+    useEffect(() => {
+        
+        const topArray = []
+
+        for (let key in topSearchIndex) {
+            topArray.push([key, topSearchIndex[key]["count"]])
+        }
+        
+        topArray.sort((a,b) => {
+            return a[1] > b[1] ? -1 : 1
+        })
+        
+        const topData = topArray.map((each) => {
+            return itemData["municipality"][userMunicipality]["items"][parseInt(each[0])]
+        })
+
+        setTopSearch(topData)
+
+    }, [topSearchIndex])
 
     // get the name/id only for top items, then render based on imported master data
 
