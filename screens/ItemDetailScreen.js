@@ -25,10 +25,10 @@ const ItemDetailScreen = ({route, navigation}) => {
                     return items.subCategory.includes(subCategory) === true
                 })
             })
-            
-            if (exists.distance !== undefined) {
+
+            if (exists[0] !== undefined) {
                 exists.sort((a, b) => {
-                    return a.distance > b.distance ? -1 : 1
+                    return parseInt(a.distance) < parseInt(b.distance) ? -1 : 1
                 })
             }
             
@@ -38,13 +38,16 @@ const ItemDetailScreen = ({route, navigation}) => {
 
             const exists = data.municipality[userMunicipality].depots.filter((each) => {
                 return each.acceptedItems.some((items) => {
-                    return items.subCategory.includes(tag) === true || items.category.includes(tag) === true
+                    
+                    // Will add subCategory matches for each item, for it to fall into facility category/subcategory of accepted items which it applies to
+                    return items.subCategory.includes(tag) === true || items.category.includes(tag) === true || items.subCategory.includes(subCategory)
+                    
                 })
             })
             
-            if (exists.distance !== undefined) {
+            if (exists[0] !== undefined) {
                 exists.sort((a, b) => {
-                    return a.distance > b.distance ? -1 : 1
+                    return parseInt(a.distance) < parseInt(b.distance) ? -1 : 1
                 })
             }
             
@@ -63,7 +66,7 @@ const ItemDetailScreen = ({route, navigation}) => {
         return (
             <View style={globalStyles.wrapper}>
                 {/* Confirm if need to pass in this section into the Header */}
-                <Section title={name}>
+                <Section title={name} plusSize={true}>
                         {tag.map((e, i) => (
                             <Tag type={e} key={i} />
                             ))}
@@ -81,7 +84,7 @@ const ItemDetailScreen = ({route, navigation}) => {
                 {
                     depotData.length !== 0
                     ?
-                    <AppText style={globalStyles.headerOne}>Drop off centers nearby</AppText>
+                    <AppText style={globalStyles.headerTwo}>Drop off centers nearby</AppText>
                     :
                     null
                 }

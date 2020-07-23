@@ -1,11 +1,15 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { StyleSheet, View, FlatList, ScrollView, Dimensions, Text, TouchableWithoutFeedback, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, FlatList, ScrollView, Dimensions, Text, TouchableWithoutFeedback, TouchableOpacity, Image } from 'react-native'
 import AppText from '../shared/AppText'
 import Card from '../shared/Card'
 import globalStyles from '../styles/globalStyles'
 import Section from '../shared/Section'
 import ListItem from '../shared/ListItem'
 import { TopSearchContext, DataContext, UserMunicipalityContext } from '../context/globalContext'
+
+import tip1 from '../assets/tipcardImg/tip1.png'
+import tip2 from '../assets/tipcardImg/tip2.png'
+import tip3 from '../assets/tipcardImg/tip3.png'
 
 const MainScreen = ({navigation}) => {
 
@@ -59,16 +63,30 @@ const MainScreen = ({navigation}) => {
                         )}
                     />
                 </Section>
-                <Section title="Recycling Blog" flex={3}>
+                <Section title="Ontario Disposal Tips" flex={3}>
                     <ScrollView horizontal={true} style={styles.sideScroll} showsHorizontalScrollIndicator={false}>
                         <Card>
-                            <AppText style={[styles.cardText, globalStyles.fontBlue]}>Remember to rinse recycling matters before putting it in the <AppText style={[globalStyles.backgroundTwo,globalStyles.fontWhite]}>blue bin</AppText></AppText>
+                            <AppText style={[styles.cardText, globalStyles.fontBlue]}>Remember to rinse recycling matters before putting it in the blue bin.</AppText>
+                            <Image 
+                                style={styles.cardImage}
+                                source={tip1}
+                            />
                         </Card>
                         <Card>
-                            <AppText style={[styles.cardText, globalStyles.fontBlue]}>Remember to rinse recycling matters before putting it in the <AppText style={[globalStyles.backgroundTwo,globalStyles.fontWhite]}>blue bin</AppText></AppText>
+                            <AppText style={[{width: "45%"}, globalStyles.fontGrey]}>Dispose of your broken glass or ceramics in the garbage bin.</AppText>
+                            <Image 
+                                style={styles.cardImage}
+                                source={tip2}
+                            />
                         </Card>
                         <Card>
-                            <AppText style={[styles.cardText, globalStyles.fontBlue]}>Remember to rinse recycling matters before putting it in the <AppText style={[globalStyles.backgroundTwo,globalStyles.fontWhite]}>blue bin</AppText></AppText> 
+                            <View style={styles.cardText}>
+                                <AppText style={globalStyles.fontGrey}>Straws belong in the garbage bin, <AppText style={globalStyles.fontBlue}>but clear plastic cups can be placed in the recycling.</AppText></AppText> 
+                            </View>
+                            <Image 
+                                style={styles.cardImage}
+                                source={tip3}
+                            />
                         </Card>
                     </ScrollView>
                 </Section>
@@ -82,7 +100,14 @@ export default MainScreen
 
 const styles = StyleSheet.create({
     cardText: {
-        width: "55%",
+        width: "60%",
+    },
+    cardImage: {
+        width: 167, 
+        height: 111, 
+        position: "absolute", 
+        right: 0,
+        bottom: 0
     },
     sideScroll: {
         overflow: "visible"

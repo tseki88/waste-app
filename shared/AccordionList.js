@@ -16,18 +16,26 @@ const AccordionList = ({acceptedItem, open=false, accordionHandler}) => {
     return (
         <View>
             <View style={styles.listContainer}>
-                <TouchableOpacity onPress={accordionHandler}>
-                    <View style={[styles.listItem, {marginBottom: open ? 10 : 17}]}>
+                {
+                    subCategory.length === 0
+                    ?
+                    <View style={[styles.listItem, {marginBottom: 17}]}>
                         <AppText style={styles.label}>{category}</AppText>
-                        {
-                            open
-                            ?
-                            <AntDesign name="minus" size={22} color="#50575D" /> 
-                            :
-                            <AntDesign name="plus" size={22} color="#50575D" /> 
-                        }
                     </View>
-                </TouchableOpacity>
+                    :
+                    <TouchableOpacity onPress={accordionHandler}>
+                        <View style={[styles.listItem, {marginBottom: open ? 10 : 17}]}>
+                            <AppText style={styles.label}>{category}</AppText>
+                            {
+                                open
+                                ?
+                                <AntDesign name="minus" size={22} color="#50575D" /> 
+                                :
+                                <AntDesign name="plus" size={22} color="#50575D" /> 
+                            }
+                        </View>
+                    </TouchableOpacity>
+                }
                 <View style={[styles.nestedList, {height: height}, {marginBottom: open ? 17 : 0}]}>
                     { 
                     subCategory.map((each, i) => (

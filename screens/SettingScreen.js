@@ -16,7 +16,7 @@ const SettingScreen = () => {
 
     const openMail = () => {
         MailComposer.composeAsync({
-            recipients:["test@test.ca"],
+            recipients:["contact.littr@gmail.com"],
             subject: "Hello Littr App Team",
         }).then((resolve) => {
             console.log("sent?"+ resolve)

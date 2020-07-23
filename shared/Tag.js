@@ -35,6 +35,9 @@ const Tag = ({type}) => {
         case "Yard Waste":
             renderTag = <MaterialCommunityIcons name="leaf" size={20} color="black" />
             break;
+        case "Back Yard Composter":
+            renderTag = <MaterialCommunityIcons name="leaf" size={20} color="black" />
+            break;
         case "Household Hazardous Waste":
             renderTag = <Ionicons name="ios-flame" size={20} color="black" />
             break;
@@ -53,6 +56,10 @@ const Tag = ({type}) => {
 
 
     return (
+        type === "Not Accepted" 
+        ?
+        null
+        :
         <View style={[styles.tag, tagStyles[type]]}>
             <View style={[styles.icon, tagStyles[type]]}>
                 {renderTag}
@@ -121,6 +128,9 @@ const tagStyles = StyleSheet.create({
     "Yard Waste": {
         backgroundColor: "peru"
     },
+    "Back Yard Composter": {
+        backgroundColor: "peru"
+    },
     "Household Hazardous Waste": {
         backgroundColor: "#E65100"
     },
@@ -161,6 +171,9 @@ const textStyles = StyleSheet.create({
         color: "white"
     },
     "Yard Waste": {
+        color: "black"
+    },
+    "Back Yard Composter": {
         color: "black"
     },
     "Household Hazardous Waste": {

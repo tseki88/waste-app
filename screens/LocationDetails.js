@@ -37,7 +37,7 @@ const LocationDetails = ({ route }) => {
         <View style={{ flex: 1, position: "relative" }}>
             <ScrollView style={globalStyles.container}>
                 <View style={globalStyles.wrapper}>
-                    <Section title={name}>
+                    <Section title={name} plusSize={true}>
                         {
                             distance
                             ?
