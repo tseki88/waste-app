@@ -215,16 +215,24 @@ const SearchScreen = ({ navigation, route }) => {
                         </Section>
                         :
                         <Section title="Recent Searches" list={true}>
-                            <FlatList
-                                style={{paddingRight: 18}}
-                                data={recentSearch}
-                                keyExtractor={item => item.name}
-                                renderItem={({ item }) => {
-                                    return (
-                                        <ListItem item={item} query={query} history={true} pressHandler={pressHandler} />
-                                    )
-                                }}
-                            />
+                            {
+                                recentSearch.length !== 0
+                                ?
+                                <FlatList
+                                    style={{paddingRight: 18}}
+                                    data={recentSearch}
+                                    keyExtractor={item => item.name}
+                                    renderItem={({ item }) => {
+                                        return (
+                                            <ListItem item={item} query={query} history={true} pressHandler={pressHandler} />
+                                        )
+                                    }}
+                                />
+                                :
+                                <View style={{ marginVertical: 8 }}>
+                                    <AppText>No recent search results found.</AppText>
+                                </View>
+                            }
                         </Section>
                 }
             </View>
