@@ -10,17 +10,22 @@ import AppText from '../shared/AppText'
 import globalStyles from '../styles/globalStyles'
 import AccordionContainer from '../shared/AccordionContainer'
 
+import Toast from 'react-native-tiny-toast'
 
 const LocationDetails = ({ route }) => {
 
     const { name, municipality, address, hours, closed, direction, lat, long, website, acceptedItems, distance } = route.params.item
-    
-    // console.log(acceptedItems)
-    console.log(distance)
 
     const copyToClipBoard = (value) => {
         Clipboard.setString(value)
-        ToastAndroid.showWithGravity("Address has been copied to clipboard", ToastAndroid.LONG, ToastAndroid.BOTTOM)
+        // ToastAndroid.showWithGravity("Address has been copied to clipboard", ToastAndroid.LONG, ToastAndroid.BOTTOM)
+        Toast.show("Address copied!", {
+            position: Toast.position.TOP,
+            containerStyle: {
+                backgroundColor: "#004EE7"
+            },
+            textStyle: globalStyles.fontBase
+        })
     }
     
     const openLink = (link) => {
@@ -134,18 +139,12 @@ const LocationDetails = ({ route }) => {
                     <Section title="Website">
                         <AppText>
                             <AppText style={styles.link} onPress={() => openAppBrowser(website)}>
-                                {/* 'https://www.york.ca/wps/portal/yorkhome/environment/yr/garbageandrecycling/wastedepots' */}
                                 Click here
-                            </AppText> to visit {municipality}'s Drop-Off Depot Locations Website.
+                            </AppText> 
+                            to visit {municipality}'s Drop-Off Depot Locations Website.
                         </AppText>
                     </Section>
                     <Section title="Accepted Items">
-                        {/* <View style={styles.card}>
-                            <AntDesign name="checkcircleo" size={20} color="#50575D" />
-                            <View style={{ marginHorizontal: 16 }}>
-                                <AppText>You searched for XXXX. This item is accepted at this facility.</AppText>
-                            </View>
-                        </View> */}
                         <AccordionContainer acceptedItems={acceptedItems} />
                     </Section>
                 </View>

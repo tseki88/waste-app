@@ -12,7 +12,7 @@ import * as MailComposer from 'expo-mail-composer'
 
 const SettingScreen = () => {
     
-    const [modalVisible, setModalVisible] = useState(false)
+    // const [modalVisible, setModalVisible] = useState(false)
 
     const openMail = () => {
         MailComposer.composeAsync({
@@ -48,7 +48,7 @@ const SettingScreen = () => {
 
     return (
         <ScrollView style={globalStyles.container}>
-            <ModalContactForm modalVisible={modalVisible} setModalVisible={setModalVisible} />
+            {/* <ModalContactForm modalVisible={modalVisible} setModalVisible={setModalVisible} /> */}
             <View style={globalStyles.wrapper}>
                 <SettingsListSwitch
                     title="Enable Location"

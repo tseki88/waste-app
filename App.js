@@ -114,7 +114,7 @@ export default function App() {
   
   
   useEffect(() => {
-    if (municipalityData === null) {
+    if (municipalityData === null || !municipalityData.municipality[userMunicipality].depots[0].distance) {
       const computeDistance = ([prevLat, prevLong], [lat, long]) => {
         const prevLatInRad = toRad(prevLat);
         const prevLongInRad = toRad(prevLong);
