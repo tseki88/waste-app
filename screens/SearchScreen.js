@@ -1,30 +1,56 @@
-import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, View, FlatList, Dimensions, TextInput, TouchableOpacity, ScrollView, AsyncStorage } from 'react-native'
+import React, { useState, useEffect, useContext } from 'react'
+import { StyleSheet, Text, View, FlatList, Dimensions, TextInput, TouchableOpacity, ScrollView, AsyncStorage, Platform } from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
 import Section from '../shared/Section'
 import globalStyles from '../styles/globalStyles'
 import ListItem from '../shared/ListItem'
 import AppText from '../shared/AppText'
-import bindicator from '../bindicator.json'
 import SearchList from '../shared/SearchList'
+import { DataContext, UserMunicipalityContext } from '../context/globalContext'
+import LocationSelector from '../shared/LocationSelector'
+import firebase from '../firebase'
 
 const SearchScreen = ({ navigation, route }) => {
-
-    // Temporary Data, will be based off global data later on
-    const [nearest, setNearest] = useState([
-        { location: "City of Toronto", key: "1" },
-        { location: "York Region", key: "2" },
-    ])
 
     const [query, setQuery] = useState("")
     const [queryDisplay, setQueryDisplay] = useState([])
     const [queryLength, setQueryLength] = useState(0)
     const [matchCount, setMatchCount] = useState(0)
-    const [inputOutline, setInputOutline] = useState({ borderColor: "grey" })
+    const [inputOutline, setInputOutline] = useState({ borderColor: "#0000" })
 
     // Turn this into global/persistent state, on localStorage
+
+    // Going to need to save different recentSearch based on Municipality set.
     const [recentSearch, setRecentSearch] = useState([])
     
+    const [municipalityData, setMunicipalityData] = useState(null)
+    
+    const data = useContext(DataContext)
+    const userMunicipality = useContext(UserMunicipalityContext)
+
+    console.log("screenRerender")
+
+    useEffect(() => {
+        setMunicipalityData(data.municipality[userMunicipality])
+        setQuery("")
+    }, [userMunicipality])
+
+    useEffect(() => {
+        const retrieveData = async () => {
+            console.log("retrieving")
+            try {
+                const value = await AsyncStorage.getItem('recentSearch');
+                if (value !== null) {
+                    setRecentSearch(JSON.parse(value))
+                }
+            } catch (error) {
+                return
+            }
+        };
+
+        console.log("setting Data")
+        retrieveData()
+    }, [])
     
     const storeData = async () => {
         try {
@@ -34,28 +60,11 @@ const SearchScreen = ({ navigation, route }) => {
         }
         console.log("setting")
     };
-    
-    const retrieveData = async () => {
-        console.log("retrieving")
-        try {
-            const value = await AsyncStorage.getItem('recentSearch');
-            if (value !== null) {
-                setRecentSearch(JSON.parse(value))
-            }
-        } catch (error) {
-            return
-        }
-    };
-
-    useEffect(() => {
-        retrieveData()
-    }, [])
 
     const inputChangeHandler = (val) => {
         setQuery(val);
-
         
-        let filteredData = bindicator.filter((each) => {
+        let filteredData = municipalityData.items.filter((each) => {
             const stringMatch = each.name.toLowerCase().indexOf(val.toLowerCase()) >= 0 
             return stringMatch
         })
@@ -63,12 +72,18 @@ const SearchScreen = ({ navigation, route }) => {
         let related = []
 
         if (filteredData.length === 0) {
-            related = bindicator.filter((each) => {
+            related = municipalityData.items.filter((each) => {
                 const relatedMatch = each.search.toLowerCase().indexOf(val.toLowerCase()) >= 0
                 return relatedMatch
             })
+            related.sort((a,b) => {
+                return b.name > a.name ? -1 : 1
+            })
             setQueryDisplay(related)
         } else {
+            filteredData.sort((a,b) => {
+                return b.name > a.name ? -1 : 1
+            })
             setQueryDisplay(filteredData)
         }
 
@@ -81,13 +96,35 @@ const SearchScreen = ({ navigation, route }) => {
     }
 
     const pressHandler = (item) => {
-        const { name, tag, image, description } = item
+        const { name, tag, image, description, category, subCategory, index } = item
         navigation.navigate("ItemDetails", {
             name: name,
             tag: tag,
             image: image,
-            description: description
+            description: description,
+            category: category,
+            subCategory: subCategory
         })
+
+        const itemCount = firebase.database().ref(`${userMunicipality}/` + index)
+
+        const incrementTopSearch = () => {
+            console.log(index)
+            itemCount.once("value", function(response) {
+                
+                if (response.val() === null){
+                    console.log("count is now 1")
+                    itemCount.set({"count": 1})
+                } else {
+                    console.log("count has been increased by 1")
+                    let currentCount = response.val().count + 1
+                    itemCount.set({"count": currentCount})
+                }
+                
+            }, function(error){console.log(error)})
+        }
+
+        incrementTopSearch()
 
         let duplicate = false
 
@@ -102,13 +139,13 @@ const SearchScreen = ({ navigation, route }) => {
                 setRecentSearch(prev => {
                     let tempState = prev
                     tempState.pop()
-                    tempState.unshift(item)
+                    tempState.unshift({...item, muniRef: userMunicipality})
                     return tempState
                 })
             } else {
                 setRecentSearch(prev => {
                     let tempState = prev
-                    tempState.unshift(item)
+                    tempState.unshift({...item, muniRef: userMunicipality})
                     return tempState
                 })
             }
@@ -134,7 +171,7 @@ const SearchScreen = ({ navigation, route }) => {
                                 value={query}
                                 autoFocus={true}
                                 onFocus={() => setInputOutline({ borderColor: "#0945DE" })}
-                                onBlur={() => setInputOutline({ borderColor: "grey" })}
+                                onBlur={() => setInputOutline({ borderColor: "#0000" })}
                                 style={[styles.input, globalStyles.fontBase]}
                             />
                             {
@@ -151,17 +188,7 @@ const SearchScreen = ({ navigation, route }) => {
                             <AppText style={[globalStyles.fontBlue, { textAlign: "center" }]}>Cancel</AppText>
                         </TouchableOpacity>
                     </View>
-                    <ScrollView horizontal={true} style={styles.sideScroll} showsHorizontalScrollIndicator={false}>
-                        {/* Maybe Radio? or just a setState a single location which gets a focus style */}
-                        <AppText style={styles.location}>Location:</AppText>
-                        {nearest.map((item) => {
-                            return (
-                                <View key={item.key} style={styles.each}>
-                                    <AppText>{item.location}</AppText>
-                                </View>
-                            )
-                        })}
-                    </ScrollView>
+                    <LocationSelector />
                 </View>
                 {
                     query !== ""
@@ -209,20 +236,22 @@ export default SearchScreen
 
 const styles = StyleSheet.create({
     header: {
-        width: Dimensions.get('screen').width,
-        marginLeft: -18,
-        paddingHorizontal: 18,
-        elevation: 1,
+        width: Dimensions.get('screen').width + 2,
+        marginLeft: -19,
+        marginTop: -2,
+        paddingHorizontal: 19,
         paddingTop: 10,
-        // paddingBottom: 10,
-        // width:Dimensions.get('screen').width - 40,
-        // elevation: 1,
-        // paddingTop: 20,
-        // marginBottom: 10,
-        // shadowOffset: { width: 10, height: 10 },
-        // shadowColor: 'grey',
-        // shadowOpacity: 1,
-        // backgroundColor: "#0000"
+        ...Platform.select({
+            ios: {
+                shadowColor: '#0000',
+                shadowOffset: { width: 0, height: 3 },
+                shadowOpacity: 0.2,
+            },
+            android: {
+                elevation: 1,
+                borderColor: "#0000",
+            },
+        })
     },
     inputContainer: {
         flexDirection: "row",
@@ -237,9 +266,19 @@ const styles = StyleSheet.create({
         height: 42,
         borderRadius: 4,
         borderWidth: 1,
-        // borderColor: 'grey',
         marginTop: 20,
         marginBottom: 10,
+        ...Platform.select({
+            ios: {
+                borderColor: '#E6EBEF',
+                // THIS ISN'T SHOWING RIGHT NOW WHYYYYY
+            },
+            android: {
+                backgroundColor: "#fff",
+                elevation: 0.6,
+                borderColor: "#0000",
+            },
+        })
     },
     input: {
         flex: 1,

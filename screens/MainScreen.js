@@ -1,106 +1,59 @@
-import React, { useState } from 'react'
-import { StyleSheet, View, FlatList, ScrollView, Dimensions, Text, TouchableWithoutFeedback } from 'react-native'
+import React, { useState, useContext, useEffect } from 'react'
+import { StyleSheet, View, FlatList, ScrollView, Dimensions, Text, TouchableWithoutFeedback, TouchableOpacity, Image } from 'react-native'
 import AppText from '../shared/AppText'
 import Card from '../shared/Card'
 import globalStyles from '../styles/globalStyles'
 import Section from '../shared/Section'
 import ListItem from '../shared/ListItem'
+import { TopSearchContext, DataContext, UserMunicipalityContext } from '../context/globalContext'
+
+import tip1 from '../assets/tipcardImg/tip1.png'
+import tip2 from '../assets/tipcardImg/tip2.png'
+import tip3 from '../assets/tipcardImg/tip3.png'
 
 const MainScreen = ({navigation}) => {
 
-    const [topSearch, setTopSearch] = useState([
-        {
-            "name": "Single Use Coffee Pod",
-            "description": "Please place this item in the garbage.  Consider using a reusable coffee filter suitable for your device.",
-            "search": "\nSingle Use Coffee Pod,Keurig,Tassimo,Kcup,K-cup,Keurig Coffee Pod,Keurig Pod,Tassimo Coffee Pod,Tassimo Pod,Coffee Pod,Pod,Coffee Pods,Plastic Coffee Pods",
-            "tag": [
-                "Garbage"
-            ],
-            "category": "Food and beverage containers",
-            "subCategory": "Disposable containers/utensils"
-        },
-        {
-            "name": "Styrofoam Cups/Dishes/Containers",
-            "description": "Please place this item in the garbage.",
-            "search": "\nStyrofoam Cups/Dishes/Containers,Cup,Plate,Takeout,Coffee,Foam,Meat Tray,Packaging Peanuts,Expanded Polystyrene,EPS Foam,Clamshell,Styrofoam Clamshell,Styrofoam Peanuts",
-            "tag": [
-                "Garbage"
-            ],
-            "category": "Food and beverage containers",
-            "subCategory": "Disposable containers/utensils"
-        },
-        {
-            "name": "Take-Out Cup Lid",
-            "description": "Please place this item in the garbage.",
-            "search": "\nTake-Out Cup Lid,Plastic Lid,Lid,Paper Cup Lid,Coffee Cup Lid,Soft Drink Lid",
-            "tag": [
-                "Garbage"
-            ],
-            "category": "Food and beverage containers",
-            "subCategory": "Disposable containers/utensils"
-        },
-    ])
+    const topSearchIndex = useContext(TopSearchContext)
+    const itemData = useContext(DataContext)
+    const userMunicipality = useContext(UserMunicipalityContext)
 
-    // const [topSearch, setTopSearch] = useState([
-    //     { 
-    //         name: "Paint",
-    //         count: 10,
-    //     },
-    //     { 
-    //         name: "Take-Out Cup Lid",
-    //         count: 8,
-    //     },
-    //     { 
-    //         name: "Single Use Coffee Pod",
-    //         count: 4,
-    //     },
-    // ])
 
-    const [nearest, setNearest] = useState([
-        { location: "City of Toronto", key: "1" },
-        { location: "York Region", key: "2" },
-    ])
+    const [topSearch, setTopSearch] = useState([])
+
+    useEffect(() => {
+        
+        const topArray = []
+
+        for (let key in topSearchIndex) {
+            topArray.push([key, topSearchIndex[key]["count"]])
+        }
+        
+        topArray.sort((a,b) => {
+            return a[1] > b[1] ? -1 : 1
+        })
+        
+        const topData = topArray.map((each) => {
+            return itemData["municipality"][userMunicipality]["items"][parseInt(each[0])]
+        })
+
+        setTopSearch(topData)
+
+    }, [topSearchIndex])
 
     // get the name/id only for top items, then render based on imported master data
 
-    const pressHandler = ({name, tag, image, description}) => {
+    const pressHandler = ({name, tag, description}) => {
         navigation.navigate("ItemDetails", {
             name: name,
             tag: tag,
-            image: image,
             description: description
         })
     }
 
-    const navigateSearch = () => {
-        navigation.navigate("Search")
-    }
     // Pressing Search Button => navigate to search
-
     return (
-        <View style={globalStyles.container}>
+        <View style={[globalStyles.container, {paddingTop: 10}]}>
             <View style={globalStyles.wrapper}>
-                <View style={styles.header}>
-                    <Text style={globalStyles.headerOne}>What do you want to throw out?</Text>
-                    <TouchableWithoutFeedback onPress={navigateSearch} style={{height: 42}}>
-                        <View style={styles.inputContainer}>
-                            <View style={styles.inputWrapper}>
-                                <AppText style={styles.input}>Search for an item</AppText>
-                            </View>
-                        </View>
-                    </TouchableWithoutFeedback>
-                    <ScrollView horizontal={true} style={styles.sideScroll} showsHorizontalScrollIndicator={false}>
-                        {/* Maybe Radio? or just a setState a single location which gets a focus style */}
-                        <AppText style={styles.location}>Location:</AppText>
-                        {nearest.map((item, i) => {
-                            return (
-                                <View key={i} style={styles.each}>
-                                    <AppText key={i}>{item.location}</AppText>
-                                </View>
-                            )
-                        })}
-                    </ScrollView>
-                </View>
                 <Section title="Top Searches" flex={4} list={true}>
                     <FlatList
                         data={topSearch}
@@ -110,16 +63,30 @@ const MainScreen = ({navigation}) => {
                         )}
                     />
                 </Section>
-                <Section title="Recycling Blog" flex={3}>
+                <Section title="Ontario Disposal Tips" flex={3}>
                     <ScrollView horizontal={true} style={styles.sideScroll} showsHorizontalScrollIndicator={false}>
                         <Card>
-                            <AppText style={[styles.cardText, globalStyles.fontBlue]}>Remember to rinse recycling matters before putting it in the <AppText style={[globalStyles.backgroundTwo,globalStyles.fontWhite]}>blue bin</AppText></AppText>
+                            <AppText style={[styles.cardText, globalStyles.fontBlue]}>Remember to rinse recycling matters before putting it in the blue bin.</AppText>
+                            <Image 
+                                style={styles.cardImage}
+                                source={tip1}
+                            />
                         </Card>
                         <Card>
-                            <AppText style={[styles.cardText, globalStyles.fontBlue]}>Remember to rinse recycling matters before putting it in the <AppText style={[globalStyles.backgroundTwo,globalStyles.fontWhite]}>blue bin</AppText></AppText>
+                            <AppText style={[{width: "45%"}, globalStyles.fontGrey]}>Dispose of your broken glass or ceramics in the garbage bin.</AppText>
+                            <Image 
+                                style={styles.cardImage}
+                                source={tip2}
+                            />
                         </Card>
                         <Card>
-                            <AppText style={[styles.cardText, globalStyles.fontBlue]}>Remember to rinse recycling matters before putting it in the <AppText style={[globalStyles.backgroundTwo,globalStyles.fontWhite]}>blue bin</AppText></AppText> 
+                            <View style={styles.cardText}>
+                                <AppText style={globalStyles.fontGrey}>Straws belong in the garbage bin, <AppText style={globalStyles.fontBlue}>but clear plastic cups can be placed in the recycling.</AppText></AppText> 
+                            </View>
+                            <Image 
+                                style={styles.cardImage}
+                                source={tip3}
+                            />
                         </Card>
                     </ScrollView>
                 </Section>
@@ -132,80 +99,15 @@ export default MainScreen
 
 
 const styles = StyleSheet.create({
-    header: {
-        width: Dimensions.get('screen').width,
-        marginLeft: -18,
-        paddingHorizontal: 18,
-        elevation: 1,
-        paddingTop: 30,
-        paddingBottom: 10,
-        // borderBottomColor: "grey",
-        // borderBottomWidth: 1,
-        // shadowOffset: { width: 10, height: 10 },
-        // shadowColor: 'grey',
-        // shadowOpacity: 1,
-        // backgroundColor: "#0000"
-    },
-    inputContainer: {
-        flexDirection: "row",
-        flexWrap: "nowrap",
-    },
-    inputWrapper: {
-        flexDirection: "row",
-        flexWrap: "nowrap",
-        justifyContent: "space-between",
-        alignItems: "center",
-        flex: 1,
-        height: 42,
-        borderRadius: 4,
-        borderWidth: 0.4,
-        borderColor: 'grey',
-        marginTop: 20,
-        marginBottom: 10,
-    },
-    input: {
-        // borderWidth: 0.2,
-        // borderColor: 'grey',
-        color: "grey",
-        marginLeft: 12,
-    },
-    clearInputButton: {
-        justifyContent: "center",
-        alignItems:"center",
-        width: 36,
-        height: 42,
-        borderColor:"grey", 
-        borderWidth:1, 
-    },
-    cancelButton: {
-        height: 42,
-        marginTop: 20,
-        marginBottom: 10,
-        paddingRight: 0,
-        paddingLeft: 16,
-        paddingVertical: 9,
-        alignItems: "center",
-    }
-    ,
-    sideScroll: {
-        paddingBottom: 8,
-        marginVertical: 2,
-        overflow: "visible"
-    },
-    location: {
-        marginRight: 8,
-        paddingVertical: 4
-    },
-    each: {
-        marginRight: 6,
-        paddingVertical: 4,
-        paddingHorizontal: 10,
-        borderRadius: 4,
-        borderColor: "#E6EBEF",
-        borderWidth: 1,
-    },
     cardText: {
-        width: "55%",
+        width: "60%",
+    },
+    cardImage: {
+        width: 167, 
+        height: 111, 
+        position: "absolute", 
+        right: 0,
+        bottom: 0
     },
     sideScroll: {
         overflow: "visible"

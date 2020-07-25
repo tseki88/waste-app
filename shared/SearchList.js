@@ -27,7 +27,7 @@ const SearchList = ({item, pressHandler, query = "", matchCount, index}) => {
     
 
     return (
-        <TouchableOpacity onPress={() => pressHandler(item)}>
+        <TouchableOpacity onPress={() => pressHandler(item, index)}>
             <View style={styles.listItem}>
                 {
                 query !== ""

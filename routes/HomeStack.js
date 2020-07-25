@@ -4,6 +4,10 @@ import ItemDetailScreen from '../screens/ItemDetailScreen';
 import LocationDetails from '../screens/LocationDetails';
 import SearchScreen from '../screens/SearchScreen';
 import MainScreen from '../screens/MainScreen';
+import globalStyles from '../styles/globalStyles';
+import { View, Text, TouchableWithoutFeedback } from 'react-native';
+import AppText from '../shared/AppText';
+import MainHeader from '../shared/MainHeader';
 
 const HomeStack = createStackNavigator();
 
@@ -17,20 +21,24 @@ const HomeStackScreen = () => {
                     backgroundColor: '#fff',
                     height: 60,
                 },
-                title: "Back",
-                headerTitleStyle: {
+                headerTitle: "",
+                headerBackTitle: "Back",
+                headerBackTitleVisible: true,
+                headerBackTitleStyle: {
                     fontSize: 16,
-                    fontWeight: "400",
-                    marginLeft: -25,
+                    marginLeft: 4,
                 }
             }}
         >
             <HomeStack.Screen 
                 name='Main' 
                 component={MainScreen}
-                options={{
-                    headerShown: false
-                }}
+                options={({navigation}) => ({
+                    headerTitle: () => <MainHeader navigation={navigation} />,
+                    headerStyle: {
+                        height: 200
+                    }
+                })}
             />
             <HomeStack.Screen
                 name="Search"

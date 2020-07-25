@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, View, ScrollView, TouchableOpacity, Clipboard, AsyncStorage } from 'react-native'
+import { StyleSheet, View, ScrollView, TouchableOpacity, Clipboard, AsyncStorage, Alert, ToastAndroid } from 'react-native'
 import MapView from 'react-native-maps'
 import * as WebBrowser from 'expo-web-browser'
 import { Linking } from 'expo'
-import { AntDesign } from '@expo/vector-icons'
 
 import Section from '../shared/Section'
 import AppText from '../shared/AppText'
@@ -11,70 +10,31 @@ import AppText from '../shared/AppText'
 import globalStyles from '../styles/globalStyles'
 import AccordionContainer from '../shared/AccordionContainer'
 
+import Toast from 'react-native-tiny-toast'
+
 const LocationDetails = ({ route }) => {
 
-    const { name, municipality, address, hours, closed, direction, lat, long, website, acceptedItems } = route.params.item
-    // Also have a route.params. => coming from search screen, location enabled
-    const [userLocation, setUserLocation] = useState({})
-    const [distance, setDistance] = useState(0)
-
-    // console.log(acceptedItems)
+    const { name, municipality, address, hours, closed, direction, lat, long, website, acceptedItems, distance } = route.params.item
 
     const copyToClipBoard = (value) => {
         Clipboard.setString(value)
+        // ToastAndroid.showWithGravity("Address has been copied to clipboard", ToastAndroid.LONG, ToastAndroid.BOTTOM)
+        Toast.show("Address copied!", {
+            position: Toast.position.TOP,
+            containerStyle: {
+                backgroundColor: "#004EE7"
+            },
+            textStyle: globalStyles.fontBase
+        })
     }
-
+    
     const openLink = (link) => {
         Linking.openURL(link)
     }
-
+    
     const openAppBrowser = (link) => {
         WebBrowser.openBrowserAsync(link)
     }
-
-    const computeDistance = ([prevLat, prevLong], [lat, long]) => {
-        const prevLatInRad = toRad(prevLat);
-        const prevLongInRad = toRad(prevLong);
-        const latInRad = toRad(lat);
-        const longInRad = toRad(long);
-
-        console.log(userLocation)
-        console.log(prevLatInRad, prevLongInRad, latInRad, longInRad)
-
-        return (
-            // In kilometers
-            6377.830272 *
-            Math.acos(
-                Math.sin(prevLatInRad) * Math.sin(latInRad) +
-                Math.cos(prevLatInRad) * Math.cos(latInRad) * Math.cos(longInRad - prevLongInRad),
-            )
-        );
-    }
-
-    const toRad = (angle) => {
-        return (angle * Math.PI) / 180;
-    }
-
-    // Initial Render, fetches the data
-    useEffect(() => {        
-        const retrieveData = async () => {
-            console.log("retrieving")
-            try {
-                const value = await AsyncStorage.getItem('userLocation');
-                if (value !== null) {
-                    setUserLocation(JSON.parse(value))
-                }
-            } catch (error) {
-                return
-            }
-        };
-        retrieveData()
-    }, [])
-
-    // Only executes when the userLocation is updated
-    useEffect(() => {
-        setDistance(computeDistance([userLocation.latitude, userLocation.longitude],[lat, long]).toFixed(1))
-    }, [userLocation])
 
     console.log("location component rerendered")
 
@@ -82,8 +42,14 @@ const LocationDetails = ({ route }) => {
         <View style={{ flex: 1, position: "relative" }}>
             <ScrollView style={globalStyles.container}>
                 <View style={globalStyles.wrapper}>
-                    <Section title={name}>
-                        <AppText>{!isNaN(distance) ? distance : "--" } km away</AppText>
+                    <Section title={name} plusSize={true}>
+                        {
+                            distance
+                            ?
+                            <AppText>{distance} km away</AppText>
+                            :
+                            null
+                        }
                     </Section>
                     <View style={styles.mapContainer}>
                         <MapView
@@ -120,7 +86,7 @@ const LocationDetails = ({ route }) => {
                                 ?
                                 hours.map((e) => {
                                     return (
-                                        <View style={{ marginBottom: 14 }} key={e.key}>
+                                        <View style={{ marginBottom: 14 }} key={e.name}>
                                             <AppText style={{ fontWeight: "bold", marginBottom: 10 }}>{e.name}</AppText>
                                             <View style={{ marginBottom: 14, flexDirection: "row", flexWrap: "nowrap" }}>
                                                 <View>
@@ -173,25 +139,16 @@ const LocationDetails = ({ route }) => {
                     <Section title="Website">
                         <AppText>
                             <AppText style={styles.link} onPress={() => openAppBrowser(website)}>
-                                {/* 'https://www.york.ca/wps/portal/yorkhome/environment/yr/garbageandrecycling/wastedepots' */}
                                 Click here
-                            </AppText> to visit {municipality}'s Drop-Off Depot Locations Website.
+                            </AppText> 
+                            to visit {municipality}'s Drop-Off Depot Locations Website.
                         </AppText>
                     </Section>
                     <Section title="Accepted Items">
-                        <View style={styles.card}>
-                            <AntDesign name="checkcircleo" size={20} color="#50575D" />
-                            <View style={{ marginHorizontal: 16 }}>
-                                <AppText>You searched for XXXX. This item is accepted at this facility.</AppText>
-                            </View>
-                        </View>
                         <AccordionContainer acceptedItems={acceptedItems} />
                     </Section>
                 </View>
             </ScrollView>
-            {/* <View style={styles.notification}>
-                <AppText style={styles.notificationText}>Address has been copied to clipboard.</AppText>
-            </View> */}
         </View>
     )
 }
