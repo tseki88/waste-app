@@ -1,13 +1,12 @@
 import React, { useEffect, useContext, useState } from 'react'
-import { StyleSheet, Text, View, Image, FlatList } from 'react-native'
-import Section from '../shared/Section'
+import { StyleSheet, View, FlatList } from 'react-native'
 import globalStyles from '../styles/globalStyles'
-import Tag from '../shared/Tag'
+import Section from '../shared/Section'
 import AppText from '../shared/AppText'
-// import { depotData } from '../sampleData'
-import { DataContext, UserMunicipalityContext } from '../context/globalContext'
-// need to go through current set of data and calculate the closest 3
 import ListItem from '../shared/ListItem'
+import Tag from '../shared/Tag'
+
+import { DataContext, UserMunicipalityContext } from '../context/globalContext'
 
 const ItemDetailScreen = ({route, navigation}) => {
 
@@ -65,18 +64,12 @@ const ItemDetailScreen = ({route, navigation}) => {
     const getHeader = () => {
         return (
             <View style={globalStyles.wrapper}>
-                {/* Confirm if need to pass in this section into the Header */}
                 <Section title={name} plusSize={true}>
                         {tag.map((e, i) => (
                             <Tag type={e} key={i} />
                             ))}
                 </Section>
-                {/* <View style={styles.image}>
-                    <Image source={image} />
-                    <Text>Img Placeholder</Text>
-                </View> */}
                 <Section title="How to discard item">
-                    {/* <AppText style={[styles.paragraph, globalStyles.fontBlackPrimary]} >{description}</AppText> */}
                     {splitDescription.map((e,i) => (
                         <AppText style={[styles.paragraph, globalStyles.fontBlackPrimary]} key={i} >{e}.</AppText>
                     ))}
@@ -93,28 +86,27 @@ const ItemDetailScreen = ({route, navigation}) => {
     }
 
     return (
-        <FlatList
-            data={depotData}
-            renderItem={({item}) => {                            
-                return (
-                    <View style={globalStyles.wrapper}>
-                        <ListItem item={item} depot={true} pressHandler={() => pressHandler(item)}/>
-                    </View>
-                )
-            }}
-            ListHeaderComponent={getHeader}
-        />
+        <View style={{flex: 1, backgroundColor: "white"}}>
+            <FlatList
+                data={depotData}
+                renderItem={({item}) => {                            
+                    return (
+                        <View style={globalStyles.wrapper}>
+                            <ListItem item={item} depot={true} pressHandler={() => pressHandler(item)}/>
+                        </View>
+                    )
+                }}
+                ListHeaderComponent={getHeader}
+            />
+        </View>
     )    
 }
 
 export default ItemDetailScreen
 
 const styles = StyleSheet.create({
-    image: {
-        height: 100,
-    },
     paragraph: {
         marginBottom: 20,
-        width: "90%"
+        width: "95%"
     }
 })

@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
-import React, { useState, useEffect } from 'react';
-import { AsyncStorage, View, ActivityIndicator } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { AsyncStorage, View, ActivityIndicator, AppState } from 'react-native';
 import * as Permissions from 'expo-permissions'
 import * as Location from 'expo-location'
 import { useFonts } from '@use-expo/font'
@@ -10,7 +10,7 @@ import firebase from './firebase'
 import InitialAppLoadScreen from './screens/InitialAppLoadScreen';
 import LandingScreen from './screens/LandingScreen';
 import tempData from './firebaseTemplate.json'
-import { UpdateMunicipalityContext, DataContext, UserMunicipalityContext, TopSearchContext } from './context/globalContext';
+import { UpdateMunicipalityContext, DataContext, UserMunicipalityContext, TopSearchContext, AppStateVisibleContext } from './context/globalContext';
 
 
 export default function App() {
@@ -25,6 +25,9 @@ export default function App() {
 
   // const [isSplashReady, setIsSplashReady] = useState(false)
   
+  const appState = useRef(AppState.currentState)
+  const [appStateVisible, setAppStateVisible] = useState(null)
+
   const [isAppReady, setIsAppReady] = useState(false)
   const [initialAppLoad, setInitialAppLoad] = useState(true)
   const [userMunicipality, setUserMunicipality] = useState(null)
@@ -44,6 +47,19 @@ export default function App() {
     "WorkSansBold": require("./assets/fonts/Work_Sans/static/WorkSans-SemiBold.ttf"),
   })
 
+
+  useEffect(() => {
+    AppState.addEventListener("change", _handleAppStateChange)
+
+    return () => {
+        AppState.removeEventListener("change", _handleAppStateChange)
+    }
+  },[])
+
+  const _handleAppStateChange = (nextAppState) => {
+      appState.current = nextAppState
+      setAppStateVisible(appState.current)
+  }
   //  - Do the below permission check 
   //    - if permission has been provided, jump to permission-2-Granted and do all calculations while splashscreen is loading.
 
@@ -171,6 +187,8 @@ export default function App() {
     }
   }, [userMunicipality, tempData])
 
+
+
   // if permission has been Denied:
   // 2-Denied.
   //    - retrieve municipality info from localStorage
@@ -202,7 +220,9 @@ export default function App() {
         <UserMunicipalityContext.Provider value={userMunicipality}>
           <DataContext.Provider value={municipalityData}>
             <TopSearchContext.Provider value={topSearch}>
-              <LandingScreen />
+              <AppStateVisibleContext.Provider value={appStateVisible}>
+                <LandingScreen />
+              </AppStateVisibleContext.Provider>
             </TopSearchContext.Provider>
           </DataContext.Provider>
         </UserMunicipalityContext.Provider>

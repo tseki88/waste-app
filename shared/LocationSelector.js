@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, AsyncStorage } from 'react-native'
 import AppText from './AppText'
 import { UpdateMunicipalityContext, UserMunicipalityContext } from '../context/globalContext'
 import globalStyles from '../styles/globalStyles'
@@ -13,6 +13,20 @@ const LocationSelector = () => {
 
     const userMunicipality = useContext(UserMunicipalityContext)
     const setUserMunicipality = useContext(UpdateMunicipalityContext)
+
+    const pressHandler = async(location) => {
+        try {
+            await AsyncStorage.setItem('userMunicipality', location);
+            console.log("Saving to storage " + location )
+            // if (value === null) {
+            //     value = "York Region"
+            // }
+            // return setUserMunicipality(value)          
+        } catch (error) {
+            return new Error("retrieve failed")
+        }
+        setUserMunicipality(location)
+    }
     
     return (
         <ScrollView horizontal={true} style={styles.sideScroll} showsHorizontalScrollIndicator={false}>
@@ -30,7 +44,7 @@ const LocationSelector = () => {
                                 : 
                                 null
                         ]} 
-                        onPress={() => setUserMunicipality(item.location)}
+                        onPress={() => pressHandler(item.location)}
                     >
                         <AppText 
                             key={i}
