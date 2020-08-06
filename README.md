@@ -9,7 +9,7 @@ Currently in the process of finishing touches and reading about publishing the a
 ## About the App
 
 ![Littr App Design Preview](preview.gif)
-*** Prototype of Designs ***
+*Prototype of Designs*
 
 ### What does this app do?
  - Search up how to dispose of particular items in your local municipality.
