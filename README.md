@@ -1,13 +1,15 @@
 # Littr App
 
 Hi there, the Littr App is a personal project for learning and creating my first React Native app utilizing Expo.
+
 The product itself and UI Designs belong to [Ashley Fong](http://ashleyfong.ca/), who I am working together with to make this app idea come to life.
 
 Currently in the process of finishing touches and reading about publishing the apps to Google Play and App Store respectively.
 
 ## About the App
 
-<img src="preview.gif" alt="Littr App preview" width="400" height="400">
+![Littr App Design Preview](preview.gif)
+*** Prototype of Designs ***
 
 ### What does this app do?
  - Search up how to dispose of particular items in your local municipality.
@@ -25,22 +27,23 @@ Currently in the process of finishing touches and reading about publishing the a
  - Some entries in data showing up twice.
   - Need to manually clean up and organize parts of the dataset.
 
+---
 
 ## Learnings from making this App | Dev Journal
 
 ### Exposure to Tools and Interactions
 Thanks to being able to work with a Product Designer on this project, I was fortunate enough to be exposed to many tools that I would have never used without any work experiences.
 
-Miro Board:
+#### Miro Board:
 - Brain storming session, feature prioritization, MVP consistent between team members.
 
-Figma:
+#### Figma:
 - Wireframes, app flow, CSS details, screen designs.
 
-Notion:
+#### Notion:
 - Kanban board, weekly sprint planning and meetings, sharing of resources.
 
-Communication:
+#### Communication:
 - Discussions, how to flag concerns and limitations from a technical perspective and communicate them appropriately, exchanging ideas and solutions for moving forward.
 
 
@@ -79,6 +82,8 @@ The biggest takeaway is that I really enjoyed working on Mobile Development usin
 
 ### Hiring?
 
-The Developer (Me) is currently looking for his first developer job! Please contact [steveseki88@gmail.com](mailto:steveseki88@gmail.com) if any opportunities for Junior positions are available.
+The Developer (Me) is currently looking for his first Front End position! 
+
+Please contact [steveseki88@gmail.com](mailto:steveseki88@gmail.com) for any available Jr. Front End positions, it would be much appreciated.
 
 Thank you for taking interest in reading about this project.
