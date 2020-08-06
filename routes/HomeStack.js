@@ -4,9 +4,6 @@ import ItemDetailScreen from '../screens/ItemDetailScreen';
 import LocationDetails from '../screens/LocationDetails';
 import SearchScreen from '../screens/SearchScreen';
 import MainScreen from '../screens/MainScreen';
-import globalStyles from '../styles/globalStyles';
-import { View, Text, TouchableWithoutFeedback } from 'react-native';
-import AppText from '../shared/AppText';
 import MainHeader from '../shared/MainHeader';
 
 const HomeStack = createStackNavigator();

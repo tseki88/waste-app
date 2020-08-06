@@ -25,7 +25,6 @@ export default MainHeader
 const styles = StyleSheet.create({
     header: {
         width: Dimensions.get('screen').width,
-        // borderWidth: 1,
         marginLeft: -16,
         paddingHorizontal: 16,
         paddingTop: 40,
@@ -48,9 +47,6 @@ const styles = StyleSheet.create({
         ...Platform.select({
             ios: {
                 borderColor: '#E6EBEF',
-                // shadowColor: 'grey',
-                // shadowOffset: { width: 0, height: 3 },
-                // shadowOpacity: 0.2,
             },
             android: {
                 backgroundColor: "#fff",
@@ -60,8 +56,6 @@ const styles = StyleSheet.create({
         })
     },
     input: {
-        // borderWidth: 0.2,
-        // borderColor: 'grey',
         color: "grey",
         marginLeft: 12,
     },

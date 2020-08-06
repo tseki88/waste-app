@@ -6,6 +6,8 @@ import ScheduleScreen from '../screens/ScheduleScreen';
 
 const ScheduleStack = createStackNavigator();
 
+
+// Now a stretch goal, not used for MVP
 const ScheduleStackScreen = () => {
     return (
         <ScheduleStack.Navigator 

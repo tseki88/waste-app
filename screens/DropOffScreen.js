@@ -9,10 +9,11 @@ const DropOffScreen = ({navigation}) => {
     const data = useContext(DataContext)
     const userMunicipality = useContext(UserMunicipalityContext)
     const [municipalityData, setMunicipalityData] = useState([])
+    const [sortedData, setSortedData] = useState([])
 
     useEffect(() => {
         setMunicipalityData(data.municipality[userMunicipality].depots)
-    },[userMunicipality])
+    },[userMunicipality, data])
 
     console.log("depot refresh")
 
@@ -20,14 +21,17 @@ const DropOffScreen = ({navigation}) => {
         navigation.navigate("LocationDetails", item={item})
     }
 
-    const sortDepot = municipalityData;
-    sortDepot.sort((a,b) => {
-        return b.name > a.name ? -1 : 1
-    })
+    useEffect(() => {
+        let sortDepot = municipalityData;
+        sortDepot.sort((a,b) => {
+            return b.name > a.name ? -1 : 1
+        })
+        setSortedData(sortDepot)
+    },[municipalityData, data])
     
     return (
         <FlatList
-            data={sortDepot}
+            data={sortedData}
             renderItem={({item}) => {                            
                 return (
                     <View style={globalStyles.wrapper}>

@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
-import React, { useState, useEffect } from 'react';
-import { AsyncStorage, View, ActivityIndicator } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { AsyncStorage, View, ActivityIndicator, AppState } from 'react-native';
 import * as Permissions from 'expo-permissions'
 import * as Location from 'expo-location'
 import { useFonts } from '@use-expo/font'
@@ -10,53 +10,42 @@ import firebase from './firebase'
 import InitialAppLoadScreen from './screens/InitialAppLoadScreen';
 import LandingScreen from './screens/LandingScreen';
 import tempData from './firebaseTemplate.json'
-import { UpdateMunicipalityContext, DataContext, UserMunicipalityContext, TopSearchContext } from './context/globalContext';
+import { UpdateMunicipalityContext, DataContext, UserMunicipalityContext, TopSearchContext, AppStateVisibleContext } from './context/globalContext';
 
 
 export default function App() {
 
-  // StatesRequired:
-  //  - isSplashReady
-  //  - isAppReady
-  //  - userMunicipality (locationPermissionGranted ? calc from userLocation : fetch from localStorage)
-//    - calculatedDistances (!locationPermissionGranted = null)
-  //  - topSearch results (for main screen only)
-  //    - will be fetched from firebase for most recent "top searches"
+  const appState = useRef(AppState.currentState)
+  const [appStateVisible, setAppStateVisible] = useState(null)
 
-  // const [isSplashReady, setIsSplashReady] = useState(false)
-  
   const [isAppReady, setIsAppReady] = useState(false)
   const [initialAppLoad, setInitialAppLoad] = useState(true)
   const [userMunicipality, setUserMunicipality] = useState(null)
   const [topSearch, setTopSearch] = useState()
   const [municipalityData, setMunicipalityData] = useState(null)
 
-  // let tempData
-  // LocalStorage:
-  //  - initialAppLoad = true
-  //  - userMunicipality = null
-
-  // SPLASHSCREEN
-  //  - Load Fonts
   const [fontLoaded] = useFonts({
     "SongMyung": require("./assets/fonts/Song_Myung/SongMyung-Regular.ttf"),
     "WorkSans": require("./assets/fonts/Work_Sans/static/WorkSans-Regular.ttf"),
     "WorkSansBold": require("./assets/fonts/Work_Sans/static/WorkSans-SemiBold.ttf"),
   })
 
-  //  - Do the below permission check 
-  //    - if permission has been provided, jump to permission-2-Granted and do all calculations while splashscreen is loading.
 
-  // PERMISSIONS
-  // 1. Check if this is initial load of App
-  //    - Make a localStorage of initialLoad = true
-  //    - Show "Ask for Location Permission Screen". **Screen Component**
-  //      - if Denied, Select Municipality Screen will provide 1 of the 2 options
-  //      - save the selected municipality to a state && localStorage
-  //    - Once selection is resolved, change localStorage of initialLoad = false
-  
   useEffect(() => {
-    
+    AppState.addEventListener("change", _handleAppStateChange)
+
+    return () => {
+        AppState.removeEventListener("change", _handleAppStateChange)
+    }
+  },[])
+
+  const _handleAppStateChange = (nextAppState) => {
+      appState.current = nextAppState
+      setAppStateVisible(appState.current)
+  }
+  
+
+  useEffect(() => {
     const initialAppLoadCheck = async () => {
       console.log("retrieving asyncStorage - initialAppLoadCheck")
       try {
@@ -71,11 +60,9 @@ export default function App() {
     initialAppLoadCheck()
   },[])
   
-  
+
   useEffect(() => {
-
     const db = firebase.database()
-
     // the top search functionality should be stored as array index values, and then fetch off of the data set.
     // sort by count and then return top3 only, set as topSearch state.
     
@@ -112,7 +99,7 @@ export default function App() {
     }
   }, [initialAppLoad])
   
-  
+
   useEffect(() => {
     if (municipalityData === null || !municipalityData.municipality[userMunicipality].depots[0].distance) {
       const computeDistance = ([prevLat, prevLong], [lat, long]) => {
@@ -171,42 +158,32 @@ export default function App() {
     }
   }, [userMunicipality, tempData])
 
-  // if permission has been Denied:
-  // 2-Denied.
-  //    - retrieve municipality info from localStorage
-  //    - Firebase call to get Data of selected municipality, and saved to a state.
-  
-  // Once the below has been all resolved, isAppReady = true / hideSplashScreen.
-  //  x FontsLoaded 
-  //  x PermissionChecked, and selected municipality has been determined (distance calc if granted)
-  //  - Firebase call to get Data (items and locations) and data has been set.
-  //  - Get Top Searches
-  
 
-  if (!fontLoaded) {
-    return <AppLoading />
-  }
-  else if(initialAppLoad) {
-    return <InitialAppLoadScreen setInitialAppLoad={setInitialAppLoad} setUserMunicipality={setUserMunicipality} />
-  } 
-  else if (!isAppReady) {
-    return (
-      <View style={{ flex: 1, backgroundColor: "#0945DE", display: "flex", alignItems:"center", justifyContent:"center" }}>
-        <ActivityIndicator size="large" color="white" />
-      </View>
-    );
-  } 
-  else {
-    return (
-      <UpdateMunicipalityContext.Provider value={setUserMunicipality}>
-        <UserMunicipalityContext.Provider value={userMunicipality}>
-          <DataContext.Provider value={municipalityData}>
-            <TopSearchContext.Provider value={topSearch}>
-              <LandingScreen />
-            </TopSearchContext.Provider>
-          </DataContext.Provider>
-        </UserMunicipalityContext.Provider>
-      </UpdateMunicipalityContext.Provider>
-    );
-  }
+  return (
+      !fontLoaded
+      ?
+      <AppLoading />
+      :
+        initialAppLoad
+        ?
+        <InitialAppLoadScreen setInitialAppLoad={setInitialAppLoad} setUserMunicipality={setUserMunicipality} />
+        :
+          !isAppReady
+          ?
+          <View style={{ flex: 1, backgroundColor: "#0945DE", display: "flex", alignItems:"center", justifyContent:"center" }}>
+            <ActivityIndicator size="large" color="white" />
+          </View>
+          :
+          <UpdateMunicipalityContext.Provider value={setUserMunicipality}>
+            <UserMunicipalityContext.Provider value={userMunicipality}>
+              <DataContext.Provider value={municipalityData}>
+                <TopSearchContext.Provider value={topSearch}>
+                  <AppStateVisibleContext.Provider value={appStateVisible}>
+                    <LandingScreen />
+                  </AppStateVisibleContext.Provider>
+                </TopSearchContext.Provider>
+              </DataContext.Provider>
+            </UserMunicipalityContext.Provider>
+          </UpdateMunicipalityContext.Provider>
+  )
 }

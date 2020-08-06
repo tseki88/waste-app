@@ -26,7 +26,7 @@ const DropOffStackScreen = () => {
                 options={{
                     headerTitle: () => (
                         <View style={{borderWidth:0}}>
-                            <Text style={[globalStyles.headerTwo, {marginTop: 30}]}>Drop Off Centers</Text>
+                            <Text style={[globalStyles.headerTwo, {marginTop: 30}]}>Drop-Off Centers</Text>
                             <LocationSelector />
                         </View>
                         

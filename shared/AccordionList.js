@@ -1,17 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { StyleSheet, View, TouchableOpacity } from 'react-native'
-import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons'
+import { AntDesign } from '@expo/vector-icons'
 import AppText from './AppText'
 
 const AccordionList = ({acceptedItem, open=false, accordionHandler}) => {
     
-
-    // const [open, setOpen] = useState(false)
-
     const height = open ? "auto" : 0;
 
     const {category, subCategory} = acceptedItem
-    // console.log(category)
 
     return (
         <View>

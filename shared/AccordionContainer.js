@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { View } from 'react-native'
 import AccordionList from './AccordionList'
 
 const AccordionContainer = ({acceptedItems}) => {

@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, Image, FlatList, Button, TouchableOpacity, AsyncStorage } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity, AsyncStorage } from 'react-native'
 import globalStyles from '../styles/globalStyles'
 import AppText from '../shared/AppText'
 import * as Permissions from 'expo-permissions'
-import * as Location from 'expo-location'
 
 const InitialAppLoadScreen = ({setInitialAppLoad, setUserMunicipality}) => {
 
@@ -49,7 +48,7 @@ const InitialAppLoadScreen = ({setInitialAppLoad, setUserMunicipality}) => {
         municipalitySelect(municipality)
         setTimeout(() => {
             promptLocationPermission()
-        }, 2000);
+        }, 1600);
     }
 
     // Render Options
