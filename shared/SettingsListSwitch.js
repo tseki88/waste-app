@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef, useContext } from 'react'
-import { StyleSheet, Switch, View, Linking, AppState } from 'react-native'
+import React, { useState, useEffect, useContext } from 'react'
+import { StyleSheet, Switch, View, Linking } from 'react-native'
 import * as Permissions from 'expo-permissions'
 import AppText from './AppText'
 import globalStyles from '../styles/globalStyles'
@@ -7,11 +7,6 @@ import { AppStateVisibleContext } from '../context/globalContext'
 
 const SettingsListSwitch = ({title, description}) => {
     
-
-
-    // Issues with switch updating
-    // const appState = useRef(AppState.currentState)
-    // const [appStateVisible, setAppStateVisible] = useState(null)
     const [locationPermission, setLocationPermission] = useState(null)
     
     const appStateVisible = useContext(AppStateVisibleContext)
@@ -23,12 +18,6 @@ const SettingsListSwitch = ({title, description}) => {
                 const { status, permissions: { location: { ios } } } = await Permissions.getAsync(Permissions.LOCATION);
                 console.log("checkingPermission")
                 if(status === "granted") {
-                    // Closes this Screen
-                    console.log("it is granted")
-                    // Call the check localAsync userMunicipality funciton, and then plug into below context.
-                    // setUserMunicipality((prev) => {
-                    //     return prev
-                    // })
                     return setLocationPermission(true)
                 } else if(status !== 'granted') {
                     // Goes to city selection screen
@@ -42,20 +31,6 @@ const SettingsListSwitch = ({title, description}) => {
 
         checkPermissionStatus()
     }, [appStateVisible])
-
-
-    // useEffect(() => {
-    //     AppState.addEventListener("change", _handleAppStateChange)
-
-    //     return () => {
-    //         AppState.removeEventListener("change", _handleAppStateChange)
-    //     }
-    // },[])
-
-    // const _handleAppStateChange = (nextAppState) => {
-    //     appState.current = nextAppState
-    //     setAppStateVisible(appState.current)
-    // }
 
     const openPermission = () => {
         Linking.openSettings()

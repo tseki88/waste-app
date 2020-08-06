@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import globalStyles from '../styles/globalStyles'
 
 const Card = (props) => {
@@ -17,11 +17,12 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderWidth: 1,
         width: 291,
+        height: 111,
         marginRight: 8,
         paddingVertical: 10,
         paddingLeft: 16,
         position: "relative",
-        overflow: "hidden",
+        overflow: "visible",
         ...Platform.select({
             ios: {
                 borderColor: '#E6EBEF',

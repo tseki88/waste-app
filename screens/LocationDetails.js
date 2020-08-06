@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { StyleSheet, View, ScrollView, TouchableOpacity, Clipboard, AsyncStorage, Alert, ToastAndroid } from 'react-native'
+import React from 'react'
+import { StyleSheet, View, ScrollView, TouchableOpacity, Clipboard } from 'react-native'
 import MapView from 'react-native-maps'
 import * as WebBrowser from 'expo-web-browser'
 import { Linking } from 'expo'
@@ -18,7 +18,6 @@ const LocationDetails = ({ route }) => {
 
     const copyToClipBoard = (value) => {
         Clipboard.setString(value)
-        // ToastAndroid.showWithGravity("Address has been copied to clipboard", ToastAndroid.LONG, ToastAndroid.BOTTOM)
         Toast.show("Address copied!", {
             position: Toast.position.TOP,
             containerStyle: {
@@ -207,8 +206,6 @@ const styles = StyleSheet.create({
         shadowColor: "#004EE7",
         flexDirection: "row",
         alignItems: "center",
-        // marginRight: 8,
-        // marginHorizontal: 6,
         padding: 16
     }
 })

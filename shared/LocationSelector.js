@@ -1,11 +1,12 @@
 import React, { useContext } from 'react'
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, AsyncStorage } from 'react-native'
+import { StyleSheet, ScrollView, TouchableOpacity, AsyncStorage } from 'react-native'
 import AppText from './AppText'
 import { UpdateMunicipalityContext, UserMunicipalityContext } from '../context/globalContext'
 import globalStyles from '../styles/globalStyles'
 
 const LocationSelector = () => {
 
+    // stretch: pull location names from the existing database for scalability
     const nearest = [
         { location: "City of Toronto", key: "1" },
         { location: "York Region", key: "2" },
@@ -17,11 +18,7 @@ const LocationSelector = () => {
     const pressHandler = async(location) => {
         try {
             await AsyncStorage.setItem('userMunicipality', location);
-            console.log("Saving to storage " + location )
-            // if (value === null) {
-            //     value = "York Region"
-            // }
-            // return setUserMunicipality(value)          
+            console.log("Saving to storage " + location )          
         } catch (error) {
             return new Error("retrieve failed")
         }
@@ -30,7 +27,6 @@ const LocationSelector = () => {
     
     return (
         <ScrollView horizontal={true} style={styles.sideScroll} showsHorizontalScrollIndicator={false}>
-            {/* Maybe Radio? or just a setState a single location which gets a focus style */}
             <AppText style={styles.location}>Location:</AppText>
             {nearest.map((item, i) => {
                 return (

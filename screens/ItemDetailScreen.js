@@ -77,7 +77,7 @@ const ItemDetailScreen = ({route, navigation}) => {
                 {
                     depotData.length !== 0
                     ?
-                    <AppText style={globalStyles.headerTwo}>Drop off centers nearby</AppText>
+                    <AppText style={globalStyles.headerTwo}>Drop-off centers nearby</AppText>
                     :
                     null
                 }

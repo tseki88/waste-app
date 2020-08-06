@@ -4,7 +4,6 @@ import { AntDesign, Feather } from '@expo/vector-icons'
 import HomeStackScreen from './HomeStack';
 import SettingStackScreen from './SettingStack';
 import DropOffStackScreen from './DropOffStack';
-// import ScheduleStackScreen from './ScheduleStack';
 import { View } from 'react-native';
 
 const Tab = createBottomTabNavigator();
@@ -46,8 +45,7 @@ const TabNavigator = () => {
             }}
         >
             <Tab.Screen name="Search" component={HomeStackScreen} />
-            <Tab.Screen name="DropOff" options={{tabBarLabel: "Drop Off"}} component={DropOffStackScreen} />
-            {/* <Tab.Screen name="Schedule" component={ScheduleStackScreen} /> */}
+            <Tab.Screen name="DropOff" options={{tabBarLabel: "Drop-Off"}} component={DropOffStackScreen} />
             <Tab.Screen name="Setting" component={SettingStackScreen} />
         </Tab.Navigator>
     )

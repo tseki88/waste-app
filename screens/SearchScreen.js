@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { StyleSheet, Text, View, FlatList, Dimensions, TextInput, TouchableOpacity, ScrollView, AsyncStorage, Platform } from 'react-native'
+import { StyleSheet, View, FlatList, Dimensions, TextInput, TouchableOpacity, AsyncStorage, Platform } from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
 import Section from '../shared/Section'
 import globalStyles from '../styles/globalStyles'
@@ -10,15 +10,13 @@ import { DataContext, UserMunicipalityContext } from '../context/globalContext'
 import LocationSelector from '../shared/LocationSelector'
 import firebase from '../firebase'
 
-const SearchScreen = ({ navigation, route }) => {
+const SearchScreen = ({ navigation }) => {
 
     const [query, setQuery] = useState("")
     const [queryDisplay, setQueryDisplay] = useState([])
     const [queryLength, setQueryLength] = useState(0)
     const [matchCount, setMatchCount] = useState(0)
     const [inputOutline, setInputOutline] = useState({ borderColor: "#0000" })
-
-    // Turn this into global/persistent state, on localStorage
 
     // Going to need to save different recentSearch based on Municipality set.
     const [recentSearch, setRecentSearch] = useState([])
@@ -279,7 +277,6 @@ const styles = StyleSheet.create({
         ...Platform.select({
             ios: {
                 borderColor: '#E6EBEF',
-                // THIS ISN'T SHOWING RIGHT NOW WHYYYYY
             },
             android: {
                 backgroundColor: "#fff",
@@ -292,29 +289,19 @@ const styles = StyleSheet.create({
         flex: 1,
         height: 42,
         marginLeft: 12,
-        // borderColor:"grey", 
-        // borderWidth:1, 
     },
     clearInputButton: {
         justifyContent: "center",
         alignItems: "center",
         width: 36,
         height: 42,
-        // borderColor:"grey", 
-        // borderWidth:1, 
     },
     cancelButton: {
         height: 42,
         marginTop: 20,
         marginBottom: 10,
-        // paddingRight: 0,
-        // paddingHorizontal: 16,
         marginLeft: 16,
         paddingVertical: 9,
-        // justifyContent:"center",
-        // alignItems: "center",
-        // marginRight: 14,
-        // borderWidth:1
     }
     ,
     sideScroll: {

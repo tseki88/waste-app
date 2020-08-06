@@ -1,7 +1,5 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import ItemDetailScreen from '../screens/ItemDetailScreen';
-import LocationDetails from '../screens/LocationDetails';
 import SettingScreen from '../screens/SettingScreen';
 
 const SettingStack = createStackNavigator();

@@ -64,7 +64,18 @@ const Tag = ({type}) => {
             <View style={[styles.icon, tagStyles[type]]}>
                 {renderTag}
             </View>
-            <AppText style={[styles.labelText, textStyles[type]]}>{type}</AppText>
+            <AppText style={[styles.labelText, textStyles[type]]}>
+                {type === "Drop Off Depot"
+                    ?
+                "Drop-Off Depot"
+                    :
+                    type === "Community Drop off"
+                        ?
+                    "Community Drop-Off"
+                        :
+                    type
+                }
+            </AppText>
         </View>
     )
 }

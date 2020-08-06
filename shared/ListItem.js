@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React from 'react'
 import { StyleSheet, View, TouchableOpacity } from 'react-native'
 import { AntDesign, MaterialCommunityIcons, Feather } from '@expo/vector-icons'
 import AppText from './AppText'

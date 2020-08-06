@@ -1,23 +1,15 @@
-import React, { useState, useContext, useEffect, useCallback } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { View, FlatList } from 'react-native'
 import globalStyles from '../styles/globalStyles'
 import ListItem from '../shared/ListItem'
-import { DataContext, UserMunicipalityContext, AppStateVisibleContext } from '../context/globalContext'
-import { useFocusEffect } from '@react-navigation/native';
+import { DataContext, UserMunicipalityContext } from '../context/globalContext'
 
 const DropOffScreen = ({navigation}) => {
 
     const data = useContext(DataContext)
     const userMunicipality = useContext(UserMunicipalityContext)
-    // const appStateVisible = useContext(AppStateVisibleContext)
     const [municipalityData, setMunicipalityData] = useState([])
     const [sortedData, setSortedData] = useState([])
-
-    // useFocusEffect(
-    //     useCallback(() => {
-    //         setMunicipalityData(data.municipality[userMunicipality].depots)
-    // },[userMunicipality, data, appStateVisible]))
-
 
     useEffect(() => {
         setMunicipalityData(data.municipality[userMunicipality].depots)
@@ -28,16 +20,6 @@ const DropOffScreen = ({navigation}) => {
     const pressHandler = (item) => {
         navigation.navigate("LocationDetails", item={item})
     }
-
-    // useFocusEffect(
-    //     useCallback(() => {
-    //         let sortDepot = municipalityData;
-    //         sortDepot.sort((a,b) => {
-    //             return b.name > a.name ? -1 : 1
-    //         })
-    //         setSortedData(sortDepot)
-    // },[municipalityData, data, appStateVisible]))
-
 
     useEffect(() => {
         let sortDepot = municipalityData;

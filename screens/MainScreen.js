@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { StyleSheet, View, FlatList, ScrollView, Dimensions, Text, TouchableWithoutFeedback, TouchableOpacity, Image } from 'react-native'
+import { StyleSheet, View, FlatList, Image } from 'react-native'
 import AppText from '../shared/AppText'
 import Card from '../shared/Card'
 import globalStyles from '../styles/globalStyles'
@@ -58,7 +58,7 @@ const MainScreen = ({navigation}) => {
     return (
         <View style={[globalStyles.container, {paddingTop: 10}]}>
             <View style={globalStyles.wrapper}>
-                <Section title="Top Searches" flex={4} list={true}>
+                <Section title="Top Searches" flex={5} list={true}>
                     <FlatList
                         data={topSearch}
                         keyExtractor={item => item.name}
@@ -67,9 +67,9 @@ const MainScreen = ({navigation}) => {
                         )}
                     />
                 </Section>
-                <Section title="Ontario Disposal Tips" flex={3}>
-                    <ViewPager style={{flex: 1}} showPageIndicator={true} pageMargin={-100}>
-                        <View style={{display: "flex", justifyContent:"center", alignItems: "flex-start"}}>
+                <Section title="Ontario Disposal Tips" flex={4}>
+                    <ViewPager style={{flex: 1}} pageMargin={-100}>
+                        <View style={{display: "flex", justifyContent:"center", alignItems: "flex-start"}} key="1">
                             <Card>
                                 <AppText style={[styles.cardText, globalStyles.fontBlue]}>Remember to rinse recycling matters before putting it in the blue bin.</AppText>
                                 <Image 
@@ -78,7 +78,7 @@ const MainScreen = ({navigation}) => {
                                 />
                             </Card>
                         </View>
-                        <View style={{display: "flex", justifyContent:"center", alignItems: "center"}}>
+                        <View style={{display: "flex", justifyContent:"center", alignItems: "center"}} key="2">
                             <Card>
                                 <AppText style={[{width: "45%"}, globalStyles.fontGrey]}>Dispose of your broken glass or ceramics in the garbage bin.</AppText>
                                 <Image 
@@ -87,7 +87,7 @@ const MainScreen = ({navigation}) => {
                                 />
                             </Card>
                         </View>
-                        <View style={{display: "flex", justifyContent:"center", alignItems: "flex-end"}}>
+                        <View style={{display: "flex", justifyContent:"center", alignItems: "flex-end"}} key="3">
                             <Card>
                                 <View style={styles.cardText}>
                                     <AppText style={globalStyles.fontGrey}>Straws belong in the garbage bin, <AppText style={globalStyles.fontBlue}>but clear plastic cups can be placed in the recycling.</AppText></AppText> 
