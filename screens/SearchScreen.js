@@ -202,7 +202,7 @@ const SearchScreen = ({ navigation }) => {
                                     <FlatList
                                         style={{paddingRight: 18}}
                                         data={queryDisplay}
-                                        keyExtractor={item => item.name + item.category + item.subCategory}
+                                        keyExtractor={item => item.index.toString()}
                                         renderItem={({ item, index }) => {
                                             return (
                                                 <SearchList item={item} query={query} pressHandler={pressHandler} matchCount={matchCount} index={index} />
