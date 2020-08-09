@@ -85,6 +85,6 @@ The biggest takeaway is that I really enjoyed working on Mobile Development usin
 
 The Developer (Me) is currently looking for his first Front End position! 
 
-Please contact [steveseki88@gmail.com](mailto:steveseki88@gmail.com) for any available Jr. Front End positions, it would be much appreciated.
+Please reach out to me at [steveseki88@gmail.com](mailto:steveseki88@gmail.com) for any Front End opportunities. I really appreciate it.
 
 Thank you for taking interest in reading about this project.
