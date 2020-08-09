@@ -42,13 +42,14 @@ const styles = StyleSheet.create({
         flex: 1,
         height: 42,
         borderRadius: 4,
-        marginTop: 20,
         borderWidth: 1,
         ...Platform.select({
             ios: {
+                marginTop: 0,
                 borderColor: '#E6EBEF',
             },
             android: {
+                marginTop: 20,
                 backgroundColor: "#fff",
                 elevation: 0.6,
                 borderColor: "#0000",
