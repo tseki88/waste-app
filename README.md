@@ -23,8 +23,6 @@ Currently in the process of finishing touches and reading about publishing the a
  - The data being used to render information was taken from York Region's Bindicator, and City of Toronto's Waste Wizard and is not updated in real time with the base data.
 
 ### Known Issues
- - pageMargin on iOS not displaying correctly for the cards. 
-   - [react-native-viewpager: open issue](https://github.com/react-native-community/react-native-viewpager/issues/206)
  - Some items displaying duplicate entries on query.
    - Need to manually clean up and organize parts of the dataset.
 
