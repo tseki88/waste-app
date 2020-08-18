@@ -27,7 +27,7 @@ const LocationSelector = () => {
     
     return (
         <ScrollView horizontal={true} style={styles.sideScroll} showsHorizontalScrollIndicator={false}>
-            <AppText style={styles.location}>Location:</AppText>
+            <AppText style={styles.location}>Region:</AppText>
             {nearest.map((item, i) => {
                 return (
                     <TouchableOpacity
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     each: {
         marginRight: 6,
         paddingVertical: 4,
-        paddingHorizontal: 16,
+        paddingHorizontal: 10,
         borderRadius: 4,
         borderColor: "#E6EBEF",
         borderWidth: 1,

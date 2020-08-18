@@ -44,7 +44,6 @@ export default function App() {
       setAppStateVisible(appState.current)
   }
   
-
   useEffect(() => {
     const initialAppLoadCheck = async () => {
       console.log("retrieving asyncStorage - initialAppLoadCheck")
@@ -60,7 +59,6 @@ export default function App() {
     initialAppLoadCheck()
   },[])
   
-
   useEffect(() => {
     const db = firebase.database()
     // the top search functionality should be stored as array index values, and then fetch off of the data set.

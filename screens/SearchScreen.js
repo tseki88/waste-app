@@ -169,7 +169,7 @@ const SearchScreen = ({ navigation }) => {
                                 value={query}
                                 autoFocus={true}
                                 onFocus={() => setInputOutline({ borderColor: "#0945DE" })}
-                                onBlur={() => setInputOutline({ borderColor: "#0000" })}
+                                onBlur={() => setInputOutline({ borderColor: "#E6EBEF" })}
                                 style={[styles.input, globalStyles.fontBase]}
                             />
                             {
@@ -249,9 +249,8 @@ const styles = StyleSheet.create({
         paddingTop: 10,
         ...Platform.select({
             ios: {
-                shadowColor: '#0000',
-                shadowOffset: { width: 0, height: 3 },
-                shadowOpacity: 0.2,
+                borderWidth: 1,
+                borderColor: '#E6EBEF',
             },
             android: {
                 elevation: 1,

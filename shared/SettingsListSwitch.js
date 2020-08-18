@@ -44,12 +44,10 @@ const SettingsListSwitch = ({title, description}) => {
                     <AppText style={globalStyles.fontGrey}>{description}</AppText>
                 </View>
             </View>
-            <View style={{paddingLeft:30}}>
+            <View style={{ paddingLeft:10 }}>
                 <Switch 
                     value={locationPermission}
                     onChange={openPermission} //opens the settings menu
-                    // onValueChange={openPermission}
-                    style={{ transform: [{ scaleX: 1.2 }, { scaleY: 1.2 }] }}
                     thumbColor="white"
                     trackColor={{false:"#6E6E6E", true:"#0945DE"}}    
                 />

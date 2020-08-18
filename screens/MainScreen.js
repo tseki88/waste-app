@@ -1,16 +1,18 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { StyleSheet, View, FlatList, Image } from 'react-native'
+import { StyleSheet, View, FlatList, Image, ScrollView, Dimensions } from 'react-native'
 import AppText from '../shared/AppText'
 import Card from '../shared/Card'
 import globalStyles from '../styles/globalStyles'
 import Section from '../shared/Section'
 import ListItem from '../shared/ListItem'
 import { TopSearchContext, DataContext, UserMunicipalityContext } from '../context/globalContext'
-import ViewPager from '@react-native-community/viewpager'
+// import ViewPager from '@react-native-community/viewpager'
 
 import tip1 from '../assets/tipcardImg/tip1.png'
 import tip2 from '../assets/tipcardImg/tip2.png'
 import tip3 from '../assets/tipcardImg/tip3.png'
+
+const { width, height } = Dimensions.get('window');
 
 const MainScreen = ({navigation}) => {
 
@@ -56,26 +58,31 @@ const MainScreen = ({navigation}) => {
 
     // Pressing Search Button => navigate to search
     return (
-        <View style={[globalStyles.container, {paddingTop: 10}]}>
+        <ScrollView style={[globalStyles.container, {paddingTop: 10, flex: 1, minHeight: height}]}>
             <View style={globalStyles.wrapper}>
                 <Section title="Top Searches" flex={5} list={true}>
-                    <FlatList
-                        data={topSearch}
-                        keyExtractor={item => item.name}
-                        renderItem={({item}) => (
-                            <ListItem key={item.name} item={item} pressHandler={pressHandler}/>
-                        )}
-                    />
+                    {
+                        topSearch.map((item) => {
+                            return <ListItem key={item.name} item={item} pressHandler={pressHandler}/>
+                        })
+                    }
                 </Section>
                 <Section title="Ontario Disposal Tips" flex={4}>
-                    <ViewPager style={{flex: 1}} pageMargin={-100}>
+                    <ScrollView 
+                        style={{flex:1, marginTop:10}}
+                        horizontal={true} 
+                        snapToOffsets={[0,1,2].map((x, i) => (i * (width - 150)) )}
+                        decelerationRate={"fast"}
+                        showsHorizontalScrollIndicator={false}
+                    >
+                    {/* <ViewPager style={{flex: 1}} pageMargin={-100}> */}
                         <View style={{display: "flex", justifyContent:"center", alignItems: "flex-start"}} key="1">
                             <Card>
                                 <AppText style={[styles.cardText, globalStyles.fontBlue]}>Remember to rinse recycling matters before putting it in the blue bin.</AppText>
                                 <Image 
                                     style={styles.cardImage}
                                     source={tip1}
-                                />
+                                    />
                             </Card>
                         </View>
                         <View style={{display: "flex", justifyContent:"center", alignItems: "center"}} key="2">
@@ -84,7 +91,7 @@ const MainScreen = ({navigation}) => {
                                 <Image 
                                     style={styles.cardImage}
                                     source={tip2}
-                                />
+                                    />
                             </Card>
                         </View>
                         <View style={{display: "flex", justifyContent:"center", alignItems: "flex-end"}} key="3">
@@ -95,13 +102,14 @@ const MainScreen = ({navigation}) => {
                                 <Image 
                                     style={styles.cardImage}
                                     source={tip3}
-                                />
+                                    />
                             </Card>
                         </View>
-                    </ViewPager>
+                    {/* </ViewPager> */}
+                    </ScrollView>
                 </Section>
             </View>
-        </View>
+        </ScrollView>
     )
 }
 

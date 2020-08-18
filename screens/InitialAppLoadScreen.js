@@ -48,7 +48,7 @@ const InitialAppLoadScreen = ({setInitialAppLoad, setUserMunicipality}) => {
         municipalitySelect(municipality)
         setTimeout(() => {
             promptLocationPermission()
-        }, 1600);
+        }, 1800);
     }
 
     // Render Options
@@ -56,7 +56,7 @@ const InitialAppLoadScreen = ({setInitialAppLoad, setUserMunicipality}) => {
         return (
             <View style={styles.textContainer}>
                 <Text style={[globalStyles.headerOne, globalStyles.fontWhite, styles.header]}>Locate Me</Text>
-                <AppText style={[globalStyles.fontWhite, styles.text]}>We would like to access your location in order to provide accurate waste disposal information based on your location.</AppText>
+                <AppText style={[globalStyles.fontWhite, styles.text]}>We would like to access your location to show you the nearest waste depots.</AppText>
             </View>
         )
     }
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
         display: "flex",
         justifyContent: "flex-start",
         alignItems: "center",
-        marginHorizontal: 40
+        marginHorizontal: "10%"
     },
     header: {
         textAlign: "center",
