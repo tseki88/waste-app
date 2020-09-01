@@ -15,8 +15,6 @@ const DropOffScreen = ({navigation}) => {
         setMunicipalityData(data.municipality[userMunicipality].depots)
     },[userMunicipality, data])
 
-    console.log("depot refresh")
-
     const pressHandler = (item) => {
         navigation.navigate("LocationDetails", item={item})
     }

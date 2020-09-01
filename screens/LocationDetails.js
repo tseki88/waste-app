@@ -35,8 +35,6 @@ const LocationDetails = ({ route }) => {
         WebBrowser.openBrowserAsync(link)
     }
 
-    console.log("location component rerendered")
-
     return (
         <View style={{ flex: 1, position: "relative" }}>
             <ScrollView style={globalStyles.container}>
@@ -140,7 +138,7 @@ const LocationDetails = ({ route }) => {
                             <AppText style={styles.link} onPress={() => openAppBrowser(website)}>
                                 Click here
                             </AppText> 
-                            to visit {municipality}'s Drop-Off Depot Locations Website.
+                            {` to visit ${municipality}'s Drop-Off Depot Locations Website.`}
                         </AppText>
                     </Section>
                     <Section title="Accepted Items">

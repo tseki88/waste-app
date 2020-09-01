@@ -32,6 +32,11 @@
         "ACCESS_COARSE_LOCATION",
         "ACCESS_FINE_LOCATION"
       ],
+      "config": {
+        "googleMaps": {
+          "apiKey": ""
+        }
+      },
       "package": "com.littrApp",
       "versionCode": 1
     },

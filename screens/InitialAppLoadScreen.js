@@ -13,7 +13,6 @@ const InitialAppLoadScreen = ({setInitialAppLoad, setUserMunicipality}) => {
     const changeInitialAppLoad = async () => {
         try {
             await AsyncStorage.setItem('initialAppLoad', "false");
-            console.log("asyncStorage initialAppLoad set to false")
             setUserMunicipality(municipalitySelected)
             return setInitialAppLoad(false)
         } catch (error) {
@@ -24,7 +23,6 @@ const InitialAppLoadScreen = ({setInitialAppLoad, setUserMunicipality}) => {
     const municipalitySelect = async (municipality) => {
         try {
             await AsyncStorage.setItem('userMunicipality', municipality);
-            console.log(`userMunicipality set to ${municipality}`)
             return setMunicipalitySelected(municipality)
         } catch (error) {
             console.log("failed to set userMunicipality")
@@ -34,13 +32,13 @@ const InitialAppLoadScreen = ({setInitialAppLoad, setUserMunicipality}) => {
     const promptLocationPermission = async () => {
         const { status, permissions: { location: { ios } } } = await Permissions.askAsync(Permissions.LOCATION);
         
-        if(status === "granted") {
-            console.log("permission granted")
-        } else if(status !== 'granted') {
-            console.log("permission denied")
-        } else {
-            throw new Error("permission check failed")
-        }
+        // if(status === "granted") {
+        //     console.log("permission granted")
+        // } else if(status !== 'granted') {
+        //     console.log("permission denied")
+        // } else {
+        //     throw new Error("permission check failed")
+        // }
         changeInitialAppLoad()
     }
 

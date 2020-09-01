@@ -12,23 +12,17 @@ const SettingsListSwitch = ({title, description}) => {
     const appStateVisible = useContext(AppStateVisibleContext)
 
     useEffect(() => {
-        console.log(appStateVisible)
         const checkPermissionStatus = async () => {
-            if (appStateVisible === "active") {
-                const { status, permissions: { location: { ios } } } = await Permissions.getAsync(Permissions.LOCATION);
-                console.log("checkingPermission")
-                if(status === "granted") {
-                    return setLocationPermission(true)
-                } else if(status !== 'granted') {
-                    // Goes to city selection screen
-                    console.log("it isn't granted")
-                    return setLocationPermission(false)
-                } else {
-                    throw new Error("permission denied")
-                }
-            };
+            const { permissions: { [Permissions.LOCATION]: { status, foregroundGranted } } } = await Permissions.getAsync(Permissions.LOCATION);
+            if(status === "granted" || foregroundGranted === true) {
+                return setLocationPermission(true)
+            } else if(status === 'denied') {
+                // Goes to city selection screen
+                return setLocationPermission(false)
+            } else {
+                throw new Error("permission denied")
+            }
         }
-
         checkPermissionStatus()
     }, [appStateVisible])
 

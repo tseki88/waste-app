@@ -26,8 +26,6 @@ const SearchScreen = ({ navigation }) => {
     const data = useContext(DataContext)
     const userMunicipality = useContext(UserMunicipalityContext)
 
-    console.log("screenRerender")
-
     useEffect(() => {
         setMunicipalityData(data.municipality[userMunicipality])
         setQuery("")
@@ -35,7 +33,6 @@ const SearchScreen = ({ navigation }) => {
 
     useEffect(() => {
         const retrieveData = async () => {
-            console.log("retrieving")
             try {
                 const value = await AsyncStorage.getItem('recentSearch');
                 if (value !== null) {
@@ -45,8 +42,6 @@ const SearchScreen = ({ navigation }) => {
                 return
             }
         };
-
-        console.log("setting Data")
         retrieveData()
     }, [])
     
@@ -56,7 +51,6 @@ const SearchScreen = ({ navigation }) => {
         } catch (error) {
             console.log("failed to save in stoeData asyncStorage")
         }
-        console.log("setting")
     };
 
     const inputChangeHandler = (val) => {
@@ -107,14 +101,11 @@ const SearchScreen = ({ navigation }) => {
         const itemCount = firebase.database().ref(`${userMunicipality}/` + index)
 
         const incrementTopSearch = () => {
-            console.log(index)
             itemCount.once("value", function(response) {
                 
                 if (response.val() === null){
-                    console.log("count is now 1")
                     itemCount.set({"count": 1})
                 } else {
-                    console.log("count has been increased by 1")
                     let currentCount = response.val().count + 1
                     itemCount.set({"count": currentCount})
                 }

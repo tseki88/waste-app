@@ -17,8 +17,7 @@ const LocationSelector = () => {
 
     const pressHandler = async(location) => {
         try {
-            await AsyncStorage.setItem('userMunicipality', location);
-            console.log("Saving to storage " + location )          
+            await AsyncStorage.setItem('userMunicipality', location);     
         } catch (error) {
             return new Error("retrieve failed")
         }

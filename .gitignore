@@ -10,6 +10,7 @@ npm-debug.*
 web-build/
 web-report/
 scrape/
+.env
 
 # macOS
 .DS_Store

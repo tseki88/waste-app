@@ -46,7 +46,6 @@ export default function App() {
   
   useEffect(() => {
     const initialAppLoadCheck = async () => {
-      console.log("retrieving asyncStorage - initialAppLoadCheck")
       try {
         const value = await AsyncStorage.getItem('initialAppLoad');
         if (value === "false") {
@@ -65,9 +64,7 @@ export default function App() {
     // sort by count and then return top3 only, set as topSearch state.
     
     if (userMunicipality !== null) {
-      console.log("useeffect for firebase starts")
       db.ref(`${userMunicipality}`).orderByChild("count").limitToLast(3).on("value", function(response) {
-        // console.log(response.val())
         return setTopSearch(response.val())
       }, function(error) {
         console.log(error)
@@ -80,10 +77,8 @@ export default function App() {
   useEffect(() => {
     if (userMunicipality === null && initialAppLoad === false) {
       const getAsyncMunicipality = async () => {
-        console.log("retrieving asyncStorage - userMunicipality")
         try {
           let value = await AsyncStorage.getItem('userMunicipality');
-          console.log(value)
           if (value === null) {
             value = "York Region"
           }
@@ -121,10 +116,11 @@ export default function App() {
       }
           
       const checkLocationPermission = async () => {
-        const { status, permissions: { location: { ios } } } = await Permissions.getAsync(Permissions.LOCATION);
+        
+        const { permissions: { [Permissions.LOCATION]: { status, foregroundGranted } } } = await Permissions.getAsync(Permissions.LOCATION);
         const temporaryData = tempData
         
-        if(status === "granted") {
+        if(status === "granted" || foregroundGranted === true) {
           await Location.getCurrentPositionAsync({})
           .then((data) => {
             const userLat = data.coords.latitude;
@@ -143,7 +139,6 @@ export default function App() {
           .catch((error) => console.log(error))
             
           } else if(status !== 'granted') {
-            console.log("permission is denied, no distance to calculate")
             setMunicipalityData(temporaryData)
           } else {
             throw new Error("permission denied")

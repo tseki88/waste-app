@@ -4,7 +4,7 @@ Hi there, the Littr App is a personal project for learning and creating my first
 
 The product itself and UI Designs belong to [Ashley Fong](http://ashleyfong.ca/), who I am working together with to make this app idea come to life.
 
-Currently in the process of finishing touches and reading about publishing the apps to Google Play and App Store respectively.
+Currently in the process of finishing touches and reading about publishing the app to Google Play.
 
 ## About the App
 
@@ -22,11 +22,8 @@ Currently in the process of finishing touches and reading about publishing the a
 ### Disclaimer
  - The data being used to render information was taken from York Region's Bindicator, and City of Toronto's Waste Wizard and is not updated in real time with the base data.
 
-### Known Issues
- - pageMargin on iOS not displaying correctly for the cards. 
-   - [react-native-viewpager: open issue](https://github.com/react-native-community/react-native-viewpager/issues/206)
- - Some items displaying duplicate entries on query.
-   - Need to manually clean up and organize parts of the dataset.
+### APK
+ - To test the app on android in the meanwhile, you can download the [APK](littr.apk).
 
 ---
 

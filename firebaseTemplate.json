@@ -1342,15 +1342,6 @@
                     "index": 147
                 },
                 {
-                    "name": "Camp Fuel",
-                    "description": "This item is Household Hazardous Waste (HHW) and MUST NOT be placed in your Garbage Bin, Blue Bin, Green Bin or put down the drain/toilet/sewer. Please take this item to one of the City's Drop-Off Depots or Community Environment Days. For HHW between 10 to 50 litres/kilograms, residents can also request a free Toxic Taxi pick-up online or by calling 311. Residents can also check the Orange Drop Program",
-                    "tag": [
-                        "Household Hazardous Waste"
-                    ],
-                    "search": "",
-                    "index": 148
-                },
-                {
                     "name": "White Gas",
                     "description": "This item is Household Hazardous Waste (HHW) and MUST NOT be placed in your Garbage Bin, Blue Bin, Green Bin or put down the drain/toilet/sewer. Please take this item to one of the City's Drop-Off Depots or Community Environment Days. For HHW between 10 to 50 litres/kilograms, residents can also request a free Toxic Taxi pick-up online or by calling 311. Residents can also check the Orange Drop Program",
                     "tag": [
@@ -2609,15 +2600,6 @@
                     ],
                     "search": "",
                     "index": 288
-                },
-                {
-                    "name": "Medical Injectors",
-                    "description": "This item is Household Hazardous Waste and MUST NOT be placed in your Garbage Bin, Blue Bin, Green Bin or put down the drain. Put these items in a sealed container labeled \"needles\" and:\n\nReturn them to your local pharmacy\nTake them to a City Drop-Off Depot\nTake them to a Community Environment Day\n\n\nReturn them to your local pharmacy\nTake them to a City Drop-Off Depot\nTake them to a Community Environment Day\nFor HHW between 10 to 50 litres/kilograms, residents can also request a free Toxic Taxi pick-up online or by calling 311",
-                    "tag": [
-                        "Household Hazardous Waste"
-                    ],
-                    "search": "",
-                    "index": 289
                 },
                 {
                     "name": "Fluorescent Light Bulb",
@@ -5662,15 +5644,6 @@
                     "index": 627
                 },
                 {
-                    "name": "Soup Cartons",
-                    "description": "Empty and rinse (if necessary and possible); remove and discard the straw in the Garbage Bin\nPlace the carton/box in your Blue Bin without flattening it",
-                    "tag": [
-                        "Blue Bin"
-                    ],
-                    "search": "",
-                    "index": 628
-                },
-                {
                     "name": "Broth Cartons",
                     "description": "Empty and rinse (if necessary and possible); remove and discard the straw in the Garbage Bin\nPlace the carton/box in your Blue Bin without flattening it",
                     "tag": [
@@ -6542,15 +6515,6 @@
                     ],
                     "search": "",
                     "index": 725
-                },
-                {
-                    "name": "Foam Take-Out Container",
-                    "description": "Empty and rinse (if necessary and possible) this item before placing it in your Blue Bin. Any type of black foam is not accepted and should be placed in the Garbage Bin",
-                    "tag": [
-                        "Blue Bin"
-                    ],
-                    "search": "",
-                    "index": 726
                 },
                 {
                     "name": "Styrofoam Takeout Container",
@@ -7579,15 +7543,6 @@
                     "index": 840
                 },
                 {
-                    "name": "Speaker",
-                    "description": "Set out electronic equipment at curbside on scheduled Garbage collection day.  \nPlace these items for pick up 0.5 meter (2 feet) away from the Garbage Bin. Large items can be put on the ground. Small items should be put in an open cardboard box or clear plastic bag. See our Electronics Waste page for more information",
-                    "tag": [
-                        "Electronics"
-                    ],
-                    "search": "",
-                    "index": 841
-                },
-                {
                     "name": "Headset",
                     "description": "Set out electronic equipment at curbside on scheduled Garbage collection day.  \nPlace these items for pick up 0.5 meter (2 feet) away from the Garbage Bin. Large items can be put on the ground. Small items should be put in an open cardboard box or clear plastic bag. See our Electronics Waste page for more information",
                     "tag": [
@@ -7840,15 +7795,6 @@
                     "index": 869
                 },
                 {
-                    "name": "Thread",
-                    "description": "Place item in the Garbage Bin",
-                    "tag": [
-                        "Garbage"
-                    ],
-                    "search": "",
-                    "index": 870
-                },
-                {
                     "name": "Squeeze Tube",
                     "description": "Place item in the Garbage Bin",
                     "tag": [
@@ -7901,15 +7847,6 @@
                     ],
                     "search": "",
                     "index": 876
-                },
-                {
-                    "name": "Plastic Makeup Tube",
-                    "description": "Place item in the Garbage Bin",
-                    "tag": [
-                        "Garbage"
-                    ],
-                    "search": "",
-                    "index": 877
                 },
                 {
                     "name": "Plastic Make-Up Tube",
@@ -10891,24 +10828,6 @@
                     "index": 1208
                 },
                 {
-                    "name": "Carcass",
-                    "description": "To dispose of small animals like a dead bird, mouse or rat, do not touch the carcass with your bare hands. Wear gloves or use a double plastic bag to pick it up and place carcass in another plastic bag and place it in the Garbage Bin",
-                    "tag": [
-                        "Garbage"
-                    ],
-                    "search": "",
-                    "index": 1209
-                },
-                {
-                    "name": "Remains",
-                    "description": "To dispose of small animals like a dead bird, mouse or rat, do not touch the carcass with your bare hands. Wear gloves or use a double plastic bag to pick it up and place carcass in another plastic bag and place it in the Garbage Bin",
-                    "tag": [
-                        "Garbage"
-                    ],
-                    "search": "",
-                    "index": 1210
-                },
-                {
                     "name": "Plastic Paint Pail",
                     "description": "Place item in the Garbage Bin. Empty hard plastic paint and sealant pails are not accepted in the Blue Bin",
                     "tag": [
@@ -13159,7 +13078,7 @@
                     "index": 1460
                 },
                 {
-                    "name": "Sparklers",
+                    "name": "Sparklers (Used)",
                     "description": "Place item in the Garbage Bin ensuring the lid closes. Lighters with fuel should be disposed of as Household Hazardous Waste",
                     "tag": [
                         "Garbage"
@@ -13538,15 +13457,6 @@
                     "index": 1502
                 },
                 {
-                    "name": "Tape",
-                    "description": "Place item in the Garbage Bin",
-                    "tag": [
-                        "Garbage"
-                    ],
-                    "search": "",
-                    "index": 1503
-                },
-                {
                     "name": "Vhs",
                     "description": "Place item in the Garbage Bin",
                     "tag": [
@@ -13779,15 +13689,6 @@
                     ],
                     "search": "",
                     "index": 1529
-                },
-                {
-                    "name": "Toy (Any Material)",
-                    "description": "Consider donating items in good and working order to not-for-profit agencies or at Community Environment Days. Alternatively, this item should be placed in the Garbage Bin after removing any batteries and disposing them as Household Hazardous Waste,",
-                    "tag": [
-                        "Garbage"
-                    ],
-                    "search": "",
-                    "index": 1530
                 },
                 {
                     "name": "Holiday Decoration",
@@ -16508,7 +16409,7 @@
                     "index": 1832
                 },
                 {
-                    "name": "Cream",
+                    "name": "Cream (Dairy)",
                     "description": "Place this item in your Green Bin. Line either your indoor container or outdoor Green Bin with a plastic bag or kraft paper bag. Do not line both",
                     "tag": [
                         "Green Bin"
@@ -16895,15 +16796,6 @@
                     "index": 1875
                 },
                 {
-                    "name": "Bread",
-                    "description": "Place this item in your Green Bin. Line either your indoor container or outdoor Green Bin with a plastic bag or kraft paper bag. Do not line both",
-                    "tag": [
-                        "Green Bin"
-                    ],
-                    "search": "",
-                    "index": 1876
-                },
-                {
                     "name": "Flour",
                     "description": "Place this item in your Green Bin. Line either your indoor container or outdoor Green Bin with a plastic bag or kraft paper bag. Do not line both",
                     "tag": [
@@ -16938,15 +16830,6 @@
                     ],
                     "search": "",
                     "index": 1880
-                },
-                {
-                    "name": "Pasta",
-                    "description": "Place this item in your Green Bin. Line either your indoor container or outdoor Green Bin with a plastic bag or kraft paper bag. Do not line both",
-                    "tag": [
-                        "Green Bin"
-                    ],
-                    "search": "",
-                    "index": 1881
                 },
                 {
                     "name": "Noodles",
@@ -19928,7 +19811,7 @@
                     "index": 2212
                 },
                 {
-                    "name": "Invasive Species",
+                    "name": "Invasive Species **",
                     "description": "The City is presently under a federal order from the Canadian Food Inspection Agency (CFIA) to quarantine an area in the northwest portion of the city (Finch on the north, Hwy 427 on the west, Dixon/Hwy 401 on the south and Martin Grove on the east). Woody material cannot be taken out of the area unless it has been ground to less than 5/8 of an inch and has been inspected and certified by CFIA personnel. Within this area City collections will be limited to material equal to or less than 7.5 centimeters (3 inches) in diameter. Material greater than 7.5 centimeters (3 inches) from the ALHB regulated area will be accepted at the Disco Drop-off Depot. Unauthorized movement of material can lead to fines up to $50,000",
                     "tag": [
                         "Yard Waste"
@@ -20055,7 +19938,7 @@
                 },
                 {
                     "name": "Garden Trimmings",
-                    "description": "Place this item in your Yard Waste. Yard waste in plastic bags will not be collected. Use kraft paper bags from October to March as items may freeze to containers. Leave your grass clippings on your lawn; yard waste containing grass clippings or sod will not be collected. Please place poisonous and invasive plants in your Garbage Bin",
+                    "description": "Place this item in your Yard Waste. Please securely tie hedge trimmings, brush or branches. Bundles can be up to 1.2 m (4ft.) in length and 0.6 m (2ft.) in width, weighing less than 20 kgs/44lbs. \nThe maximum diameter of each branch is 7.5 cm (3 inches). Please leave your grass clippings on your lawn. Yard waste containing grass clippings or sod will not be picked up. Please place poisonous and invasive plants in your Garbage Bin. Yard waste in plastic bags will not be collected. Use kraft paper bags from October to March as items may freeze to containers.",
                     "tag": [
                         "Yard Waste"
                     ],
@@ -20232,15 +20115,6 @@
                     ],
                     "search": "",
                     "index": 2246
-                },
-                {
-                    "name": "Garden Trimmings",
-                    "description": "Please securely tie hedge trimmings, brush or branches. Bundles can be up to 1.2 m (4ft.) in length and 0.6 m (2ft.) in width, weighing less than 20 kgs/44lbs. \nThe maximum diameter of each branch is 7.5 cm (3 inches). Please leave your grass clippings on your lawn. Yard waste containing grass clippings or sod will not be picked up. Please place poisonous and invasive plants in your Garbage Bin",
-                    "tag": [
-                        "Yard Waste"
-                    ],
-                    "search": "",
-                    "index": 2247
                 },
                 {
                     "name": "Hedge Clippings",
@@ -21162,7 +21036,7 @@
                 },
                 {
                     "name": "Carcass",
-                    "description": "If you find an injured or dead animal, please call 311. The City of Toronto's Animal Services can also assist with pets that have passed away. For more information please see Animal services",
+                    "description": "To dispose of small animals like a dead bird, mouse or rat, do not touch the carcass with your bare hands. Wear gloves or use a double plastic bag to pick it up and place carcass in another plastic bag and place it in the Garbage Bin. If you find an injured or dead animal, please call 311. The City of Toronto's Animal Services can also assist with pets that have passed away. For more information please see Animal services",
                     "tag": [
                         "Not Accepted"
                     ],
@@ -21180,7 +21054,7 @@
                 },
                 {
                     "name": "Remains",
-                    "description": "If you find an injured or dead animal, please call 311. The City of Toronto's Animal Services can also assist with pets that have passed away. For more information please see Animal services",
+                    "description": "To dispose of small animals like a dead bird, mouse or rat, do not touch the carcass with your bare hands. Wear gloves or use a double plastic bag to pick it up and place carcass in another plastic bag and place it in the Garbage Bin. If you find an injured or dead animal, please call 311. The City of Toronto's Animal Services can also assist with pets that have passed away. For more information please see Animal services",
                     "tag": [
                         "Not Accepted"
                     ],
@@ -22134,17 +22008,6 @@
                     "index": 13
                 },
                 {
-                    "name": "Bathtub/Sink",
-                    "description": "This item can be dropped off as scrap metal, free of charge, at select waste depots. A fee may be charged if the item cannot be recycled",
-                    "search": "\nBathtub/Sink,Shower Enclosure,Plumbing Fixtures,Faucet,Tub,Bath",
-                    "tag": [
-                        "York Region Waste Facility"
-                    ],
-                    "category": "Building materials",
-                    "subCategory": "Bathroom fixtures",
-                    "index": 14
-                },
-                {
                     "name": "Toilet",
                     "description": "This item can be dropped off as garbage at the Georgina Waste Transfer Station or a Community Environmental Centre (CEC). Disposal fees will apply. Please check your local municipal website or waste calendar to see if this item can also be collected at the curb with bulky garbage",
                     "search": "\nToilet",
@@ -22303,30 +22166,6 @@
                     "index": 27
                 },
                 {
-                    "name": "Acoustic Ceiling Tiles",
-                    "description": "This item can be dropped off as garbage at the Georgina Waste Transfer Station (no more than 500kg) or a Community Environmental Centre (CEC). Disposal fees will apply",
-                    "search": "\nAcoustic Ceiling Tiles,Ceiling Tiles",
-                    "tag": [
-                        "Garbage",
-                        "York Region Waste Facility"
-                    ],
-                    "category": "Building materials",
-                    "subCategory": "Flooring",
-                    "index": 28
-                },
-                {
-                    "name": "Carpet",
-                    "description": "This item can be dropped off as garbage at the Georgina Waste Transfer Station (no more than 500kg) or a Community Environmental Centre (CEC). Disposal fees will apply. This item may also be suitable for collection at the curb. Please check your local municipal website or waste calendar for further information and set out guidelines",
-                    "search": "\nCarpet,Rug,Area Rug",
-                    "tag": [
-                        "Garbage",
-                        "York Region Waste Facility"
-                    ],
-                    "category": "Building materials",
-                    "subCategory": "Flooring",
-                    "index": 29
-                },
-                {
                     "name": "Flooring",
                     "description": "This item can be dropped off as garbage at the Georgina Waste Transfer Station (no more than 500kg) or a Community Environmental Centre (CEC). Disposal fees will apply. This item may also be suitable for collection at the curb. Please check your local municipal website or waste calendar for further information and set out guidelines",
                     "search": "\nFlooring,Carpet Underlay,Hardwood Floor,Linoleum Flooring,Parquet,Tiles,Ceramic Tiles,Porcelain,Laminate,Laminate Flooring,Vinyl Flooring",
@@ -22475,19 +22314,6 @@
                     "index": 41
                 },
                 {
-                    "name": "Textiles",
-                    "description": "Items in good condition can be donated. Acceptance of items is at the discretion of the charity. Select organizations will take damaged items so long as they are clean, dry and odorless",
-                    "search": "\nTextiles,Fabric,Curtains,Cushion,Upholstery,Rags,Drapes,Window Covering,Blankets,Sheets,Clothes",
-                    "tag": [
-                        "Reuse Donation Centre",
-                        "Community Drop off",
-                        "York Region Waste Facility"
-                    ],
-                    "category": "Clothing and textiles",
-                    "subCategory": "Textiles",
-                    "index": 42
-                },
-                {
                     "name": "Towel",
                     "description": "Items in good condition can be donated. Acceptance of items is at the discretion of the charity",
                     "search": "\nTowel,Wash Cloth",
@@ -22509,17 +22335,6 @@
                     "category": "Clothing and textiles",
                     "subCategory": "Textiles",
                     "index": 44
-                },
-                {
-                    "name": "Glue",
-                    "description": "This item is Household Hazardous Waste (HHW) and can be taken to a HHW depot for proper recycling and disposal. All HHW should be in original containers and well-marked. Containers are not returnable. Do not mix products. Residents may drop off up to 60L of HHW and 20 fluorescent tubes per day at York Region HHW Depots",
-                    "search": "\nGlue,Spray Adhesive",
-                    "tag": [
-                        "York Region Waste Facility"
-                    ],
-                    "category": "Craft supplies",
-                    "subCategory": "Glues and chemicals",
-                    "index": 45
                 },
                 {
                     "name": "Chalk",
@@ -22567,28 +22382,6 @@
                     "index": 49
                 },
                 {
-                    "name": "Construction Paper",
-                    "description": "Please place this item loose in the Blue Box",
-                    "search": "\nConstruction Paper,Business Cards,Store Receipts",
-                    "tag": [
-                        "Blue Box"
-                    ],
-                    "category": "Craft supplies",
-                    "subCategory": "Paper products",
-                    "index": 50
-                },
-                {
-                    "name": "Paper products",
-                    "description": "Please place this item in the blue box",
-                    "search": "\nPaper products,Writing Paper,Bristol Board,Sticky Note,File Folder,Envelope,Index Card,Birthday Card,Christmas Card,Card,Envelope with plastic window",
-                    "tag": [
-                        "Blue Box"
-                    ],
-                    "category": "Craft supplies",
-                    "subCategory": "Paper products",
-                    "index": 51
-                },
-                {
                     "name": "Sewing Needle",
                     "description": "Please place this item in the garbage. Wrap sharp edges to prevent puncturing of the bag",
                     "search": "\nSewing Needle,Pin,Tack",
@@ -22609,30 +22402,6 @@
                     "category": "Craft supplies",
                     "subCategory": "Sewing supplies",
                     "index": 53
-                },
-                {
-                    "name": "Textiles",
-                    "description": "Items in good condition can be donated. Acceptance of items is at the discretion of the charity. Select organizations will take damaged items so long as they are clean, dry and odorless",
-                    "search": "\nTextiles,Fabric,Curtains,Cushion,Upholstery,Rags,Drapes,Window Covering,Blankets,Sheets,Clothes",
-                    "tag": [
-                        "Reuse Donation Centre",
-                        "Community Drop off",
-                        "York Region Waste Facility"
-                    ],
-                    "category": "Craft supplies",
-                    "subCategory": "Yarn/Fabric",
-                    "index": 54
-                },
-                {
-                    "name": "Yarn",
-                    "description": "Items in good condition can be donated. Acceptance of items is at the discretion of the charity",
-                    "search": "\nYarn,Wool",
-                    "tag": [
-                        "Reuse Donation Centre"
-                    ],
-                    "category": "Craft supplies",
-                    "subCategory": "Yarn/Fabric",
-                    "index": 55
                 },
                 {
                     "name": "Ammunition",
@@ -23039,17 +22808,6 @@
                     "index": 91
                 },
                 {
-                    "name": "Glass Bottle or Jar",
-                    "description": "Please place this item in your blue box. Please remove metal lids and place lids in the blue box",
-                    "search": "\nGlass Bottle or Jar,Glass Juice Bottle,Glass Water Bottle,Glass Pop Bottle,Glass Condiment Jar,Jam Jar,Brown glass bottle for health supplements,Metal Lid from Glass Jar",
-                    "tag": [
-                        "Blue Box"
-                    ],
-                    "category": "Food and beverage containers",
-                    "subCategory": "Beverage containers",
-                    "index": 92
-                },
-                {
                     "name": "Juice Box",
                     "description": "Please place this item in your blue box. Place straw and wrapper in the garbage",
                     "search": "\nJuice Box,Drink Box,Tetrapak,Juice Carton",
@@ -23194,17 +22952,6 @@
                     "index": 105
                 },
                 {
-                    "name": "Styrofoam Cups/Dishes/Containers",
-                    "description": "Please place this item in the garbage",
-                    "search": "\nStyrofoam Cups/Dishes/Containers,Cup,Plate,Takeout,Coffee,Foam,Meat Tray,Packaging Peanuts,Expanded Polystyrene,EPS Foam,Clamshell,Styrofoam Clamshell,Styrofoam Peanuts",
-                    "tag": [
-                        "Garbage"
-                    ],
-                    "category": "Food and beverage containers",
-                    "subCategory": "Disposable containers/utensils",
-                    "index": 106
-                },
-                {
                     "name": "Take-Out Cup Lid",
                     "description": "Please place this item in the garbage",
                     "search": "\nTake-Out Cup Lid,Plastic Lid,Lid,Paper Cup Lid,Coffee Cup Lid,Soft Drink Lid",
@@ -23304,17 +23051,6 @@
                     "index": 115
                 },
                 {
-                    "name": "Paper Plate (Food Soiled)",
-                    "description": "Please place this item in the green bin",
-                    "search": "\nPaper Plate (Food Soiled),Paper Plates",
-                    "tag": [
-                        "Green Bin"
-                    ],
-                    "category": "Food and beverage containers",
-                    "subCategory": "Soiled food packaging  (paper)",
-                    "index": 116
-                },
-                {
                     "name": "Paper Take-out Container",
                     "description": "Please place this item in the Green Bin. Consider using reusable containers wherever possible",
                     "search": "\nPaper Take-out Container,Paper Restaurant take out container,Paper Fast Food Container,Paper Takeaway container",
@@ -23324,17 +23060,6 @@
                     "category": "Food and beverage containers",
                     "subCategory": "Soiled food packaging  (paper)",
                     "index": 117
-                },
-                {
-                    "name": "Paper Towel/Napkin",
-                    "description": "Please place this item in the green bin",
-                    "search": "\nPaper Towel/Napkin",
-                    "tag": [
-                        "Green Bin"
-                    ],
-                    "category": "Food and beverage containers",
-                    "subCategory": "Soiled food packaging  (paper)",
-                    "index": 118
                 },
                 {
                     "name": "Popcorn Bag",
@@ -23525,19 +23250,6 @@
                     "index": 134
                 },
                 {
-                    "name": "Building Materials",
-                    "description": "This item can be dropped off as garbage at the Georgina Waste Transfer Station or a Community Environmental Centre (CEC). Disposal fees will apply. Please check your local municipal website or waste calendar to see if this item can also be collected at the curb",
-                    "search": "\nBuilding Materials,PVC Pipe,Fiberglass,Plexiglass,Vapour Barrier,Shingles,Eavestrough,Vents Metal,Fireplace Insert,Curtain Rod,Garage Door,Tar Paper,Roof Shingles,Roofing Shingle,Construction Waste,Asphalt Shingles",
-                    "tag": [
-                        "Garbage",
-                        "York Region Waste Facility",
-                        "Community Drop off"
-                    ],
-                    "category": "Garbage",
-                    "subCategory": "Bulky item disposal",
-                    "index": 135
-                },
-                {
                     "name": "Cane",
                     "description": "Items in good condition can be donated to charity at select donation centres or at York Region’s Community Environmental Centres. Acceptance of items is at the discretion of the charity. Damaged items can be disposed for a fee at select York Region Waste Facilities. Curbside collection may also be available. Check with your local municipality for more information",
                     "search": "\nCane,Walker",
@@ -23587,18 +23299,6 @@
                     "category": "Garbage",
                     "subCategory": "Bulky item disposal",
                     "index": 139
-                },
-                {
-                    "name": "E-Bike",
-                    "description": "This item can be dropped off as garbage at the Georgina Waste Transfer Station or a Community Environmental Centre (CEC). Disposal fees will apply. Please remove the battery from the bike before disposal. Batteries can be taken to a CEC for disposal",
-                    "search": "\nE-Bike",
-                    "tag": [
-                        "Garbage",
-                        "York Region Waste Facility"
-                    ],
-                    "category": "Garbage",
-                    "subCategory": "Oversized Items",
-                    "index": 140
                 },
                 {
                     "name": "Hot Tub",
@@ -24207,42 +23907,6 @@
                     "index": 192
                 },
                 {
-                    "name": "Board Games",
-                    "description": "Items in good condition can be donated. Acceptance of items is at the discretion of the charity. Damaged items can go in the garbage",
-                    "search": "\nBoard Games,Monopoly,Risk,Playing Cards,Puzzles,Game",
-                    "tag": [
-                        "Garbage",
-                        "Reuse Donation Centre",
-                        "York Region Waste Facility",
-                        "Community Drop off"
-                    ],
-                    "category": "Housewares",
-                    "subCategory": "Household items",
-                    "index": 193
-                },
-                {
-                    "name": "Candle",
-                    "description": "Please place this item in the garbage",
-                    "search": "\nCandle,Candles,Wax",
-                    "tag": [
-                        "Garbage"
-                    ],
-                    "category": "Housewares",
-                    "subCategory": "Household items",
-                    "index": 194
-                },
-                {
-                    "name": "Disposable Cloth/Wipe",
-                    "description": "Please place this item in the garbage. Please do not flush wipes down the toilet",
-                    "search": "\nDisposable Cloth/Wipe,J Cloth,Swiffer,Disinfectant Wipe,Lysol Wipes,Baby Wipes,Wipes,Disposable Mop Sheet,Mop Sheet,Wet Wipe,Sanitizing Wipe",
-                    "tag": [
-                        "Garbage"
-                    ],
-                    "category": "Housewares",
-                    "subCategory": "Household items",
-                    "index": 195
-                },
-                {
                     "name": "Household Items",
                     "description": "Please place this item in the garbage. Tip: This item can be repaired at a repair shop",
                     "search": "\nHousehold Items,Umbrella,Broom,Laundry basket,Clothes Hamper,Photos,Trophy,Basket,Pegs,Pictures,Pics,Prints,Picture,Photograph,Medals,Children Trophies,Magnet,Magnets,Water Hose",
@@ -24299,19 +23963,6 @@
                     "category": "Housewares",
                     "subCategory": "Indoor furniture",
                     "index": 200
-                },
-                {
-                    "name": "Chair",
-                    "description": "Items in good condition can be donated to charity at select donation centres. Acceptance of items is at the discretion of the charity. Damaged items can be disposed for a fee at select York Region Waste Facilities. Curbside collection may also be available. Check with your local municipality for more information",
-                    "search": "\nChair,Dining chair,Kitchen chair,Armchair,Lazy-Boy,Recliner,Ottoman",
-                    "tag": [
-                        "York Region Waste Facility",
-                        "Community Drop off",
-                        "Reuse Donation Centre"
-                    ],
-                    "category": "Housewares",
-                    "subCategory": "Indoor furniture",
-                    "index": 201
                 },
                 {
                     "name": "Coffee/End Table",
@@ -24417,19 +24068,6 @@
                     "category": "Housewares",
                     "subCategory": "Kitchen items",
                     "index": 209
-                },
-                {
-                    "name": "Cookware",
-                    "description": "Items in good condition can be donated at select donation centres. Acceptance is at the discretion of  the charity. Items in poor condition may be disposed at select York Region Waste Facilities. Fees may apply if the item cannot be recycled as scrap metal. Curbside collection may also be available. Contact your local municipality for more information",
-                    "search": "\nCookware,Pots,Frying Pan,Spatula,Pans,Stainless steel pot,Stainless steel Pan,Cooking Pots,Pots and Pans",
-                    "tag": [
-                        "Garbage",
-                        "York Region Waste Facility",
-                        "Reuse Donation Centre"
-                    ],
-                    "category": "Housewares",
-                    "subCategory": "Kitchen items",
-                    "index": 210
                 },
                 {
                     "name": "Drinking Glass",
@@ -24779,17 +24417,6 @@
                     "index": 239
                 },
                 {
-                    "name": "Hair and Fur",
-                    "description": "Please place this item in your green bin",
-                    "search": "\nHair and Fur,Feathers",
-                    "tag": [
-                        "Green Bin"
-                    ],
-                    "category": "Kitchen waste",
-                    "subCategory": "Other compostable items",
-                    "index": 240
-                },
-                {
                     "name": "Paper Plate (Food Soiled)",
                     "description": "Please place this item in the green bin",
                     "search": "\nPaper Plate (Food Soiled),Paper Plates",
@@ -24823,17 +24450,6 @@
                     "index": 243
                 },
                 {
-                    "name": "Popcorn Bag",
-                    "description": "Please place this item in the green bin",
-                    "search": "\nPopcorn Bag,Microwave Popcorn",
-                    "tag": [
-                        "Green Bin"
-                    ],
-                    "category": "Kitchen waste",
-                    "subCategory": "Other compostable items",
-                    "index": 244
-                },
-                {
                     "name": "Sawdust And Wood Shavings",
                     "description": "Small quantities of sawdust and wood shavings can go in your green bin. They cannot be from pressure treated, melamine, composite or particle board wood. Otherwise this item is garbage and can be placed at the curb or brought to a depot",
                     "search": "\nSawdust And Wood Shavings,Pencil Shavings",
@@ -24843,17 +24459,6 @@
                     "category": "Kitchen waste",
                     "subCategory": "Other compostable items",
                     "index": 245
-                },
-                {
-                    "name": "Pasta and Grains",
-                    "description": "Please place this item in the green bin",
-                    "search": "\nPasta and Grains,Cereals and Grains,Pasta,Baking Ingredients,Rice,Bread,Oatmeal and Oats,Pastry",
-                    "tag": [
-                        "Green Bin"
-                    ],
-                    "category": "Kitchen waste",
-                    "subCategory": "Pasta and grains",
-                    "index": 246
                 },
                 {
                     "name": "Lard",
@@ -24887,20 +24492,6 @@
                     "category": "Kitchen waste",
                     "subCategory": "Prepared food/leftovers",
                     "index": 249
-                },
-                {
-                    "name": "Cane",
-                    "description": "Items in good condition can be donated to charity at select donation centres or at York Region’s Community Environmental Centres. Acceptance of items is at the discretion of the charity. Damaged items can be disposed for a fee at select York Region Waste Facilities. Curbside collection may also be available. Check with your local municipality for more information",
-                    "search": "\nCane,Walker",
-                    "tag": [
-                        "Garbage",
-                        "York Region Waste Facility",
-                        "Reuse Donation Centre",
-                        "Community Drop off"
-                    ],
-                    "category": "Medical/Homecare supplies",
-                    "subCategory": "Equipment",
-                    "index": 250
                 },
                 {
                     "name": "Commode",
@@ -25105,17 +24696,6 @@
                     "index": 267
                 },
                 {
-                    "name": "Glue",
-                    "description": "This item is Household Hazardous Waste (HHW) and can be taken to a HHW depot for proper recycling and disposal. All HHW should be in original containers and well-marked. Containers are not returnable. Do not mix products. Residents may drop off up to 60L of HHW and 20 fluorescent tubes per day at York Region HHW Depots",
-                    "search": "\nGlue,Spray Adhesive",
-                    "tag": [
-                        "York Region Waste Facility"
-                    ],
-                    "category": "Office supplies",
-                    "subCategory": "Office chemicals",
-                    "index": 268
-                },
-                {
                     "name": "White Out",
                     "description": "This item is Household Hazardous Waste (HHW) and can be taken to a HHW depot for proper recycling and disposal. All HHW should be in original containers and well-marked. Containers are not returnable. Do not mix products. Residents may drop off up to 60L of HHW and 20 fluorescent tubes per day at York Region HHW Depots",
                     "search": "\nWhite Out,Liquid Paper,Correction Fluid",
@@ -25136,17 +24716,6 @@
                     "category": "Office supplies",
                     "subCategory": "Paper",
                     "index": 270
-                },
-                {
-                    "name": "Paper products",
-                    "description": "Please place this item in the blue box",
-                    "search": "\nPaper products,Writing Paper,Bristol Board,Sticky Note,File Folder,Envelope,Index Card,Birthday Card,Christmas Card,Card,Envelope with plastic window",
-                    "tag": [
-                        "Blue Box"
-                    ],
-                    "category": "Office supplies",
-                    "subCategory": "Paper",
-                    "index": 271
                 },
                 {
                     "name": "Shredded Paper",
@@ -25205,17 +24774,6 @@
                     "index": 276
                 },
                 {
-                    "name": "Wrapping Paper",
-                    "description": "Please place this item in the blue box. Remove ribbons, bows and tape",
-                    "search": "\nWrapping Paper,Gift wrap,gift bag",
-                    "tag": [
-                        "Blue Box"
-                    ],
-                    "category": "Office supplies",
-                    "subCategory": "Specialty paper",
-                    "index": 277
-                },
-                {
                     "name": "Binder",
                     "description": "Please place this item in the garbage",
                     "search": "\nBinder,3-Ring Binder,Binders",
@@ -25225,17 +24783,6 @@
                     "category": "Office supplies",
                     "subCategory": "Supplies",
                     "index": 278
-                },
-                {
-                    "name": "Compostable Plastic",
-                    "description": "Please place this item in the garbage",
-                    "search": "\nCompostable Plastic,compostable cutlery,compostable plastic take-out container,compostable plastic take-out containers,compostable plastic cup,compostable plastic cups,compostable pen,compostable pens,compostable pencil,compostable pencils,biodegradable plastic,bioplastic",
-                    "tag": [
-                        "Garbage"
-                    ],
-                    "category": "Office supplies",
-                    "subCategory": "Supplies",
-                    "index": 279
                 },
                 {
                     "name": "Elastic Band",
@@ -25385,17 +24932,6 @@
                     "index": 292
                 },
                 {
-                    "name": "Mason Jar",
-                    "description": "Please place this item in your blue box",
-                    "search": "\nMason Jar,Mason Jar",
-                    "tag": [
-                        "Blue Box"
-                    ],
-                    "category": "Packaging",
-                    "subCategory": "Glass",
-                    "index": 293
-                },
-                {
                     "name": "Plastic Tubs",
                     "description": "Please place this item in your Blue Box. Please make sure containers are empty and rinsed and plastic lids are on",
                     "search": "\nPlastic Tubs,Margarine Tub,Sour Cream Tub,Cottage Cheese Tub,Ice Cream Tub,Lid,Yogurt Tub,Single serve yogurt,Apple sauce container,Yogurt Cup",
@@ -25444,29 +24980,6 @@
                     "index": 297
                 },
                 {
-                    "name": "Aerosol Can",
-                    "description": "Please place empty aerosol cans loose in your blue box and plastic caps in your garbage. If the aerosol can is not completely empty, it is considered Household Hazardous Waste (HHW) and can be taken to a HHW depot for safe recycling and disposal",
-                    "search": "\nAerosol Can,Spray,Hairspray Can,Sunscreen,Air Freshener Spray,Spray Paint,Shaving Cream,Whip Cream",
-                    "tag": [
-                        "Blue Box",
-                        "York Region Waste Facility"
-                    ],
-                    "category": "Packaging",
-                    "subCategory": "Metal can",
-                    "index": 298
-                },
-                {
-                    "name": "Chafing Fuel",
-                    "description": "This item is Household Hazardous Waste (HHW) and can be taken to a HHW depot for proper recycling and disposal. All HHW should be in original containers and well-marked. Containers are not returnable. Do not mix products. Residents may drop off up to 60L of HHW and 20 fluorescent tubes per day at York Region HHW Depots. If you are looking for alternative locations for proper recycling and disposal of your material please visit www.regeneration.ca",
-                    "search": "\nChafing Fuel,chafing fuel catering aid,easy heaters,power heat,chafing gel,fondue gel,anolon sterno,buffet burner,buffet burners,sterno CandleLamp,chafer,choice chafing fuel",
-                    "tag": [
-                        "York Region Waste Facility"
-                    ],
-                    "category": "Packaging",
-                    "subCategory": "Metal can",
-                    "index": 299
-                },
-                {
                     "name": "Coffee Can",
                     "description": "Remove lid and place lid and container loose in your Blue Box. Please make sure all containers are empty and dry",
                     "search": "\nCoffee Can",
@@ -25478,17 +24991,6 @@
                     "index": 300
                 },
                 {
-                    "name": "Foil Sheet/Container",
-                    "description": "Please place this item in your Blue Box. Aluminum foil sheets should be scrunched up in a ball (at least 2\" diameter). Please remove all food residue before recycling",
-                    "search": "\nFoil Sheet/Container,Aluminum,Pie Plate,Tin Foil,Aluminum Foil",
-                    "tag": [
-                        "Blue Box"
-                    ],
-                    "category": "Packaging",
-                    "subCategory": "Metal can",
-                    "index": 301
-                },
-                {
                     "name": "Food or Beverage Can",
                     "description": "Remove lid and place lid and container in your Blue Box. Please make sure all containers are empty and dry. Do not crush cans",
                     "search": "\nFood or Beverage Can,Tin Can,Aluminum Can,Soup Can,Pop Can",
@@ -25498,17 +25000,6 @@
                     "category": "Packaging",
                     "subCategory": "Metal can",
                     "index": 302
-                },
-                {
-                    "name": "Construction Paper",
-                    "description": "Please place this item loose in the Blue Box",
-                    "search": "\nConstruction Paper,Business Cards,Store Receipts",
-                    "tag": [
-                        "Blue Box"
-                    ],
-                    "category": "Packaging",
-                    "subCategory": "Paper",
-                    "index": 303
                 },
                 {
                     "name": "Paper Flour/Sugar bag",
@@ -25988,56 +25479,6 @@
                     "index": 346
                 },
                 {
-                    "name": "Artificial Christmas Tree",
-                    "description": "Items in good condition can be donated at select Reuse Donation Centres. Acceptance of items is at the discretion of the charity. Damaged items that cannot be reused can be disposed for a fee at select York Region Waste Facilities. Curbside collection may also be available. Check with your local municipality for more information",
-                    "search": "\nArtificial Christmas Tree,X-mas,Xmas",
-                    "tag": [
-                        "Garbage",
-                        "York Region Waste Facility",
-                        "Reuse Donation Centre"
-                    ],
-                    "category": "Seasonal",
-                    "subCategory": "Decorations",
-                    "index": 347
-                },
-                {
-                    "name": "Christmas Decorations",
-                    "description": "Items in good condition can be donated to charity at select donation centres. Acceptance of items is at the discretion of the charity. Damaged items can be disposed for a fee at select York Region Waste Facilities. Curbside collection may also be available. Check with your local municipality for more information",
-                    "search": "\nChristmas Decorations,Christmas Balls,Garland,Tinsel,Ornaments,Christmas Stockings",
-                    "tag": [
-                        "Garbage",
-                        "York Region Waste Facility",
-                        "Reuse Donation Centre"
-                    ],
-                    "category": "Seasonal",
-                    "subCategory": "Decorations",
-                    "index": 348
-                },
-                {
-                    "name": "Christmas Lights",
-                    "description": "Items in good condition can be donated. Acceptance of items is at the discretion of the charity. Damaged items can go in the garbage",
-                    "search": "\nChristmas Lights,Xmas Lights,Light String",
-                    "tag": [
-                        "Garbage",
-                        "York Region Waste Facility",
-                        "Reuse Donation Centre"
-                    ],
-                    "category": "Seasonal",
-                    "subCategory": "Decorations",
-                    "index": 349
-                },
-                {
-                    "name": "Gift Bag",
-                    "description": "Please place this item in the blue box. Remove ribbons, bows and tape",
-                    "search": "\nGift Bag,Greeting Card",
-                    "tag": [
-                        "Blue Box"
-                    ],
-                    "category": "Seasonal",
-                    "subCategory": "Gift wrap",
-                    "index": 350
-                },
-                {
                     "name": "Ribbon/Bow",
                     "description": "Please place this item in the garbage",
                     "search": "\nRibbon/Bow",
@@ -26155,18 +25596,6 @@
                     "index": 361
                 },
                 {
-                    "name": "Bicycle",
-                    "description": "Items in good condition can be donated to charity at select donation centres. Acceptance of items is at the discretion of the charity. Damaged items can be recycled as scrap metal at select York Region Waste Facilities. Curbside collection may also be available. Check with your local municipality for more information. Tip: This item can be repaired at a bike repair shop",
-                    "search": "\nBicycle,Bike",
-                    "tag": [
-                        "Reuse Donation Centre",
-                        "York Region Waste Facility"
-                    ],
-                    "category": "Sharp metals",
-                    "subCategory": "Other metal items",
-                    "index": 362
-                },
-                {
                     "name": "Chain Saw",
                     "description": "This item can be dropped off as scrap metal, free of charge, at select waste depots. Please ensure oil and gasoline have been removed prior to drop-off which is considered hazardous waste",
                     "search": "\nChain Saw",
@@ -26247,32 +25676,6 @@
                     "category": "Sharp metals",
                     "subCategory": "Other metal items",
                     "index": 369
-                },
-                {
-                    "name": "Shoes",
-                    "description": "Items in good condition can be donated. Acceptance of items is at the discretion of the charity. Damaged items can go in the garbage. Tip: This item can be repaired at a shoe repair shop",
-                    "search": "\nShoes,Sandals,Boots",
-                    "tag": [
-                        "York Region Waste Facility",
-                        "Reuse Donation Centre",
-                        "Community Drop off"
-                    ],
-                    "category": "Shoes",
-                    "subCategory": "Other shoes",
-                    "index": 370
-                },
-                {
-                    "name": "Textiles",
-                    "description": "Items in good condition can be donated. Acceptance of items is at the discretion of the charity. Select organizations will take damaged items so long as they are clean, dry and odorless",
-                    "search": "\nTextiles,Fabric,Curtains,Cushion,Upholstery,Rags,Drapes,Window Covering,Blankets,Sheets,Clothes",
-                    "tag": [
-                        "Reuse Donation Centre",
-                        "Community Drop off",
-                        "York Region Waste Facility"
-                    ],
-                    "category": "Shoes",
-                    "subCategory": "Other shoes",
-                    "index": 371
                 },
                 {
                     "name": "Shoes",
@@ -26505,17 +25908,6 @@
                     "category": "Yard waste",
                     "subCategory": "Leaves and branches",
                     "index": 390
-                },
-                {
-                    "name": "Christmas Tree",
-                    "description": "This is yard waste. The tree must be free of all debris including decorations, plastic, compostable, and biodegrable bags. Special collection weeks may apply for Christmas trees. Please check your local municipal website or waste calendar for further collection information. Yard waste can also be dropped off at the Bloomington Compost Site. Fees may apply",
-                    "search": "\nChristmas Tree,Xmas Tree,X-mas Tree",
-                    "tag": [
-                        "Yard Waste"
-                    ],
-                    "category": "Yard waste",
-                    "subCategory": "Seasonal decorations",
-                    "index": 391
                 },
                 {
                     "name": "Fall Decorations",
