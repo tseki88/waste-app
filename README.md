@@ -23,7 +23,7 @@ Currently in the process of finishing touches and reading about publishing the a
  - The data being used to render information was taken from York Region's Bindicator, and City of Toronto's Waste Wizard and is not updated in real time with the base data.
 
 ### Download the App!
-[![Get it on Google Play](google-play-badge.png)](https://play.google.com/store/apps/details?id=com.littrApp)
+[<img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width="250" />](https://play.google.com/store/apps/details?id=com.littrApp)
 
 ---
 
